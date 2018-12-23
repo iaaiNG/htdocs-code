@@ -1,0 +1,126 @@
+
+①创建C:\xampp\htdocs\framework\WebApp\project
+②将template.zip拷贝到
+C:\xampp\htdocs\framework\WebApp\project
+③选中template.zip 解压缩当前文件夹
+
+
+1、准备开发环境
+①启动apache和mysql
+②所有的服务器端php文件修改 
+php中设置：
+header('Access-Control-Allow-Origin:http://localhost:8100');
+header('Access-Control-Allow-Credentials:true');
+
+客户端请求时设置：
+this.http.get(myUrl, { withCredentials: true }).map((response: Response) => response.json());
+
+③新建一个工程将压缩包和nodeModules准备一下，目的是实现在visual studio code中打开终端之后，可以通过ionic serve -l 来启动开发服务器；否则项目就无法进行
+
+2、搭建项目框架
+步骤1 、创建共用服务
+在app目录下创建文件夹utility,
+在utility中创建service文件夹，在该文件夹下创建网络请求服务myhttp.service.ts
+
+步骤2：在pages目录下创建以下page（通过命令行 ionic g page ***）
+
+home 根页面 （作为容器）
+index 首页
+detail详情
+cart 购物车
+login登录
+order-confirm 订单确认
+pay 支付
+user-center 用户中心
+not-found
+
+要求：根页面显示4个tab，第一个index，第二个cart ，第三个user-center，第四个not-found
+
+
+用到的字图标
+camera
+chatboxes
+cart
+settings
+person
+home
+heart
+bookmark
+pin
+close
+help
+
+
+3、实现index
+
+3.1 网络请求的服务
+①在app/utility/service下创建服务myhttp.service.ts
+②在该服务中要求封装一个方法
+sendRequest(url:string){}
+与远程服务器端的交互
+③在调用该方法时，显示loading，请求成功之后，关闭loading
+loading显示：‘正在通信’
+注意：
+在AppModule中 指定依赖于HttpModule
+如果要用到ngModel，记得指定依赖于FormsModule。
+服务创建完之后，能直接用吗？要指定提供商(providers)
+
+3.2 发请求，将服务器返回的数据渲染
+http://localhost/ajia_code/data/product/index.php
+
+要用到的图片：
+从哪？
+	C:\xampp\htdocs\ajia_code\img
+拷贝到哪去？
+	C:\xampp\htdocs\framework\WebApp\project\template\src\assets\img
+index:
+	ionSlides
+	ionScroll
+	缩略图列表
+	Searchbar
+
+
+
+carouselItems:[
+	{
+	cid:"1"
+	href:"product_details.html?lid=28"
+	img:"img/index/banner1.png"
+	title:"轮播广告商品1"
+	}
+]
+
+newArrivalItems:[
+ {
+ details:"酷睿双核i5处理器|256GB SSD|8GB内存|英特尔HD显卡620含共享显卡内存"
+href:"product_details.html?lid=1"
+pic:"img/index/study_computer_img1.png"
+pid:"1"
+price:"6988.00"
+title:"Apple MacBook Air系列"
+ }
+]
+
+recommendedItems:[
+{
+ 
+}
+]
+
+4、detail
+①解析由index跳转时所传递的参数
+②根据该参数向服务器端请求
+http://localhost/ajia_code/data/product/details.php?lid=1
+③加入购物车按钮：
+
+如果服务器端，
+返回
+	情况1：300 用户未登录 --》直接跳转到login
+	情况2：200 成功 --》 显示一个toast（添加成功，底部 1.5s）
+	情况3：500 失败 --》显示一个toast（添加失败底部 1.5s）
+5、notFound
+	3s之后自动返回上一页
+	2s之后自动返回上一页
+	1s之后自动返回上一页
+	返回上一页
+6、tabs中的设置--》 订单确认

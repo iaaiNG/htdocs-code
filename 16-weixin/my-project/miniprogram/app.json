@@ -1,0 +1,22 @@
+{
+  "cloud": true,
+  "pages": [
+    "pages/test2/test2",
+    "pages/index/index",
+    "pages/userConsole/userConsole",
+    "pages/storageConsole/storageConsole",
+    "pages/databaseGuide/databaseGuide",
+    "pages/addFunction/addFunction",
+    "pages/deployFunctions/deployFunctions",
+    "pages/chooseLib/chooseLib",
+    "pages/test/test",
+    "pages/weather/weather"
+  ],
+  "window": {
+    "backgroundColor": "#fff",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "江左前端",
+    "navigationBarTextStyle": "#fff"
+  }
+}

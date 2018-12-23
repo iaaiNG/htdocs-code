@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/react.js"></script>
+  <script src="js/react-dom.js"></script>
+  <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="d1"></div>
+
+<script type="text/babel">
+  let MyInput = React.createClass({
+    render(){
+      return <div>
+        <label>{this.props.labelName}<input type="text" placeholder={this.props.myPlaceholder}/></label>
+      </div>
+    }
+  })
+  let MyButton = React.createClass({
+    render(){
+      return <input type="button" value={this.props.btnName}/>
+    }
+  })
+  let MyForm = React.createClass({
+    render(){
+      return <form action="#">
+        <MyInput labelName="用户名：" myPlaceholder="请输入用户名"/>
+        <MyInput labelName="密码" myPlaceholder="请输入密码"/>
+        <MyButton btnName="确认"/>
+        <MyButton btnName="取消"/>
+      </form>
+    }
+  })
+  ReactDOM.render(
+    <MyForm/>,
+    document.getElementById('d1')
+  )
+</script>
+</body>
+</html>

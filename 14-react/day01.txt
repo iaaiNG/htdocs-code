@@ -1,0 +1,31 @@
+
+前端的3大主流框架：vue、angular、react
+
+5天的时间来学习 React/ReactNative，
+实现一个基于移动端的原生的app。
+
+React的核心思想：组件化
+
+React的核心概念：组件/jsx/props/state/refs
+
+一、React的概述
+ui = user interface 用户界面
+
+what?
+React是由facebook出品的，用来渲染ui的js库，指的是我们可以通过组件来构建ui（和vue、angular、ionic组件树），定位就是用来实现ui的。
+
+why?
+	①数据操作太频繁
+	  VDOM 虚拟DOM，尽量的降低操作DOM的成本
+	②代码维护成本很高
+	  单向数据流
+
+when?
+	用在ui操作、数据操作比较频繁的场景
+
+注意事项：
+	React并没有自己的全家桶，专心做UI的
+
+
+每日一练：
+	实现Ionic中所有的page。

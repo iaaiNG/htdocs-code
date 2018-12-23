@@ -1,0 +1,7 @@
+<!--pages/weather/weather.wxml-->
+<!-- <text>pages/weather/weather.wxml</text> -->
+<view style='padding:50rpx'>
+  <input type='text' placeholder='input city name' style='height:100rpx' bindinput='output'/>
+  <button bindtap='searchWeather'>search</button>
+  <text>{{weatherMsg}}</text>
+</view>

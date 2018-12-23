@@ -1,0 +1,20 @@
+<!--pages/test/test.wxml-->
+<text>pages/test/test.wxml</text>
+<view style='width:375rpx;background:#aaa;'>
+<text>iaaiNG</text>
+</view>
+
+<view>{{msg}}</view>
+<button type='primary' bindtap='changeMsg'>click</button>
+
+
+<!-- <view class="section">
+  <view>flex-direction: row</view>
+  <view style="flex-direction:row;">
+    <view style='height:300rpx;width:250rpx;background:green;'>1</view>
+    <view style='height:300rpx;width:250rpx;background:red;'>2</view>
+    <view style='height:300rpx;width:250rpx;background:blue;'>3</view>
+  </view>
+</view> -->
+
+

@@ -1,0 +1,38 @@
+{
+  "pages": [
+    "pages/books/main",
+    "pages/index/main",
+    "pages/comments/main",
+    "pages/detail/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#DD5145",
+    "navigationBarTitleText": "江左图书",
+    "navigationBarTextStyle": "light"
+  },
+  "tabBar": {
+    "color":"#000",
+    "selectedColor":"#DD5145",
+    "list": [
+      {
+      "pagePath": "pages/books/main",
+      "text": "图书",
+      "selectedIconPath":"static/img/book-active.png",
+      "iconPath":"static/img/book.png"
+      },
+      {
+        "pagePath": "pages/comments/main",
+        "text": "评论",
+        "selectedIconPath":"static/img/todo-active.png",
+        "iconPath":"static/img/todo.png"
+      },
+      {
+        "pagePath": "pages/index/main",
+        "text": "我",
+        "selectedIconPath":"static/img/me-active.png",
+        "iconPath":"static/img/me.png"
+      }
+    ]
+  }
+}

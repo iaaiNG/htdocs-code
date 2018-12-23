@@ -1,0 +1,295 @@
+一、项目实施的步骤：
+①需求分析
+分析项目中需要用到的功能
+
+②概要设计
+设计用到的页面有哪些 
+怎么进行导航
+服务器端怎么访问
+路由模块的使用
+
+③详细设计
+详细设计每一个页面或者组件..
+header
+index
+...
+
+④测试各个功能是否完善
+
+二、基于angular来重构学子商城
+1、整体架构
+
+模块：
+	angular是以模块为基本单位，在模块中可以声明组件、指令、管道，也可以在模块中去给服务指定提供商；指定模块的根组件
+组件：
+	组件是一个可被反复使用的，带有特定功能的视图，本质是一个带有模板的指令
+	组件类本身要负责要渲染的模板内容，负责要处理的数据绑定和用户交互
+模板内容：
+	结合着结构型指令、属性型指令的标签，极大的扩展了html的功能，包括渲染自定义组件
+指令：
+	指令就是扩展html的功能，支持选择结构、循环结构，包括动态的样式或样式类
+服务：
+	服务是用来封装常用的属性和方法，主要是用在组件中，减轻组件本身的复杂度
+	常见的服务，比如封装网络请求服务、日志类服务、心跳服务..
+依赖注入：
+	将需要依赖（用到的）服务或者模块等，拿到对应的组件或者模块中，这个依赖，就可以使用了。
+
+	比如，用到ngModel指令，只需要在AppModule中的imports数组指定FormsModule,表单模块所有的东西都可以使用了
+
+	比如，封装了HeartBeatSerice,只要是指定过提供商，在组件中就可以直接import,在构造函数中进行实例化，就可以使用了
+
+数据绑定：
+	将数据和视图进行绑定，在数据操作比较频繁的场景下，无需直接手工进行DOM操作了，因为有绑定，一方发生变化，另一方也会直接更新
+	() [] [(ngModel)] {{}}
+
+
+元数据(metaData)：
+	用来告诉Angular如何来处理当前的类
+	@Component({
+		selector:'',
+		template:'',
+		styleUrls:[],
+		providers:[]
+	})
+
+	@Injectable({
+		...
+	})
+
+	@NgModule({
+		...	
+	})
+
+2、重构学子商城(jQuery+css)
+
+整体架构：
+	ng4+bootStrap+css
+
+2.1 搭建脚手架
+创建要用到的组件、服务、文件夹，引入对应的资源，
+完成路由的指定
+
+2.2 header footer notFound
+
+header
+	在组件类中，通过styleUrls引入要用到的样式类文件
+	根据服务器端所返回的结果，来决定页头中要显示的模板内容
+service
+	myhttp.service.ts
+	①忘了指定providers
+	②依赖于HttpModule
+
+。。。
+	发请求，获取到服务器端返回的数据
+	将数据通过数据绑定显示在模板内容
+	在模板内容中，进行用户的交互
+
+
+三、Android开发知识点
+
+1、Android工程目录结构
+
+src（source 源代码） 存储的是java文件，封装方法和数据
+assets 将资源放到该目录，比如做混合编程时候，将前端代码直接放到该目录中
+bin（binary 二进制） 存储是编译完之后，生成的可以直接安装在Android手机的文件（.apk结尾）
+res（resource 资源）
+	app中用到的图标、图片、数据、布局文件
+
+AndroidManifest.xml 记录了一个Android应用程序的配置信息，包括版本号，权限、图标的设置、数据的设置...
+
+
+2、Android的开发方式
+在src目录下，创建和编辑java文件，来完成业务逻辑的处理
+在res目录下的layout文件中，创建和编辑xml文件，来指定页面的布局
+
+
+四、hybridApp的创建和使用
+
+HybridApp:混合编程应用程序，混合着前端技术（css/html/js）和原生开发知识（Android/iOS/WP/BB...），进行编程，而生成的可以直接运行在手机的操作系统的app
+
+实现的基本步骤：
+①完成前端项目的编写和测试
+②创建一个Android的工程
+③将前端代码 拷贝到 Android工程的Assets目录
+④4行java代码，创建原生组件，调用前端代码，并显示在页面
+WebView是由Google推出的SDK中的一个网络视图的类，在实例化之后，载入指定的网页
+	//实例化
+	WebView wv = new WebView(getApplicationContext());
+	//载入指定的网页
+	wv.loadUrl("file:///android_asset/demo01.html");
+	//WebView类型的对象，默认是不允许执行js的，如果有需要，手工设置允许执行js
+	wv.getSettings()
+		.setJavaScriptEnabled(true);
+	//将wv作为当前的app的内容视图
+	setContentView(wv);
+
+⑤run as
+
+
+根据可读性，语言：机器语言(010101)、汇编语言(arm..)、
+高级语言(c/c++/java/...)
+
+
+Android工程常见的错误信息：
+ ① 工程在没有变化时候，反复run as会提示该警告信息，不是错误，不用理会
+ ActivityManager: 
+ Warning: Activity not started, its current task has been brought to the front
+
+
+练习：实现一个hybridApp
+①完成前端项目的编写和测试
+	demo02.html，有一个button p,点击按钮隐藏段落
+②创建一个Android的工程
+	demo03
+③将前端代码 拷贝到 Android工程的Assets目录
+④4行java代码，创建原生组件，调用前端代码，并显示在页面
+
+WebView类型的对象 默认是不允许执行js的。
+	
+
+五、调试技巧
+
+如何在eclipse中获取js中 通过console所输出的日志信息？
+步骤1 先去引入：
+import android.webkit.ConsoleMessage;
+import android.webkit.WebChromeClient;
+步骤2 配置：
+wv.setWebChromeClient(new WebChromeClient(){
+	@Override
+	public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
+		// TODO Auto-generated method stub
+		return super.onConsoleMessage(consoleMessage);
+	}
+});
+
+如何在eclipse去指定要显示的视图？
+以logcat为例，
+windows --> show view ->other -> logcat
+
+
+混合编程：前端代码通过webView，生成apk
+
+常见的2种方案：
+方案1：直接将前端代码 拷贝到Android工程的assets目录中
+方案2：将前端代码全部部署在服务器端，通过loadUrl载入服务器端的地址
+	①保证前端代码功能是完整的
+	②将前端代码 部署 在服务器端，拿到一个可被访问的url
+http://localhost/framework/WebApp/day02/demo02.html
+	③将localhost替换成当前pc的真实IP地址
+	（因为手机也有localhost，也有127.0.0.1）
+	windows+R -> cmd -> 在命令行窗口中输入ipconfig -> 查看ipv4的地址
+	172.163.100.49
+http://172.163.100.49/framework/WebApp/day02/demo02.html
+	④在pc中打开浏览器 ，启动apache服务，确认上述url是否能够正常访问
+	⑤编写java代码
+	wv.loadUrl("http://172.163.100.49/framework/WebApp/day02/demo02.html");
+	⑥给当前App添加一个允许访问网络的权限
+	AndroidManifest.xml，点击permission，
+	点击add，在弹窗中选中uses permission,
+	在右侧的下拉菜单中选中android.permission.INTERNET
+
+注意事项：
+	当前的Android模拟器版本是Android4.2.2,由于Google官方规定在Android4.4以后才支持es6 、c3等，当前是无法正常运行包括上述特殊属性的app
+
+
+
+六、Ionic概述
+
+what？
+	是一个开源的用来构造移动端app的框架
+	Ionic = 丰富的移动端的样式 + angular + cordova 
+why ?
+	构建在Angular之上的
+	丰富的样式类和封装的各个组件
+	支持es6\ts\h5...
+	强大的命令行的支持
+	构建在cordova(phoneGap) （cordova或者phoneGap是一个平台，可以使用该平台 通过编写js 来实现对于智能设备底层硬件的调用）之上
+how?	
+	搭建开发环境？
+	①安装ionic (有可能会用到的cordova)
+	npm install -g cordova ionic
+	②创建一个模板项目
+	ionic start myApp tabs/sideMenu/blank
+	创建一个使用tabs模板/侧边栏菜单模板/空白的模板项目
+
+	ionic start myApp sideMenu
+	创建一个基于侧边栏菜单的模板项目，项目的名称叫做myApp
+
+	③进入到开发模式
+	//进入到当前目录下的myApp文件夹
+	cd myApp 
+	//启动开发服务器
+	ionic serve
+
+
+
+在没有联网的情况下，怎么配置ionic?
+① 到ftp中去下载 cmd.rar
+② 将cmd.rar压缩包 统一放到
+C:\xampp\htdocs\framework\WebApp
+③选择解压缩cmd.rar到当前文件夹
+④将目录结构设置为环境变量
+C:\xampp\htdocs\framework\WebApp\cmd
+
+找到桌面中的计算机
+点击右键-》属性
+选中高级系统设置
+弹窗中 点击环境变量
+修改系统中path的环境变量：在path所对应的值的后边，先写上一个分号，然后再分号后边跟上ionic.cmd所在的路径
+
+七、Ionic启动开发服务器执行流程
+ionic serve
+
+Ionic中 主要是在src的pages目录 通过创建page来构造app
+
+
+①Ionic是基于模块的，在app中有main.ts，指定了启动的根模块为AppModule
+②在AppModule中 ，发现指定的根组件是由ionic-angular所提供的IonicApp
+③在app.module.ts中
+IonicModule.forRoot(MyApp)
+通过IonicApp和myApp就建立起联系了，可以认为IonicApp就是以myApp为根组件
+④在app.component.ts中 指定了模板内容为
+app.html
+在app.html中 将HelloIonicPage设置为当前的root
+
+
+八、Ionic中page创建、使用的基本步骤
+①创建一个page
+ionic g page demo01
+创建一个叫做demo01的页面类，最终会在src的pages目录中生成一个demo01的文件夹，在该文件夹中有对应的类和模板
+
+②声明
+import {Demo01Page} from '../pages/demo01/demo01'
+
+@NgModule({
+	delclarations:[Demo01Page],
+	entryComponents:[Demo01Page]
+
+})
+
+③调用
+选择1：可以选择去通过导航 访问（现在还没有学）
+
+选择2：将Demo01Page ，引入到app.component.ts,设置为rootPage
+
+
+程序在运行--》进程 
+ctr+c --> 发出一个信号 9
+
+九、AlertController
+
+①引入
+import {AlertController} from 'ionic-angular'
+
+②实例化
+constructor(public myAlertCtrl:AlertController){}
+
+③调用
+let myWIndow = this.myAlertCtrl.create();
+
+myWIndwow.present();
+
+学会自己看手册！！
+
+练习：创建一个文件夹 demo03-lianxi,
+通过alertController，去显示一个确认窗口，支持显示两个按钮，确认、取消，在点击时，能够在控制台分别输出：点击了确认、取消

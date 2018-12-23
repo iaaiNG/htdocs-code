@@ -1,0 +1,261 @@
+一、练习：实现一个SPA.
+demo15/ 
+check.component.ts      查看页面
+pay.component.ts	支付页面
+send.component.ts	发货页面
+
+路由默认加载check
+check:button->pay 传递价格
+pay: 接收到参数 显示在price页面;超链接(去发货)->send
+send:button(商品查看)--> check
+
+①指定路由出口（盛放组件的容器）
+<router-outlet></router-outlet>
+
+②创建要用到的各个组件
+
+③配置路由词典
+
+④自测
+
+⑤传参
+发送:check 接收：pay
+配置pay的路由地址
+接收
+发送
+
+
+二、路由模块
+
+1、补充了跳转和传参的新的方案
+
+跳转的方式:
+ 可以通过Router类对应的对象中的navigate方法也可以实现跳转,参数是一个数组，第一个元素是path，第二个参数是要传递的参数
+ this.myRouter.navigate([path,arg]);
+跳转: this.myRouter.navigate(['/check']);
+传参: this.myRouter.navigate(['/check',{id:10}]);
+通过navigate进行传参，相比navigateByUrl少了一步，无需再给接收方配置路由地址
+练习：
+     demo16/login.component.ts，dashboard.component.ts；在login,有一个button，有一个超链接，一个输入框，点击上述button或者超链接 跳转到dashboard，并把输入框中的用户名传递给dashboard，dashboard接收并显示在h1的标签中
+要求：通过navigate来实现
+ 
+ navigate(['',{}])
+ [routerLink]="['',{}]"
+
+ 传参有两种方案：
+ 方案1：需配置接收方路由地址
+
+{path:'/dashboard'} --> {path:'/dashboard/:uname'}
+
+ navigateByUrl('/dashboard/zhangsan')
+ routerLink="/dashboard/zhangsan"
+
+ 方案2：不需要配置
+ navigate(['/dashboard',{uname:'zhangsan'}])
+ [routerLink]="['/dashboard',{uname:'zhangsan'}]"
+
+
+2、路由嵌套
+
+路由嵌套：SPA中，一个组件如果支持动态加载其它组件作为子组件，渲染特定的内容，可以让功能更强大；路由嵌套就可以帮助实现这个功能。
+
+所谓的路由嵌套就是指：在一个SPA中的某个组件中，指定一个容器，该容器可以按需加载其它组件
+
+路由嵌套：
+①在准备加载其它组件的组件中，指定一个容器
+router-outlet
+②创建要加载的子组件
+③配置子组件的路由地址
+	const routes:Routes = [
+	 {
+		path:'mail',
+	        component:MailComponent,
+		children:[
+		        {path:'',component:InboxComponent}
+			{path:'inbox',co....},
+			{path:'outbox',co....}
+		]
+	}
+	
+	]
+
+
+demo:
+
+MailComponent 
+InboxComponent
+OutboxComponent
+
+
+3、路由规则
+①当path为''，可以设置默认要加载的组件
+②当path为**，可以设置异常的处理
+③当需要重定向时，可以通过redirectTo,重定向到指定的组件，有一个前提，必须配合pathMatch属性指定为full
+
+总结路由模块：
+
+基本使用
+跳转的方式
+参数传递
+路由嵌套
+
+
+4、组件之间的通信
+
+Vue组件间通信？
+①props down
+
+<son myName="zhangsan">
+
+Vue.component('son',{
+  props:['myName']
+})
+
+②events up
+③ref
+this.refs.
+④parent
+⑤var bus = new Vue();
+bus.$on/$emit
+
+
+4.1 父组件 通过属性传值 与子组件进行通信
+(props down)
+
+①传值
+在父组件中 调用 子组件时候，给指定属性去传值
+<son myName="zhangsan"></son>
+//将sonName变量中的值 绑定给son组件的myName属性
+<son [myName]="sonName"></son>
+
+②接受值
+在子组件中，接收数据
+import {Input} from '@angular/core'
+
+@Input() myName:string = "";
+//给输入属性起别名
+@Input('myName') uName:string
+
+4.2 子组件 与 父组件通信(events up)
+
+①绑定事件处理函数
+在父组件中调用子组件时候，绑定处理函数（定义在父组件中）
+第一：定义一个带有参数的方法
+	rcvMsg(data:any){}
+第二：调用子组件时，绑定
+	<son (customEvent)="rcvMsg($event)">
+$event是一个由angular所封装的，带有想要的参数。
+②触发事件
+子组件中触发
+import {Output,EventEmitter} from '@angular/core'
+
+@Ouput() customEvent = new EventEmitter();
+
+this.customEvent.emit('发送给父组件的数据');
+
+
+练习：
+创建一个demo19/
+myheader.component.ts
+mymain.component.ts
+父-》子
+	在调用子组件时，把main页面中定义的版本号
+	version="1.0"传递给子组件，
+	要求子组件接收 并显示在myheader
+子-》父
+	在子组件初始化完成之后(ngOnInit)，将isUserLogin=true，传递给父组件（父组件中出了子组件之后，有一个列表，希望子组件中的isUserLogin是true，就显示列表，否则就不显示）
+
+4.3 组件间通信-本地变量
+
+父组件不能使用数据绑定来读取子组件的属性或调用子组件的方法。
+但可以在父组件模板里，新建一个本地变量来代表子组件，然后利用这个变量来读取子组件的属性和调用子组件的方法，如下例所示。
+
+①在父组件去调用子组件时，可以指定#加上变量的名称
+<son #mySon></son>
+
+②在父组件中，通过mySon得到son组件类的实例
+<div>
+	<son #mySon></son>
+	//如果p标签 需要显示子组件类中某个变量，
+	比如count
+	<p>{{mySon.count}}</p>
+	//如果要想在js中 操作子组件 方案1：
+	<button (click)="handleClick(mySon)">
+	</button>
+</div>
+
+
+父组件中通过ViewChild得到子组件的实例方法：
+准备：
+ <son #mySon></son>
+
+① 引入
+import {ViewChild} from '@angular/core'
+② 取值
+@ViewChild('mySon') sonInstance;
+③使用
+ this.sonInstance.***/***()
+
+
+写项目，无论时原生、框架：
+数据
+	增删改查
+视图
+	根据数据变化，决定视图如何更新
+
+核心问题：
+	组件间通信
+	与服务器端的通信
+	组件的创建和使用、理解组件树的概念
+	SPA路由模块（建立起url和组件映射关系，跳转、传参、嵌套。。。。）
+
+4.4 组件间通信-服务
+
+服务本质是一个对象，明天讲这种解决方案
+
+
+总结：
+1、路由
+	路由嵌套（在准备加载其它组件的指定容器，配置路由词典 children）、
+	navigate（无需指定接收方的路由地址）
+	 this.myRouter.navigate(['/myDetail',{id:3}])
+	 <a [routerLink]=
+	 '['/myDetail',{id:index}]'></a>
+2、组件间通信
+	props down
+		①调用子组件指定属性
+		②子组件内部接收值
+		@Input() myName:string=""
+
+	events up :
+		①绑定事件处理函数
+			rcvMsg(data:any){}
+	<son (customEvent)="rcvMsg($event)">
+		②触发自定义事件
+		import {Output,EventEmitter} from '@angular/core'
+		@Output() customEvent = new EventEmitter()
+		this.customEvent.emit('data');
+	local variable :
+		①给子组件指定本地变量
+		<son #mySon></son>
+		②父组件中通过mySon去操作子组件
+		import {ViewChild} from '@angular/core'
+
+		@ViewChild('mySon') sonInstance:any;
+
+		this.sonInstance.**/**();
+
+
+每日一练：
+	实现SPA，
+	demo21/
+	header.component.ts 页头组件 实现子与父通信，定义一个方法，用来返回true/false
+
+	cart.component.ts 购物车组件,渲染一个列表,就在ngOnInit处理方法中通过ViewChild调用header组件中的方法，如果返回true渲染列表，否则就不显示列表；放一个按钮，点击跳转到订单确认页面
+	
+	orderConfirm.component.ts 订单确认组件（button 确认商品--》step1,
+	  button 支付-->step2），
+	支持嵌套组件,
+	step1.component.ts,step2.component.ts
+
+	

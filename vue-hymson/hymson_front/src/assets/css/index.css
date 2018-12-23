@@ -1,0 +1,201 @@
+.content{
+    width: 1200px;
+    margin: 0 auto;
+}
+.content>div:first-child{
+    margin: 20px 0;
+    color: #707070 ;
+    font-size: 20px;
+    font-weight: bold;
+}
+.abouthmx>div{
+    float: left;
+    width: 600px;
+    height: 400px;
+}
+.abouthmx>div:last-child{
+    width: 590px;
+    margin-left: 10px;
+    background: #054B91;
+    color: white;
+    padding: 50px;
+}
+.abouthmx>div:last-child>h1{
+    margin-bottom: 20px ;
+}
+.abouthmx>div:last-child>p{
+    line-height: 30px;
+}
+.abouthmx>div:last-child>a{
+    color: white;
+    text-align: center;
+    display: inline-block;
+    margin-top: 30px;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    border:1px solid white;
+    border-radius: 20px;
+}
+.abouthmx>div:last-child>a:hover,.pro>div a:hover {
+    color: #0b66c1;
+    background: white;
+}
+.abouthmx:after {
+    content: " ";
+    display: table;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+/*产品与方案*/
+/*.pro{*/
+    /*display: flex;*/
+    /*justify-content: center ;*/
+/*}*/
+.pro:after {
+    content: " ";
+    display: table;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.pro>div{
+    float: left;
+    height: 400px;
+    width: 300px;
+    color: white;
+}
+.pro>div:nth-child(1){
+    background: url(../images/soludi1.jpg) center 0 no-repeat;
+}
+.pro>div:nth-child(2){
+    background: url(../images/soludi2.jpg) center 0 no-repeat;
+}
+.pro>div:nth-child(3){
+    background: url(../images/soludi3.jpg) center 0 no-repeat;
+}
+.pro>div:nth-child(4){
+    background: url(../images/soludi4.jpg) center 0 no-repeat;
+}
+.pro>div>div{
+    padding: 0 20px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: all .3s linear;
+}
+.pro>div img{
+    margin-top: 140px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid white;
+    transition: all .3s linear;
+}
+.pro>div h4{
+    margin: 20px 0;
+}
+.pro>div p {
+    font-size: 15px;
+    visibility: hidden;
+    transition: all .3s linear;
+    line-height: 25px;
+}
+.pro>div a {
+    margin-top: 20px;
+    color: white;
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    border: 1px solid white;
+    line-height: 30px;
+    border-radius: 15px;
+    visibility: hidden;
+    transition: all .3s linear;
+}
+.mask{
+    width: 300px;
+    height: 400px;
+    background: rgba(10,50,90,0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/*合作伙伴*/
+.parts:after {
+    content: " ";
+    display: table;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.parts{
+    margin-bottom: 80px;
+}
+.parts ul {
+    margin-top: 40px;
+    margin-left: 45px;
+}
+.parts ul li {
+    float: left;
+    width: 230px;
+    height: 60px;
+    margin-bottom: 20px;
+}
+.parts ul li img{
+    width: 200px;
+    height: 60px;
+    border: 1px solid #ECE;
+}
+
+/*电梯导航*/
+#lift{
+    margin-top: 25px;
+    display: none;
+    position: fixed;
+    z-index: 100;
+    background-color: #918888;
+    left: 5px;
+    top: 120px;
+}
+.lift_list{
+    display: block; list-style:none
+}
+.lift_item {
+    border-top: 1px solid #b1aaaa;
+    transition: background-color .1s;
+    transition:all .3s linear;
+}
+.lift_btn {
+    overflow: hidden;
+    display: block;
+    width: 24px;
+    padding: 10px 5px;
+    line-height: 14px;
+    text-align: center;
+    color: #fefefe;
+    transition: color .1s;
+}
+.lift_item:hover, .lift_item_on {
+    position: relative;
+    border-bottom: 1px solid #0b66c1;
+    margin-bottom: -1px;
+    border-color: #0b66c1;
+    background-color: #0b66c1;
+}
+.lift_btn {
+    overflow: hidden;
+    display: block;
+    width: 50px;
+    height:60px;
+    padding: 10px 5px;
+    line-height: 30px;
+    text-align: center;
+    color: #fefefe;
+    transition: color .1s;
+    font-weight: bolder;
+}

@@ -1,0 +1,181 @@
+
+Image
+
+FlatList
+
+touchableOpacity
+
+keyboardAvoidingView
+
+TextInput
+
+fetch(与远程服务器端的通信)
+
+
+一、Image组件
+
+import {Image} from 'react-native'
+
+//引入本地的资源文件
+<Image source={require('path')}></Image>
+//引入网络资源文件
+<Image source={{uri:'imgurl'}}></Image>
+
+
+有一个列表:
+	imgList=['1.jpg','2.jpg','3.jpg']
+将imgList中的每一个元素渲染在不同的Image标签
+
+ReactNative的Image的使用注意事项：
+
+在引入本地的资源图片路径时候，不允许做任何的运算
+//直接写路径是ok
+<Image source={require('../1.jpg')}/>
+//不允许
+<Image source={require('../'+'1.jpg')}/>
+
+二、FlatList
+
+import {FlatList} from 'react-native';
+
+//data是用来指定列表背后的数据源
+//renderItem是用来告诉列表应该怎么去显示列表项
+<FlatList data={this.state.状态}
+	  renderItem={this.showItem}
+	/>
+
+showItem=(info)=>{
+	//info是一个对象，包含item和index
+	return 列表项
+}
+
+data
+renderItem
+
+三、TouchableOpacity
+
+TouchableOpaicity是一个容器，容器被点击的时候，
+会有一个透明度变化的效果（按下，透明度降低，松手，恢复）
+
+import {TouchableOpacity} from 'react-native'
+
+<TouchableOpacity>
+</TouchableOpacity>
+
+练习：
+	demo10_lianxi的文件夹 demo10.js
+
+	要求在组件挂载完毕之后，初始化一个数组，将数组渲染在列表中，列表中的列表项要求支持在点击的时候有透明度的变化。
+
+	state
+	componentDidMount
+	setState
+	FlatList (data/renderItem)
+	TouchableOpacity
+
+fakeAPI:
+http://jsonplaceholder.typicode.com/users
+
+四、fetch
+
+fetch用来向指定的url发起网络请求，
+将反序列化后的结果进行处理。
+
+fetch(myUrl)
+	.then((response)=>{return response.json()})
+	.then((response)=>{
+		//response就是服务器端返回的数据
+		//数据是已经进行过json格式的反序列化
+	})
+
+
+五、TextInput
+
+文本输入框，基本用法：
+import {TextInput} from 'react';
+
+<TextInput placeholder="" onChangeText={this.handleChange}/>
+
+handleChange(msg){
+	//msg就是当前用户所输入的值
+}
+
+配置蓝蝶模拟器：
+1、准备apk包
+C:\xampp\htdocs\framework\react\reactNative\myapp\android\app\build\outputs\apk
+2、安装蓝蝶
+一路next
+3、启动蓝蝶
+4、把app-debug.apk文件拖拽到蓝蝶软件去安装
+5、配置分辨率
+点开app的安装包，点击右上角的（向下的箭头）
+--》 设置 --》分辨率设置--》自定义 480*800
+ 重启蓝蝶软件
+
+ 配置host & port:  点击蓝蝶软件的右下角的向右的箭头，摇一摇  在菜单中，选中dev settings，设置host port  172.163.100.58:8081
+
+
+ 之前的根组件：
+ (
+      <View style={styles.container}>
+        <Demo12Component></Demo12Component>
+        <Text style={styles.welcome}>
+          Welcome to Tedu!
+        </Text>
+        <Text style={styles.instructions}>
+          To get started, edit index.android.js
+        </Text>
+        <Text style={styles.instructions}>
+          Double tap R on your keyboard to reload,{'\n'}
+          Shake or press menu button for dev menu
+        </Text>
+      </View>
+    )
+	
+
+六、Flexbox
+
+在ReactNative中的布局方式 是通过flexbox来实现的
+
+flexDirection的默认值是column而不是row，而flex也只能指定一个数字值
+
+flexDirection 指定主轴是row还是column，默认是column
+justifyContent 沿着主轴的排列方式
+alignItems 沿着次轴的排列方式
+
+
+
+RN常用组件：
+View
+Text
+Button
+TextInput
+Image
+FlatList
+Fetch
+Flexbox 布局
+StyleSheet
+
+
+
+
+ToDoBox
+
+在components目录中创建一个文件夹 todobox
+在该文件夹中创建4个组件
+ToDoInput.js
+ToDoList.js
+ToDoItem.js
+ToDoBox.js
+
+完成ToDoBox所有功能：
+1、实现组件的创建和add功能
+2、delete
+
+
+
+
+
+
+
+

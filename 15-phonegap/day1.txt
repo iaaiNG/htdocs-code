@@ -1,0 +1,185 @@
+
+学到的框架：
+ bootStrap（响应式）
+ jQuery（简化DOM操作）
+ vue（渐进式的框架，核心库关注视图层）
+ angular（依赖注入/模板语法）
+ ionic（定位移动端框架）
+ reactJS（做网页前端的ui的库）
+ reactNative（通过react语法来实现原生应用程序编程）。。。
+
+ ionic = angular + 丰富的样式类、组件类+ cordova（是一个平台，一个中间层，可以让开发者通过编写js调用设备底层的核心功能，比如设备的加速度传感器、罗盘、摄像头、声音。。。）
+
+
+一、phoneGap概述
+
+发展历程：
+	09年 首次推出PhoneGap
+	11年 被Adobe收购，phoneGap将跨平台的核心代码贡献给了Adobe，形成一个新的开源项目cordova
+	12年 推出一个云端打包服务，将本地的代码上传到云端，编译生成安装包
+phoneGap的工作原理：
+	phoneGap扮演着一个中间层的角色，开发者在应用上层编写js，来调用中间层所提供的api，实现对于设备底层接口的调用
+	
+why?
+	目前所学习到的技术，html/css/js/angular/vue...,没有一个是可以直接调用底层硬件的，phoneGap是可以实现对底层的调用。
+
+	开发者可以使用前端技术 来调用Android/iOS/WMP手机的接口
+
+	开发理念：
+		write once,run everywhere
+	
+	核心特点：
+		①标准化
+			w3c标准
+		②大众化
+			不需要专业的原生开发技能，只要会写前端代码，就可以做开发
+		③兼容性
+			支持的平台
+how？怎么搭建环境？
+	①安装pc端的软件
+		1、管理工程
+		创建一个基于phoneGap的模板项目
+		或者
+		打开一个已经存在的phoneGap的模板项目
+		移除
+		2、端口号的设置
+		3、终端日志的输出
+	②准备移动端的app
+		1、指定如何连接开发服务器
+		2、preview 预览
+	
+二、phoneGap使用
+
+phoneGap的工作机制 靠的是 各种各样的plugin插件，提供一些js的api；开发时，调用api实现智能设备底层的调用。
+
+
+在模板项目的代码中：
+	app.intialize();
+	绑定一个事件:deviceReady,和对应的处理函数
+	在处理函数中，查找对应的元素进行显示和隐藏
+	
+
+建议：最好在deviceReady事件触发之后，再使用插件
+
+0、events
+	deviceReady
+	online/offline
+	backbutton/startcallbutton/endcallbutton
+	batteryStatus/batteryCritical/..
+	pause/resume
+	....
+
+1、device
+
+	device插件是用来获取设备的软硬件信息
+
+	device.platform/name/phonegap/uuid/version...
+
+	可以查看支持的插件列表：
+	phonegap-plugins.com
+
+	//安装cordova
+	npm install -g cordova;
+
+	//安装一个插件：
+	cordova add plugin 插件名称
+
+
+2、accelerometer 加速度传感器
+	我们通过加速度传感器来获取当前的加速度信息，来去每隔一段时间进行监听
+
+	实现类似微信摇一摇、运动类的app
+
+	 navigator.accelerometer
+		    .getCurrentAcceleration(
+			function(){
+			    console.log('获取成功');
+			},
+			function(){
+			    console.log('获取失败');
+			}
+		    )
+
+	让加速传感器启动过之后，不允许再反复启动。
+	判断是否启动
+	开始监听：
+	navigator.accelerometer
+		    .watchAcceleration(
+			function(){
+			    console.log('获取成功');
+			},
+			function(){
+			    console.log('获取失败');
+			},
+			{frequency:1000}
+		    )
+
+	结束监听：
+	navigator.accelerometer.clearWatch()
+
+3、capture
+//参数基本一致，有3个，分别是成功和失败的处理函数，还有配置参数对象
+navigator.device.capture.captureAudio()
+navigator.device.capture.captureImage()
+navigator.device.capture.captureVideo()
+
+4、notification 通知
+
+视觉 弹窗
+	 navigator.notification
+            .alert('Hello Notification');  
+听觉 发出声音
+	navigator.notification.beep(3);
+触觉 震动
+	navigator.notification.vibrate(3000);
+
+5、camera 摄像头
+	navigator.camera.getPicture()
+练习：  设置头像的功能。
+	
+	在视图中指定一个img/btn
+	希望在点击btn时，打开相册，选取一张图片，设置为img要显示的图片
+
+	提示信息：
+		①sourceType指定从相册中选图片
+		②成功处理函数时有参数
+
+
+6、文件操作 file
+
+文件写操作
+	①得到文件系统 fileSystem
+		window.requestFileSystem(
+		LocalFileSystem.PERSISTENT,
+		0,
+		function(fs){},
+		function(){}
+		)
+	②得到要操作的文件入口对象 fileEntry
+		fs.root.getFile(
+			'readme.txt',
+			{create:true},
+			function(fileEntry){},
+			function(){}
+		)
+	③fileWriter
+		fileEntry.createWriter(
+			function(writer){
+			 writer.write('hello phoneGap');
+			},
+			function(){}
+		)
+	
+
+文件读操作
+	①得到文件系统 fileSystem
+	②得到要操作的文件入口对象 fileEntry
+	③file
+		fileEntry.file(
+			function(file){},
+			function(){})
+	④fileReader
+	 var reader = new FileReader();
+	
+
+

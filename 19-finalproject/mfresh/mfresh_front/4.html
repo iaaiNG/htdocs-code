@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <mf-main></mf-main>
+</div>
+<script src="js/vue.js"></script>
+<script>
+  var childBread = Vue.component('bread', {
+    template: `<h3>面包屑</h3>`
+  })
+  var nav = {template: '<h3>主题</h3>'}
+  Vue.component('mf-main', {
+    components: {
+      "bread1": childBread,
+      "main1": nav
+    },
+    template: `
+      <div>
+        <bread1></bread1>
+        <mian1></mian1>
+      </div>`
+  })
+  new Vue({el: '#app'})
+</script>
+</body>
+</html>

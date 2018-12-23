@@ -1,0 +1,81 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, pre {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+img {
+    vertical-align: middle;
+}
+ul {
+    list-style: none;
+}
+.header{
+    background: white;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+    top:0;
+}
+.txt1 {
+    width: 1200px;
+    margin: 0 auto;
+    height: 2em;
+    line-height: 2em;
+    border-bottom: 1px solid #E6E6E6;
+    color: #6F6F6F;
+}
+
+.txt1 > ul, .txt2 > ul {
+    list-style: none;
+    float: right;
+}
+
+.txt1 > ul > li {
+    float: left;
+    margin-left: 1.5rem;
+}
+
+.txt2 {
+    width: 1200px;
+    margin: 0 auto;
+    line-height: 100px;
+    height:100px;
+}
+
+.txt2 > img {
+    vertical-align: middle;
+}
+
+.txt2 > ul > li {
+    width: 120px;
+    font-size: 1em;
+    height:100px;
+    float: left;
+    text-align: center;
+    position: relative;
+}
+.txt2 > ul > li:hover{
+    background: #F5F5F5;
+}
+#nav>li>ul > li > a {
+    color: white;
+    font-size: .8em;
+}
+#nav>li>ul{
+    height:0;
+    overflow: hidden;
+    list-style: none;
+    line-height: 60px;
+    background: #034276;
+    transition: all .3s linear;
+    position: absolute;
+    width:120px;
+    z-index: 30;
+}
+#nav .showList{
+    height:190px;
+}

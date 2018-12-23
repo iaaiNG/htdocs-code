@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajax</title>
+</head>
+<body>
+<h3>前端子系统</h3>
+<button id="btn1">向后端子系统发起get请求</button>
+<br>
+<button id="btn2">向后端子系统发起post请求</button>
+<br>
+<button id="btn3">向后端子系统发起put请求</button>
+<br>
+<button id="btn4">向后端子系统发起delete请求</button>
+<br>
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+  $('#btn1').click(function () {
+    $.ajax({
+      type: 'get',
+      url: 'http://127.0.0.1:3000/list',
+      success: function (data) {
+        console.log(data)
+      }
+    })
+  })
+  $('#btn2').click(function () {
+    $.ajax({
+      type: 'post',
+      // url: 'http://127.0.0.1:3000/user',
+      url: 'http://127.0.0.1:3000/user/login',
+      data: {uname: '海陆空', upwd: '123456', age:"fifth"},
+      success: function (data) {
+        console.log(data)
+      }
+    })
+  })
+  $('#btn3').click(function () {
+    $.ajax({
+      type: 'post',
+      url: 'http://127.0.0.1:3000/put',
+      data: {_method:'PUT', uname: 'dingding', upwd: '123456'},
+      success: function (data) {
+        console.log(data)
+      }
+    })
+  })
+  $('#btn4').click(function () {
+    $.ajax({
+      type: 'delete',
+      url: 'http://127.0.0.1:3000/delete',
+      data: {uname: 'dingding', upwd: '123456'},
+      success: function (data) {
+        console.log(data)
+      }
+    })
+  })
+</script>
+</body>
+</html>

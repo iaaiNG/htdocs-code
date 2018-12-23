@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--suppress JSUnusedLocalSymbols -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="d1"></div>
+
+<script type="text/babel">
+    function cc(data) {
+        return React.createClass({
+            render(){
+                return data
+            }
+        })
+    }
+    let MyHeader = cc(<h1>这是页头</h1>)
+    let MyFooter = cc(<h1>这是页脚</h1>)
+    let MyContent = cc(<p>这是正文</p>)
+    let Home = cc(
+        <div>
+        <MyHeader/>
+        <MyContent/>
+        <MyFooter/>
+        </div>)
+    ReactDOM.render(
+        <Home/>,
+        document.getElementById('d1')
+    )
+</script>
+</body>
+</html>

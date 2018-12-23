@@ -1,0 +1,11 @@
+<h1>Lorem ipsum dolor aliquid, adipisci veniam blanditiis!</h1>
+<div>
+    <p *ngIf="isShow">仅有会员可见</p>
+</div>
+<div [ngSwitch]="rightAnswer">
+    <div *ngSwitchCase="'a'">正确答案是A</div>
+    <div *ngSwitchCase="'b'">正确答案是B</div>
+    <div *ngSwitchCase='"c"'>正确答案是C</div>
+    <div *ngSwitchCase="'d'">正确答案是D</div>
+    <div *ngSwitchDefault>output2</div>
+</div>

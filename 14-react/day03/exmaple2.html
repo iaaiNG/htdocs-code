@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/react.js"></script>
+  <script src="js/react-dom.js"></script>
+  <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="d1"></div>
+
+<script type="text/babel">
+  let MyComponent = React.createClass({
+    getInitialState(){ return { opa:1 }},
+    componentWillMount(){},
+    componentDidMount(){
+      setInterval(()=>{
+        var opa = this.state.opa
+        this.refs.myH1.style.opacity =  opa
+        opa -= 0.05
+        if(opa<0) opa = 1
+        this.setState({opa: opa})
+      },100)
+    },
+    render(){
+      return <h1 ref="myH1">Welcome</h1>
+    }
+  })
+  ReactDOM.render(
+    <MyComponent/>,
+    document.getElementById('d1')
+  )
+</script>
+</body>
+</html>

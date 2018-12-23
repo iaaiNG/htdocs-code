@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button type="button" id="btn1">get</button>
+<button type="button" id="btn2">post</button>
+<button type="button" id="btn2-1">register</button>
+<button type="button" id="btn2-2">check uname</button>
+<button type="button" id="btn2-3">check phone</button>
+<button type="button" id="btn3">put</button>
+<button type="button" id="btn4">detele</button>
+<script src="js/jquery-1.11.3.js"></script>
+<script>
+  $('#btn1').click(() => {
+    $.ajax({
+      type: "get",
+      url: 'http://localhost:3000/user',
+      data: {uname: 'tom', upwd: '123456'},
+      success(data) {
+        console.log(data)
+      }
+    })
+  })
+  $('#btn2').click(() => {
+    $.ajax({
+      type: "post",
+      url: 'http://localhost:3000/user/login',
+      data: {unameOrPhone: 'test', upwd: '123456'},
+      success(data) {
+        console.log(data)
+      }
+    })
+  })
+  $('#btn2-1').click(() => {
+    $.ajax({
+      type: "post",
+      url: 'http://localhost:3000/user/register',
+      data: {unameOrPhone: 'iaaing', upwd: '123456',phone:'15521333664'},
+      success(data) {
+        console.log(data)
+      }
+    })
+  })
+  $('#btn2-2').click(() => {
+    $.ajax({
+      type: "post",
+      url: 'http://localhost:3000/user/check/uname',
+      data: {uname: 'iaaing'},
+      success(data) {
+        console.log(data)
+      }
+    })
+  })
+  $('#btn2-3').click(() => {
+    $.ajax({
+      type: "post",
+      url: 'http://localhost:3000/user/check/phone',
+      data: {phone: '155213331664'},
+      success(data) {
+        console.log(data)
+      }
+    })
+  })
+  $('#btn3').click(() => {
+    $.ajax({
+      type: "put",
+      url: 'http://localhost:3000/user',
+      data: {uname: 'tom', upwd: '123456', uid: 1},
+      success(data) {
+        console.log(data)
+      }
+    })
+  })
+  $('#btn4').click(() => {
+    $.ajax({
+      type: "delete",
+      url: 'http://localhost:3000/user',
+      data: {uid: 1},
+      success(data) {
+        console.log(data)
+      }
+    })
+  })
+</script>
+</body>
+</html>

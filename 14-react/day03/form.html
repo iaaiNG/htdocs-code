@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/react.js"></script>
+  <script src="js/react-dom.js"></script>
+  <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="d1"></div>
+
+<script type="text/babel">
+  let Mycomponent = React.createClass({
+    getInitialState(){
+      return {myValue:"hello"}
+    },
+    handleChange(ev){
+      this.setState({myValue:ev.target.value}) },
+    render(){
+      return <form action="#">
+        <input type="text" value={this.state.myValue} onChange={this.handleChange}/>
+      </form>
+    }
+  })
+  ReactDOM.render(
+    <Mycomponent/>,
+    document.getElementById('d1')
+  )
+</script>
+</body>
+</html>

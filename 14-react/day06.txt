@@ -1,0 +1,108 @@
+Vue/Angular Router使用基本步骤：
+
+①指定容器
+
+②配置路由词典
+
+③跳转、传参、嵌套
+
+
+
+React Navigation
+
+使用步骤：
+
+①安装
+npm install react-navigation
+	准备React-Nativegation:
+	①将压缩包放在了对应的目录中
+	react_navigation_node_modules.zip
+	C:\xampp\htdocs\framework\react\reactNative\myapp
+
+	②在该目录中，选中压缩包，解压缩到当前文件夹
+	③检查
+	到node_modules文件夹中 去查看是否有react-navigation文件夹
+②创建需要用到的组件
+	比如：
+	ListComponent
+	DetailComponent
+③配置路由词典
+	import {StackNavigator} from 'react-nativation'
+	import ListComponent from '***'
+	import DetailComponent from '***'
+
+	const MyNavigator = StackNavigator({
+		MyList:{
+		 screen:ListComponent
+		},
+		MyDetail:{
+		 screen:DetailComponent
+		}
+	})
+④让配置过路由的MyNavigator生效
+	//指定根组件 ReactDOM.render
+	AppRegistry.registerComponent('myapp', () => MyNavigator);
+
+⑤需要导航
+	//导航到指定的路由地址
+  this.props.navigation.navigate('myDetail');
+	//返回上一页
+  this.props.navigation.goBack();
+
+⑥传参
+	发送
+		this.props.navigation
+		.navigate('myDetail',{msg:1})
+	接收
+		this.props.navigation
+		.state.params.msg
+
+问题：在使用node_moduels中的react-navigation时，
+报错，提示undefined is not a function
+解决方案：是开发服务器的缓存问题，只需要开启js的远程调试会自动清除缓存
+
+练习：
+	创建一个文件夹demo15_lianxi，
+	在这个文件夹中 实现两个组件，
+	分别是: 
+		check.js(CheckComponent,显示一个Text，点击Text 要求有一个透明度变化的效果，跳转到pay,把商品价格20捎过去) 
+		pay.js（PayComponent,接收传来的参数，显示在Text中）
+
+扩展：
+	1、stackNativgator
+	const myNavigator = StackNavigator({
+	  myCheck: {
+	    screen: CheckComponent,
+	    navigationOptions: () => {
+	      return {
+		headerTitle: '商品查看页面',
+		headerTitleStyle: { alignSelf: 'center' }
+	      }
+	    }
+	  },
+	  myPay: {
+	    screen: PayComponent,
+	    navigationOptions: () => {
+	      return {
+		headerTitle: '商品支付页面',
+		headerLeft:null,
+		headerTitleStyle: 
+		  {alignSelf: 'center'}
+	      }
+	    }
+	  }
+	});
+
+	2、react如何实现选择功能
+		表单式 && <Text></Text>
+	3、react实现循环功能
+		this.state.list.map(
+		function(child){
+		 return <Text>{child}</Text>
+		}
+		)
+
+每日一练：
+	1、脚手架搭建完毕
+	2、实现login的功能
+	

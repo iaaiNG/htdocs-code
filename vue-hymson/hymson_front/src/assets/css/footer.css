@@ -1,0 +1,77 @@
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+.clearfloat:after {
+    content: " ";
+    display: table;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+/*footer*/
+.footer {
+    /* margin-top: 60px; */
+    background: #323232;
+    border-top:1px solid #ddd;
+}
+.f_con {
+    margin-top: 60px;
+    padding-bottom:30px;
+}
+.f_con ul li {
+    float: left;
+    margin-right: 100px;
+}
+.f_con ul li h3 {
+    font-size: 18px;
+    color:#fff;
+    font-weight: lighter;
+    line-height: 28px;
+    margin-bottom:40px
+}
+.f_con ul li a {
+    display: block;
+    color: #999;
+    margin:20px 0;
+}
+.f_con ul li a:hover {
+    color:#f63;
+}
+.f_con>span {
+    float: left;
+    width: 200px;
+    height: 200px;
+    background: url(../images/erweimax.jpg) 0 0 no-repeat;
+}
+.kefu {
+    float: right;
+    margin-right: 26px;
+    text-align: center;
+}
+.kefu>h4 {
+    font-size: 24px;
+    font-weight: lighter;
+    line-height: 36px;
+    color:#FECB17
+}
+.kefu>span {
+    color:#999;
+}
+.kefu>a {
+    display: block;
+    margin: 8px auto 0;
+    width: 120px;
+    height: 26px;
+    background: #003279;
+    color:#fff;
+    font-size: 14px;
+    line-height: 26px;
+}
+
+.copyright {
+    border-top:1px solid #ddd;
+    line-height: 65px;
+    text-align: center;
+    color:#999;
+}

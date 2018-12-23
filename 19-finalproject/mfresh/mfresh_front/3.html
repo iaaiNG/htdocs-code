@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+<h3>Vue</h3>
+<div id="app">
+  <mf-header></mf-header>
+  <mf-main></mf-main>
+  <mf-footer></mf-footer>
+</div>
+
+<template id="template-main">
+  <div class="mian">
+    <ul>
+      <li v-for="item in news"><a :href="item.nid">{{item.title}}</a></li>
+    </ul>
+    <p>来自：iaaiNG</p>
+  </div>
+</template>
+<template id="template-footer">
+  <div class="footer">
+    <p>------------------------ 版权所有：iaaiNG ---------------------------</p>
+  </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+  Vue.component('mf-header', {
+    template: `
+<div>
+<h3>页头</h3><hr>
+</div>`
+  })
+  Vue.component('mf-main',{
+    template:"#template-main",
+    data(){
+      return {
+        news: [
+          { "nid": 20, "title": "20智能空气净化器翻盘：净美仕能否领衔?" },
+          {"nid": 22, "title": "22净美仕新风净化系统　助力校园新风行动", },
+          { "nid": 23, "title": "23全国新风行动全面启动 助推净美仕战略升级" },
+          { "nid": 17, "title": "17空气净化器要逆天？ “玫瑰金”“土豪金”齐上阵" },
+          { "nid": 6, "title": "6净美仕新风净化系统　助力校园新风行动" }
+        ]
+      }
+    }
+  })
+  Vue.component('mf-footer',{
+    template:"#template-footer"
+  })
+  let vm = new Vue({
+    el: '#app',
+    data: {}
+  })
+</script>
+</body>
+
+</html>

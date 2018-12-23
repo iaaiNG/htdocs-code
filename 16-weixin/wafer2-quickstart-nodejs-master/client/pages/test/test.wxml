@@ -1,0 +1,6 @@
+<!--pages/test/test.wxml-->
+<scroll-view scroll-x >
+  <view class='main1'>1</view>
+  <view class='main2'>2</view>
+  <view class='main3'>3</view>
+</scroll-view>

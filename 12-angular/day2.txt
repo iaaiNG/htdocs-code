@@ -1,0 +1,320 @@
+
+常用指令
+
+自定义指令
+
+路由模块的使用
+
+
+一、常用的指令
+
+组件与指令关系：组件就是一个带有模板内容的指令
+
+metaData(元数据):每一个类都有自己的元数据,元数据告诉 Angular 如何处理一个类（就是装饰器中的配置对象），就像组件类要通过selector告诉angular要想调用该组件就得用这个选择器的名字
+
+属性型指令：修改元素的外观或者行为
+
+0、事件绑定
+
+<any (eventName)="handleEvent()"></any>
+
+
+1、属性绑定
+<any [attribute]="myValue"></any>
+将myValue变量的值 绑定到指定的标签元素的属性attribute
+
+<a [href]="myUrl"></a>
+
+2、双向数据绑定
+①必须指定模块 依赖于 表单模块
+在app.module.ts中，引入表单模块
+import {FormsModule} from '@angular/forms'
+
+在模块的元数据imports数组中指定表单模块的名字
+@NgModule({
+ imports:[FormsModule]
+})
+
+②使用ngModel
+<!-- 将数据绑定到视图 -->
+<input type="text" [ngModel]="myValue"/>
+
+<!-- 双向数据绑定 -->
+<input type="text" [(ngModel)]="myResult"/>
+
+<!-- 监听用户的输入 -->
+<input type="text" [(ngModel)]="myName"
+(ngModelChange)="handleModelChange($event)" 
+/>
+
+handleModelChange(data:any){
+	//data就是对应的修改后的数据
+	console.log(data);
+	console.log(this.myName);
+}
+
+
+3、ngStyle/ngClass
+
+①如果在某一个组件中 要想使用一个样式类文件，可以
+@Component({
+	styleUrls:['./test.css']
+})
+
+目前为止所学到的组件元数据：
+selector/template/templateUrl/styleUrls
+
+②动态样式
+<any [ngStyle]="{color:myColor}"></any>
+
+③动态样式类的设置
+<any [ngClass]="{myBlue:isUserLogin}"></any>
+
+练习：demo10/demo10.component.ts
+一个组件渲染一个p一个button；
+点击button时候，要求p标签的透明度(0~1 0~1)
+
+事件绑定
+ngStyle
+
+二、自定义指令
+new Vue({
+	directives:{
+	}
+})
+
+angular创建指令的方式：
+创建一个指令类,掌握了自定义指令的知识，根据业务创建不同的需要用到的指令（有可能自带的指令是无法实现所有的需求的）
+
+创建一个组件类 @Component
+创建一个模块类 @NgModel
+创建一个指令类 @Directive
+
+自定义指令的实现步骤：
+①创建一个文件 test.directive.ts
+②在文件中
+引入对应的指令类
+import {Directive} from '@angular/core'
+
+装饰类
+@Directive({
+	selector:'[test]'
+})
+
+导出类
+export class TestDirecitve{
+}
+
+③使用之前，到模块中声明
+找到app.module.ts,
+import {TestDirective} from './demo11/test.directive'
+
+@NgModule({
+ declarations:[TestDirective]
+})
+
+④调用自定义指令
+<any test></any>
+
+进阶：给自定义指令指定操作元素的功能
+① import {ElementRef} from '@angular/core'
+② 实例化
+ constructor(private el:ElementRef){
+ }
+③找到元素进行操作
+	this.el.nativeElement
+
+
+三、路由
+路由模块的功能：
+建立url和不同的页面(组件)之间的关系，处理页面间的导航、传参、嵌套、路由守卫。。。
+
+Vue中路由模块的使用方式：
+1、基本步骤
+	①指定一个容器 <router-view></router-view>
+	②创建组件 ListComponent DetailComponent
+	③配置路由词典
+		new Vue({
+		 router:new VueRouter({
+			routes:[
+		{path:'/list',component:***},
+		{path:'/detail',component:***},
+			]
+		 })
+		})		
+
+2、跳转的方式
+	<router-link to="/detail"></router-link>
+	this.$router.push('detail');	
+
+3、传参的方式
+	①明确发送 接收
+	②配置接收方的路由地址
+	{path:'/detail',component:***}
+	===>
+	{path:'/detail/:id',component:***},
+	③接收参数
+	this.$route.params
+	④发送参数
+
+4、嵌套的方式
+	{
+		path:'/detail/:id',
+		component:***,
+		children:[
+		{},{}
+		]
+	}
+
+
+angular实现路由：
+1、实现的基本步骤
+①指定一个容器
+<router-outlet></router-outlet>
+②创建要用到的各个组件
+③配置路由词典
+方案1：在app.module.ts中完成所有的路由的设置，但是有悖于SRP
+方案2(推荐)：单独去创建一个文件，在该文件中完成路由的设置
+	步骤1：在app目录下创建一个文件app.route.ts
+	步骤2：在该文件中a-module-routing快速创建一个和路由相关的模块
+	步骤3：在该文件中
+		修改引入的组件类
+		修改路由词典
+		修改forChild->forRoot
+		修改导出的类的名称
+	步骤4：在app.module.ts
+	import {AppRoutingModule} from './app.route'
+	@NgModule（{
+	 imports:[AppRoutingModule]
+	}）
+
+2、在angular实现路由跳转的方式：
+①直接修改地址栏
+localhost:3000/demo12
+localhost:3000/demo13
+
+②js的方式
+	步骤1：import {Router} from '@angular/router'
+	步骤2：实例化
+	constructor(private myRouter:Router){
+	}
+	步骤3：使用myRouter来实现导航
+	this.myRouter.navigateByUrl('demo13')
+
+③超链接
+	<a routerLink="/demo13"></a>
+
+
+返回上一页：
+	步骤1：引入
+		import {Location} from '@angular/common'
+	步骤2：实例化
+		constructor(private  myLocation:Location){
+		}
+	步骤3：调用方法,返回上一页的功能
+		this.myLocation.back();
+
+
+总结：路由规则
+当path为空，指定当前app默认加载第一个组件；
+当path为**,指定当前app在没有成功的匹配到任何一个路由地址时 要访问的组件(404/index)
+
+3、在angular实现路由跳转的参数的传递
+①发送 接收
+
+②配置接收方的路由地址
+
+③接收参数
+
+④发送参数
+
+假设需求：
+demo12 
+
+input/button点击时候，能够把input输入的数据发给demo14
+①发送:demo12 接收方:demo14
+②配置接收方的路由地址
+{path：'demo14'}
+-->
+{path：'demo14/:uName'}
+③接收参数
+
+RXJS？遵循微软所推出的一个进行异步请求处理RX规范js的实现
+
+异步请求：
+ajax/callback/promise/rxjs
+
+Rxjs是基于类似消息的订阅机制
+subscribe
+
+	步骤1：引入ActivatedRoute
+	import {ActivatedRoute} from '@angular/router'
+
+	步骤2：实例化
+	constructor(private myRoute:ActivatedRoute){
+	}
+
+	步骤3：接收参数
+	subscribe
+	this.myRoute.params.subscribe(
+	 (result:any)=>{
+		//result.uName
+	 }
+	)
+
+(tsc)TypeScriptCompiler 编译器 将ts语法转换为多数浏览器能支持的普通的js
+
+
+总结：
+属性型指令: () 事件绑定、 []属性绑定、 [()]双向数据绑定 ngStyle/ngClass 动态样式/样式类的设置
+
+自定义指令：创建一个指令类（@Direcitve）
+	进阶： el:ElementRef
+		this.el.nativeElement
+
+路由模块:建立起url和组件之间的映射关系
+	基本步骤
+		①指定容器
+		router-outlet
+		②创建用到的组件
+		③配置路由词典
+		创建一个文件app.route.ts
+		[
+		 {path:'',component:Demo01Component},
+ 		 {path:'demo12',component:Demo01Component},
+ 		 {path:'**',component:Demo01Component},
+		]
+	跳转:修改地址栏/ routerLink="/demo12" /this.myRouter.navigateByUrl('demo12')
+	/this.myLocation.back()
+	传参:
+		明确发送、接收
+		配置接收方的路由地址
+		path:'demo14'
+		path:'demo14/:uName'
+		接收参数
+		myRoute:ActivatedRoute
+		this.myRoute.params.subscribe(
+		(data:any)=>{}
+		}
+
+练习：实现一个SPA.
+demo15/ 
+check.component.ts      查看页面
+pay.component.ts	支付页面
+send.component.ts	发货页面
+
+路由默认加载check
+check:button->pay 传递价格
+price: 接收到参数 显示在price页面;超链接(去发货)->send
+send:button(商品查看)--> check
+
+
+
+
+
+
+
+
+
+
+

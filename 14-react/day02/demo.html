@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/react.js"></script>
+  <script src="js/react-dom.js"></script>
+  <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="d1"></div>
+
+<script type="text/babel">
+  let MyList = React.createClass({render(){
+    return <ul>{
+      React.Children.map(
+        this.props.children,function(child){
+          return child
+        }
+      )
+    }</ul>
+    }})
+  ReactDOM.render(
+    <MyList>
+      <li>asd</li>
+      <li>zxc</li>
+      <li>zxc</li>
+    </MyList>,
+    document.getElementById('d1')
+  )
+</script>
+</body>
+</html>

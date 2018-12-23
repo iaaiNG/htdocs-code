@@ -1,0 +1,36 @@
+
+<h2>这是选择指令和循环指令的练习</h2>
+
+<!--多重判断-->
+<div [ngSwitch]="uName">
+    <p *ngSwitchCase="'lucy'">
+        Hello Lucy
+    </p>
+    <p *ngSwitchCase="'michael'">
+        你好 Michael
+    </p>
+    <p *ngSwitchDefault>请登录</p>
+</div>
+
+<!--循环结构-->
+<table>
+    <thead>
+        <tr>
+            <th>成绩</th>
+            <th>年龄</th>
+            <th>性别</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!--ngContainer是一个容器，不会影响html层级结构-->
+        <ng-container *ngFor="let stu of stuList" >
+            <tr 
+            *ngIf="stu.score >= 80">
+                <td>{{stu.score}}</td>
+                <td>{{stu.age}}</td>
+                <td>{{stu.sex}}</td>
+            </tr>  
+        </ng-container>
+ 
+    </tbody>
+</table>

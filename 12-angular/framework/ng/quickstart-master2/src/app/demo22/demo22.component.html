@@ -1,0 +1,65 @@
+<h1>这是个管道的案例</h1>
+
+<h1>{{nowDate}}</h1>
+<h1>{{nowDate | date}}</h1>
+<!--给管道进行传参 -->
+<!--
+    Vue中传参的写法
+    <h1>{{nowDate | date(arg1,arg2)}}</h1> 
+
+    y年  M月  d日  h时 m分
+ -->
+ <h1>{{nowDate | date:'MM-dd hh:mm'}}</h1>
+
+ <!-- json格式序列化、反序列化 -->
+ <p>{{stu.name}}</p>
+ <p>{{stu.age}}</p>
+ <p>{{stu | json}}</p>
+
+<!-- 大小写 -->
+<h3>{{title}}</h3>
+<h3>{{title | uppercase}}</h3>
+<h3>{{title | lowercase}}</h3>
+
+<!-- number 管道-->
+<p>{{price}}</p>
+<!--number:'整数保留位数.小数保留的最小位数-小数保留的最大位数' -->
+<p>{{price | number:'4.1-1'}}</p>
+
+<!-- currency 货币样式的格式化
+<any> {{ 表达式 | 
+    currency:'目标货币格式':'是否显示货币符号'}} </any>
+-->
+<p>{{totalPrice}}</p>
+<!--默认处理为usd-->
+<p>{{totalPrice | currency}}</p>
+<p>{{totalPrice | currency:'EUR'}}</p>
+<p>{{totalPrice | currency:'CNY'}}</p>
+
+<p>{{totalPrice | currency:'EUR':true}}</p>
+<p>{{totalPrice | currency:'USD':true}}</p>
+<p>{{totalPrice | currency:'CNY':true}}</p>
+
+<!--percent 百分比的格式化方式-->
+<p>{{trendAge}}</p>
+<p>{{trendAge | percent}}</p>
+<p>{{trendAge | percent:'2.3'}}</p>
+
+<!-- slice
+<any>
+    {{表达式 | slice:start:end}}
+</any>
+截取表达式结果，从start位置到end位置，如果不指定end
+意味着读取到最后一位
+ -->
+<h3>{{info}}</h3>
+<h3>{{info | slice:5}}</h3>
+<h3>{{info | slice:0:5}}</h3>
+
+<!--
+    多重过滤
+    定义一个字符串tips="It is a tip",
+    渲染到h2标签时候，只显示IS A TIP
+    -->
+<h2>{{tips}}</h2>
+<h2>{{tips | uppercase | slice:3}}</h2>

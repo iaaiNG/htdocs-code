@@ -1,0 +1,195 @@
+
+每日一练：
+	①完成组件的创建和使用
+	②实现add
+		①到ToDoBox中定义一个状态（类型为数组）
+		②在点击ToDoInput中的add按钮时，怎么修改ToDoBox中的状态
+			在ToDoBox中定义一个方法
+			将方法传递给ToDoInput
+			按钮单击调用该方法修改状态
+		// (9:55 - 10:25)
+		③希望在todolist中能够渲染多个todoitem，就得将ToDoBox中的状态的数组传递给todolist
+		todolist通过属性接收todobox所传递来的数组，遍历数组，返回多个todoitem
+	③实现delete
+		①在todobox中定义一个用来删除指定位置元素的方法 有参数（是要删除的元素的下标）
+		②将该方法传递给todolist，然后再传递给todoitem
+		③在todoitem中的delete按钮 单击时
+		调用方法
+
+要求：点击add按钮，能够将用户输入的内容显示在todoitem中，点击多次，创建多个todoitem
+（状态可以实现动态绑定！）
+
+
+angular ionic
+
+一、ReactNative概述
+ https://github.com/kunyashaw
+
+官网：
+	https://facebook.github.io/react-native/
+	reactnative.cn
+
+ReactJS和ReactNative关系？
+ReactJS是采用React的语法写网页
+ReactNative是采用React的语法写Android/iOS
+（React的语法 5大核心概念：jsx/component/refs/props/state）
+
+React开发理念（slogan） ：
+	learn once,write anywhere
+
+
+what?
+ReactNative是由fb出品的，可以基于React语法进行编程，调用由ReactNative所封装的组件，来编写移动端的原生应用程序
+
+注意事项：ReactNative在进行渲染不允许出现任何的html标签
+cli: command line interface 命令行
+GUI: graphical user inerface 图形化
+
+why?
+	free /open source
+	开发成本很低（学习成本、时间成本）
+	真正nativeApp（性能比较好）
+
+how？   搭建开发环境
+	方式1：create-react-native-app
+         //全局安装create-react-native-app
+	 npm install -g create-react-native-app
+	 //创建一个基于react-native的模板项目 名字叫做my-app
+	 create-react-native-app my-app
+	 //切换到my-app目录
+	 cd my-app/
+	 //启动开发服务器
+	 npm start
+		
+	方式2：react-native-cli
+	//安装
+	npm install -g react-native-cli
+	//创建一个模板项目
+	react-native init my-app
+	//启动开发服务器
+	cd my-app
+	react-native start
+
+准备工作：
+	①准备好了一个叫做myapp的模板项目
+	②启动了一个模拟器
+
+如果模拟器中 并没有myapp的安装可执行程序。
+①找到apk结尾的源文件
+C:\xampp\htdocs\framework\react\reactNative\myapp\android\app\build\outputs\apk
+②将apk结尾的文件放在htdocs中的framework的文件夹下边
+③启动apache
+④在模拟器中 就可以打开浏览器 访问pc的ip地址
+查询pc的IP地址： windows+R -> cmd -> ipconfig
+172.163.100.58
+
+
+模拟器的myapp如何使用？
+①打开模拟器(eclipse->avd android virtual device manager->start-launch)
+②在模拟器安装的程序列表中，打开myapp
+③点击menu
+④选中 dev settings
+⑤选中 debug server host & port
+⑥输入当前pc的ip地址和端口号
+	比如:172.163.100.58:8081
+
+
+二、ReactNative的基本使用
+
+ReactNative组件的创建和使用的基本步骤：
+
+创建：
+	import React,{Component} from 'react';
+	import {Text} from 'react-native';
+	export default class Component1 extends Component{
+		render(){
+			return <Text>hello</Text>
+		}
+	}
+使用：
+	由于reactNative是默认加载index.android.js文件，我们可以在该文件中渲染自定义组件
+	import Component1  from ''
+	<Component1/>
+
+调试技巧：
+	①找到visual studio code,然后关闭开发服务器
+	ctrl+c --> y
+	②启动开发服务器
+	npm start
+	③关闭模拟器
+	④打开模拟器
+	⑤打开模拟器中的myapp
+	(确保端口号是8081，还有ip地址是当前pc的ip地址)
+	⑥点击menu，选择reload
+
+三、ReactNative所封装的组件
+1、Text
+	显示文本内容
+2、View
+	View是一个容器，如果是在ios下调用它就是UIView、如果是在Android，还是android.view.View
+
+3、StyleSheet
+	选择1：	指定样式：
+	<Text style={{fontSize:30,backgroundColor: 'blue'}}></Text>
+
+	选择2：指定样式类
+	3.1 引入
+	import {StyleSheet} from 'react-native';
+	3.2 创建
+	var MyStyle = StyleSheet.create({
+		myHeader1:{
+			fontSize:50
+		},
+		myHeader2:{
+			fontSize:40
+		}
+	})
+	3.3 使用
+	<any style={MyStyle.myHeader1}></any>
+
+4、state
+
+4.1 3个基本操作
+	初始化
+		constructor(){
+			super();
+			this.state = {count:0}
+		}
+	读状态
+		this.state.count
+	写状态
+		this.setState({count:2})	
+	
+4.2 state依然可以实现数据绑定的效果
+	如果将state的值 和 视图 建立起绑定关系，当state的值发生变化时，视图就会自动的更新(React)
+
+5、Button
+	import {Button} from 'react-native';
+
+	<Button 
+	title="clickMe"
+	onPress={this.hand
+	lePress}></Button>
+
+总结：
+	todobox
+	reactnative的概述
+	搭建环境
+	3个组件类(Text/View/Button)
+	state
+	StyleSheet
+
+综合练习：
+	创建demo06_lianxi的文件夹，demo06.js
+
+	在demo06创建一个组件类，类的名称Demo06Component
+
+	要求在组件挂载完毕之后，启动定时器，修改组件渲染的唯一一个元素Text透明度
+	0~1 0~1
+	
+
+
+
+
+
+

@@ -1,0 +1,266 @@
+每日一练：
+实现SPA，
+demo21/
+header.component.ts 页头组件 实现子与父通信，定义一个方法，用来返回true/false
+
+cart.component.ts 购物车组件,渲染一个列表,就在ngOnInit处理方法中通过ViewChild调用header组件中的方法，如果返回true渲染列表，否则就不显示列表；放一个按钮，点击跳转到订单确认页面
+
+orderConfirm.component.ts 订单确认组件（
+button 确认商品--》step1,  button 支付-->step2），
+支持嵌套组件,
+step1.component.ts,step2.component.ts
+
+①创建了orderConfirm和cart组件，声明 并配置对应的路由地址
+②创建step1 step2，配置可以加载到orderConfirm组件中路由地址
+③创建header组件，cart组件向要调用header组件中的方法（父组件 读取 子组件实例中数据或者方法）
+ViewChild
+
+今天安排：
+管道
+服务
+路由守卫
+
+
+一、管道
+
+filter? 过滤器 是用来实现对数据的筛选、过滤、格式化
+
+回顾：
+VueJs2.0是没有内置的过滤器
+在vue中有个数据name=“zhangsan”
+//实现一个过滤器叫做myUppercase，可以将过滤器前面的数据转换成大写的
+new Vue({
+ filters:{
+   myUppercase:function(myInput){
+     return myInput.toUppercase();
+   }
+ }
+})
+{{name | myUppercase}}
+区别：
+①给管道指定参数格式不一样
+vue:{{name | myUppercase(arg1,arg2)}}
+ng :{{name | myUppercase:arg1:arg2}}
+②vue是没有内置，只能自定义，而Angular是自带管道的
+
+
+在angularJS中叫做filter，升级angular之后叫做pipe
+
+
+angular提供了丰富的内置过滤器，同时也支持自定义过滤器。
+
+管道（过滤器）？
+	管道/过滤器，本质都是一个带有参数，有返回值的方法。
+	将输入 进行处理 进行输出
+	把经常用到的数据处理，可以直接在html中进行数据的处理，省去了到js中进行操作的过程，提高了工作效率。
+
+angular管道的语法:
+<any> {{表达式 | 管道}} </any>
+<any> {{表达式 | 管道:arg1}} </any>
+
+多重过滤？
+<any> {{表达式 | 管道1 | 管道2 | 管道3...}} </any>
+
+
+1、内置管道
+
+
+①date  日期
+{{ 表达式 | date:'yy-MM-dd hh:mm'}}
+
+②json  在html中 支持json格式的序列化
+
+③uppercase/lowercase 大小写的转换
+
+④number:
+	'整数保留位数.小数保留的最小位数-小数保留的最大位数' 
+	3.2-3
+
+⑤currency 货币样式的格式化
+	<any> 
+	{{ 表达式 | 
+	    currency:'目标货币格式':'是否显示货币符号'}}
+	    </any>
+
+	<p>{{totalPrice | currency:'USD':true}}</p>
+
+
+⑥percent
+	<any>
+	    {{表达式 | percent:‘整数位数.小数最少-小数最大位数’}}
+	</any>
+	格式化加上%
+⑦slice
+	<any>
+	    {{表达式 | slice:start:end}}
+	</any>
+	截取表达式结果，从start位置到end位置，如果不指定end，意味着读取到最后一位
+
+
+2、自定义管道类
+**.component.ts
+**.direcitve.ts
+**.module.ts
+**.pipe.ts
+
+实现：
+①创建一个管道类文件
+test.pipe.ts
+指定transform方法对于数据和参数的处理，将结果返回
+
+②声明
+app.module.ts
+import {TestPipe} from '***'
+
+@NgModule({
+ declarations:[
+  TestPipe
+ ]
+})
+
+③调用自定义管道类
+
+用法和内置的没有任何区别
+
+
+练习：
+	创建一个管道类 sex.pipe.ts ,
+	管道名字叫做sexchange
+	实现对于性别的转换
+	1 | sexchange -》男
+	0 | sexchange -》女
+	1 | sexchange:true -》男
+	1 | sexchange:false -》boy
+	0 | sexchange:true -》女
+	0 | sexchange:false -》girl
+
+二、服务
+
+在一个大型项目中，如果有一些方法或者数据 需要反复的用到，想办法去封装，方便进行复用，angular中建议通过封装成一个对象--》服务
+
+服务？就是一个类，在这个类中封装一些常用到的方法或者数据
+
+案例：
+如果一个项目中，有非常多个组件，
+在测试开发，会输出一堆的日志信息，方便调试；
+发布到线上，挨个去删除日志信息太麻烦，
+需要封装一个日志类服务，减轻工作量
+
+1、服务的使用步骤：
+①创建服务
+	@Injectable()
+	//定义数据和方法
+②给服务指定提供商
+	两种选择：
+		选择1：给module指定provider
+		该模块中所有的组件都可以引入服务区使用	
+		选择2：给component指定provider
+		该组件以及子组件
+	import {LogService} from '***'
+	providers:[LogService]
+③调用服务
+	//引入
+	import {LogService} from '***'
+	//实例化
+	constructor(private myService:LogService){}
+	//调用
+	this.myService.**/**()
+
+
+练习：
+	心跳服务
+	创建一个服务 heartbeat.service.ts，
+	在这个服务中封装两个方法，分别是开始心跳和结束心跳
+	start:启动周期性定时器，每隔1s,向控制台输出一句话:in heart beat
+	setInterval
+
+	stop: 结束定时器
+	clearInterval
+
+	demo25/demo25.component.ts
+	视图:有两个按钮，一个开始，一个是结束，点击时，调用服务中start、stop
+
+①服务的创建和使用
+②定时器的启动和关闭
+
+
+
+2、封装一个网络请求的服务
+创建服务
+	如何发请求？
+	sendRequest(myUrl:string){
+	  return this.http.get(myUrl).map(
+	  (response:Response)=>response.json()
+	  )
+	}
+给服务指定提供商
+调用服务
+	this.myHttpService
+	.sendRequest("要请求的地址")
+	.subcribe((result:any)=>{
+		console.log(result);
+	})
+
+
+如果有跨域：
+在php中：
+header('Access-Control-Allow-Origin:*')
+
+
+总结：
+①自定义管道类
+	管道？就是一个有参数有返回值方法；作用实现对于数据的筛选、过滤、格式化
+	①创建
+	@Pipe({
+	 name:''
+	})
+	②声明
+	declarations:['SexPipe']
+	③使用
+②自定义服务并使用
+	服务本质就是类，可以在这个类中封装经常用到的方法或者数据
+	①创建一个服务类
+	@Injectable()
+	在服务类中定义方法、数据
+	②指定提供商
+	providers:[HeartBeatService]
+	模块、组件限定作用范围
+	③使用
+	import {}
+	constructor(){}
+	this.myService.**/**()
+③如何封装一个网络请求的服务
+	注意事项：默认的AppModule不支持网络请求模块，指定依赖于HttpModule
+
+	①创建一个服务类
+	@Injectable()
+	在服务类中定义方法、数据
+		sendRequest(myUrl:string){
+	  return this.http.get(myUrl).map(
+	  (response:Response)=>response.json()
+	  )
+	}
+	②指定提供商
+	providers:[MyHttpService]
+	模块、组件限定作用范围
+	③使用
+	import {}
+	constructor(){}
+	this.myHttpService
+	.sendRequest("要请求的地址")
+	.subcribe((result:any)=>{
+		console.log(result);
+	})
+
+
+每日一练：
+	服务，
+	demo27_lianxi/
+	
+	demo27.component.ts：
+		注入服务，根据服务中方法返回的结果，决定是否显示一个列表
+
+	custom.service.ts :封装一个方法checkUserLogin，用来检查用户是否登录，返回true就是登录状态，否则就是未登录
+
+	4天讲解的知识点，整理思维导图。
+	

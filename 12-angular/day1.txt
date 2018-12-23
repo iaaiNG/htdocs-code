@@ -1,0 +1,298 @@
+
+一、软件设计原则和设计模式
+
+我们已经具备使用html/css/js/h5/c3,可以完成基本的需求，要想实现大型的商业项目，希望
+①清楚在软件领域中的设计原则和设计模式 
+②掌握主流框架（Vue/Angular/React）的使用
+
+
+框架？
+	是一套优秀的代码，可以被反复使用。
+	提高了开发速度、提高了代码的质量。
+
+学习框架？
+	①目标
+	②框架的基本架构：有什么东西、了解实现过程
+
+
+反面的案例：
+僵化、脆弱、不必要的重复、晦涩。。。
+
+知识点要求：精通、掌握、了解
+
+1、设计原则
+①YAGNI
+you aren't gonna need it
+不要写 不需要的代码
+
+②KISS
+keep it simple and stupid
+代码要简单
+
+合理的注释/遵循团队的代码设计风格
+
+③DRY
+Don't Repeat Yourself
+不要重复自己
+
+代码的封装和重用
+
+④高内聚低耦合
+
+耦合度：不同的模块或者不同的组件之间的关系
+将降低耦合度的过程 称之为是 解耦
+
+内聚：一个模块或者一个组件内部之间的关系
+
+⑤SRP
+single responsibility principle 单一责任原则
+
+每个模块、方法、文件、类等 只做一件事情
+
+⑥OCP
+open close principle
+开闭原则
+
+对扩展开放 对修改关闭
+
+⑦最少知识法则
+least knowledge priciple
+
+
+2、设计模式
+23种设计模式，主要分为3大类
+设计模式(Design pattern)是一套被反复使用、多数人知晓的、经过分类编目的、代码设计经验的总结
+
+创建型模式，共五种：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。
+
+结构型模式，共七种：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。
+
+行为型模式，共十一种：策略模式、模板方法模式、观察者模式、迭代子模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。
+
+了解：工厂方法模式、观察者模式、单例模式
+在学习过程中，遇到对应的设计模式，再讲解。
+
+
+二、Angular概述
+
+what?
+	09年推出，由Google和开源社区共同维护的一个开源的js框架
+	angular 是4.*版本
+
+	主流的版本有两种：
+	①angularJS 针对的是angular1.*版本
+	②angular 针对的是angular2.0以后所有版本
+
+	版本之间的区别？
+	①angular2.0以后所有的版本几乎没有大的变化（官方承诺）
+	②angular与angularJS差别
+	2.1 $scope/$http/$rootScope/Controller等等核心概念都在新版本中舍弃了
+	2.2 angular引入了组件的概念
+	组件？是一个可被反复使用的 带有特定功能的视图
+	组件的好处？提高了代码的复用率、降低了测试难度、降低了维护成本、提高了代码的可读性
+	2.3 angular支持typescript
+	typescript是一个强类型检查机制语言，是由两大巨头google和micrsoft联合推出、推广的一种语言，es6的超集。
+	
+	定义一个数据都要指定对应的类型，而且一旦指定为某种数据类型之后，就不允许修改为其它类型的数据
+
+when?	
+	PC端&Mobile端，适合数据操作为主的app
+	Google、微信网页版、锤子手机官网...
+
+why?
+	①符合开发的潮流，包括组件概念
+	angularJS用户主要是传统的企业，angular已经大量的用在新型的互联网公司等
+
+	②提到了代码的可读性和可维护性
+
+	③angular引入了更高性能的工具，编写编译部署更简单
+
+	④支持typeScript
+
+how？	
+	方式1：
+		①安装nodeJS，保证npm可用
+		②全局安装angular的命令行工具
+		npm install -g @angular/cli
+		③创建项目
+		ng new my-app
+		④启动开发服务器
+		cd my-app
+		ng serve --open
+	方式2：（新手友好的方式）
+		①下载模板项目
+ 		在浏览器中输入：
+		https://github.com/angular/quickstart
+		点击clone or download
+		选中download zip
+		②解压缩模板项目，进到项目文件件中输入:
+		npm install
+		③启动开发服务器
+		npm start
+
+		ctrl+` 启动集成终端
+		
+三、Angular开发
+
+启动开发服务器： npm start
+结束开发服务器： ctr+c ,y点击enter
+
+1、angular启动流程
+当在一个Angular项目中，在终端输入npm start时候，启动了一个开发服务器（lite-server，开启3000端口）；
+在src目录下有一个文件叫做index.html，在body中渲染了自定义组件my-app,对应的是app目录下的app.component.ts文件，指定了template属性为hello Angular，selector为my-app
+
+工作机制：
+main.ts-->启动AppModule--》指定了启动AppComponent，组件就是可用了
+
+2、组件类的创建和使用
+
+组件 是一个可被反复使用的 带有特定功能的视图
+
+创建：
+	①在app目录下创建一个文件夹demo01
+	在demo01文件夹中创建一个文件demo01.component.ts
+
+	②引入组件类
+	import {Component} from '@angular/core'
+	③导出自定义组件类
+
+	export class Demo01Component{
+	}
+
+	④通过装饰器 指定该组件类的元数据metaData
+
+	@Component({
+		selector:'demo01',
+		template:'<h1>hello world</h1>'
+	})
+
+
+	selctor:指定选择器，是指定在编写html时调用组件的名称，作为标签去使用
+
+2、使用
+	①先到模块中声明
+	找到app目录app.module.ts文件，引入要声明的组件类
+	import {Demo01Component} from './demo01/demo01.component'
+	
+	@NgModule({
+		declarations:[Demo01Component]
+	})
+	②作为标签去使用
+	在该模块中任何一个组件中 都可以去使用
+
+
+任何一个包含组件概念的框架，在使用的时候，一定要有组件树的概念。
+
+
+练习：
+在app目录创建一个 demo02的文件夹，创建一个demo02.component.ts的文件，导出组件类为 Demo02Component,指定选择器的名称为demo02,模板中去指定显示一个有5个元素构成的列表;
+
+
+在渲染时候，根组件中只显示该Demo02Component.
+
+
+四、Angular指令
+
+如何离线安装一个vscode的插件？
+①找到对应的文件夹C:\Users\web-01\.vscode\extensions
+②将ngTplForStu.zip解压缩，找到john-papa的文件夹，拷贝该文件夹
+③粘贴到第一步对应的文件夹中
+④重启vscode 激活插件
+
+Vue
+v-for/v-if v-else v-else-if
+v-show/v-model/v-bind:src--> :src/
+@click
+
+vue的lifecycle:
+create/update/mount/destroy
+
+1、常见指令
+①循环
+
+*ngFor
+语法: 
+<any *ngFor="let tmp of list"> </any>
+<any *ngFor="let tmp of list；
+	let myIndex=index"> </any>
+
+②选择
+
+<any *ngIf="表达式"></any>
+
+typeScript:
+	1、常见的数据类型 string/number/boolean/array/any/object
+	2、如何定义一个指定类型的变量
+	count:number = 2;
+如何要在模板中调用类中定义的变量：
+	直接在构造函数之前定义，无需加let关键词
+	isMemeber:boolean = true;
+
+③多重判断
+*ngSwitchCase *ngSwitchDefault,有一个使用前提：
+通过[ngSwitch]去指定判断条件
+
+<div [ngSwitch]="someValue">
+	<p *ngSwitchCase="1"></p>
+	<p *ngSwitchCase="1"></p>
+	<p *ngSwitchCase="1"></p>
+	<p *ngSwitchDefault></p>
+</div>
+
+
+2、练习：创建一个组件 demo05/demo05.component.ts
+
+在这个组件中，
+①有一个变量uName,如果用户名是lucy显示Hello Lucy,否则是michael，显示'你好,michael';否则当时其他情况是，显示"请去登录"
+②初始化一个对象数组stuList（包含5个元素），每个对象都包含score/age/sex,将数据渲染在一个table中（只显示成绩是80分以上的行）
+
+
+3、结构型指令与属性型指令的基本概念
+
+结构型指令？？
+影响html结构的指令
+*ngFor/*ngIf/*ngSwitchCase/*ngSwitchDefault
+
+属性型指令？
+属性型指令会改变某个元素、组件或其它指令的外观或行为。 
+比如，内置的NgStyle指令可以同时修改元素的多个样式。
+
+4、常用的属性型指令
+
+事件绑定
+	语法:
+	<any (eventName)="handleEvent()"></any>
+
+	步骤1：在对应的组件类中 定义方法
+	步骤2：在模板中通过(eventName)=“handleEvent()” 给指定的eventName事件 绑定一个处理函数 handleEvent
+
+总结：
+	设计原则和设计模式
+	angular 
+		①概述 
+		②angular启动流程 
+		③组件创建和使用 
+		④组件中常见的结构型指令 
+		⑤组件中的属性型指令
+			事件绑定
+
+每日练习：
+	在demo07/demo07.component.ts创建一个组件类Demo07Component，渲染一个表单，
+	表单中
+	①有一个注册的按钮，点击注册按钮 显示弹窗(注册成功)
+	②有一个登录的按钮，点击登录按钮时，通过控制台提示“请输入对应的用户名和密码”
+	③调用MyInputComponent去渲染一个输入框
+
+	在demo07/myinput.component.ts,创建一个组件类 MyInputComponent,渲染一个input标签
+
+
+
+
+
+
+
+
+
+
+
+

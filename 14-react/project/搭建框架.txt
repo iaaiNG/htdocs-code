@@ -1,0 +1,14 @@
+1、准备工作
+
+启动apache和mysql
+
+2、搭建项目架子
+①解压缩reactNative.zip文件夹到project目录中
+②通过visualStudioCode去打开reactNative文件夹中的myapp文件夹
+③将react_navigation_node_modules.zip拷贝到myapp文件夹中
+④解压缩react_navigation_node_modules.zip到当前文件夹
+⑤在myapp文件夹中创建app目录 ，在app目录下创建components目录，在components目录中，创建project目录
+⑥在project目录中创建login.js main.js productList.js三个文件
+⑦在index.android.js中配置路由词典，让默认访问login.js
+
+3、实现具体页面需求

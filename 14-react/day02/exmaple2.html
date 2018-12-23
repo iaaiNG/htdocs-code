@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/react.js"></script>
+  <script src="js/react-dom.js"></script>
+  <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="d1"></div>
+
+<script type="text/babel">
+  let MyInputComponent = React.createClass({
+    mysth(){
+      this.props.input(this.refs.myInput.value)
+    },
+    render(){
+      return <div>
+        <label>
+          请输入：<input onChange={this.mysth} type="text" ref="myInput"/>
+        </label>
+      </div>
+    }
+  })
+  let MyButtonComponent = React.createClass({
+    showMsg(){
+      // console.log(this)
+      this.props.msg()
+    },
+    render(){
+      return <button onClick={this.showMsg}>Click</button>
+    }
+  })
+  let MyMainComponent = React.createClass({
+    msg:"999",
+    dosth(data){
+      this.msg = data
+      // console.log(this)
+    },
+    showsth(){
+      console.log(this)
+      return this.msg
+    },
+    asd(data){
+      console.log(data)
+      // console.log(this.msg)
+    },
+    render(){
+      return <div>
+        <MyInputComponent input={this.dosth}></MyInputComponent>
+        <MyButtonComponent msg={this.showsth}></MyButtonComponent>
+        <br/><button onClick={this.asd(this)}>this</button>
+        <br/>{this.msg}
+      </div>
+    }
+  })
+  ReactDOM.render(
+    <MyMainComponent/>,
+    document.getElementById('d1')
+  )
+</script>
+</body>
+</html>

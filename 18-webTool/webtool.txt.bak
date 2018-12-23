@@ -1,0 +1,150 @@
+web-tool node.js第三方模块
+1、gulp
+	1、准备步骤
+		1、cmd全局安装：cnpm i -g gulp
+		2、安装gulp为项目的开发依赖：cnpm i --save-dev gulp
+		3、创建文件：gulpfile.js
+	2、Hello World
+		const gulp = require('gulp');
+		gulp.task('default', () => {
+			console.log('Hello, gulp!')
+		})
+		// cmd 当前目录执行gulp
+	3、gulp 常用函数
+		1、gulp.task()
+		2、gulp.run()
+		3、gulp.src()
+		4、gulp.dest()  
+		5、gulp.watch()  监听文件变化，执行回调函数
+	4、gulp 作用
+		1、检查 js 文件的语法错误
+			1、利用cmd安装项目开发依赖 jshint：cnpm i --save-dev jshint gulp-jshint
+				const gulp = require('gulp');
+				const jshint = require('gulp-jshint')
+				gulp.task('default', () => {
+					gulp.run('hint')  
+				})
+				gulp.task('hint',()=>{
+					gulp.src('./js/*.js')
+						.pipe(jshint())
+						.pipe(jshint.reporter('default'))
+				})
+			2、cmd 当前目录执行：gulp 
+		2、压缩 js 文件
+			1、安装项目开发依赖：gulp-concat、gulp-uglify、gulp-rename
+				cmd：cnpm i --save-dev gulp-concat gulp-uglify gulp-rename
+			2、代码
+				const gulp = require('gulp');
+				const concat = require('gulp-concat')
+				const uglify = require('gulp-uglify')
+				const rename = require('gulp-rename')
+				gulp.task('scripts', () => {
+					gulp.src('./js/*.js')
+						.pipe(concat('all.js'))  // 合并所有 JS 文件 到 all.js 文件中
+						.pipe(gulp.dest('./dist'))
+						.pipe(rename('all.min.js'))
+						.pipe(uglify())  // 压缩 
+						.pipe(gulp.dest('./dist'))
+				})
+			3、cmd 当前目录执行：gulp scripts
+		3、编译 css 预处理器文件如：*.sass => *.css 
+			1、安装项目开发依赖：gulp-sass
+				cmd：cnpm i --save-dev gulp-sass
+			2、代码：
+				const gulp = require('gulp');
+				const sass = require('gulp-sass')
+				gulp.task('sass', () => {
+					gulp.src('./sass/*.sass')
+						.pipe(sass())
+						.pipe(gulp.dest('./css'))
+				})
+			3、cmd 当前目录执行：gulp sass
+2、webpack：web项目的打包工具
+	1、准备步骤
+		1、cmd全局安装：cnpm i -g webpack
+		2、为项目安装开发依赖：cnpm i --save-dev webpack
+	2、执行步骤：webpack app/main.js -o public/bundle.js
+		// 将 app 目录下 main.js 及其中引入的文件打包到 public 目录下的 bundle.js 中
+	3、优化执行步骤
+		1、配置 webpack.config.js 文件
+			module.exports = {
+				entry: __dirname + '/app/main.js',  //项目入口文件
+				output: {
+					path:  __dirname + '/public',
+					filename: 'bundle.js'  //webpack 打包后生成bundle.js
+				}
+			};
+		2、执行方法：
+			1、直接在 cmd 中执行：webpack
+			2、在 package.json 中，为 “scripts” 添加键值对："start": "webpack"，
+				在cmd中执行：npm [run] start  // 当键为 "start" 时，可以省略 run
+	4、热重载
+		1、安装依赖：cnpm i -D webpack-dev-server
+		2、配置 webpack.config.js 文件：
+			devServer: {
+				contentBase: './public',  // index.html 路径
+				historyApiFallback: true,
+				inline: true  // 实时刷新
+			}
+		3、配置 package.json 文件，为 “scripts” 添加键值对："server":"webpack-dev-server --open"
+		4、cmd执行：npm run server
+3、mocha：测试框架
+	1、准备步骤
+		1、cmd全局安装：cnpm i -g mocha
+		2、准备package.json：npm init
+		3、安装项目的开发依赖：cnpm i --save-dev mocha chai  // chai 断言库
+	2、断言库 chai 的基本断言
+		expect().to.be.equal()  // 判断相等
+		expect().to.not.be.equal()  // 判断不等
+		expect().to.be.ok  // 判断true
+		expect().to.not.be.ok  // 判断false
+		expect().to.be.a('string')  // 判断字符串类型
+		expect().to.be.a('object')  // 判断对象类型
+		expect().to.be.match(regexp)  // 判断是否匹配正则
+		expect().to.be.empty  // 判断空集合
+		expect([1,2,3]).to.include(2)  // 判断数组是否包含某元素
+		expect('hello').to.contain('el')  // 判断是否包含子字符串
+		expect({k1:v1,k2:v2}).to.include.keys('k1') //判断对象是否包含某个键
+	3、基本使用：
+		1、创建add.test.js文件，代码：
+			const expect = require('chai').expect;  // 引入
+			function add(x,y){ return x+y; };
+			describe('a add() function test',()=>{  // describe 创建测试套件
+				it('1+1=2',()=>{  // it 创建测试用例
+					expect(add(1,1)).to.be.equal(2);  // expect 创建断言，判断相等
+				})
+				it('-1+1=0',()=>{ 
+					expect(add(-1,1)).to.be.equal(0)
+				})
+			})
+			/* a add() function test
+				√ 1+1=2
+				√ -1+1=0
+			  2 passing (9ms) */
+		2、执行：
+			1、cmd：mocha add.test.js
+			2、如果文件夹包含 test 目录，mocha 会自动测试 test下所有测试模块：mocha
+			3、如果 test 目录下还有子目录，则递归测试：mocha --recursive	
+	4、mocha 异步测试：
+		1、代码：
+			const mysql = require('mysql');
+			const expect = require('chai').expect;
+			pool= mysql.createPool({ user:'root' })
+			describe('connect mysql', () => {  
+				it('make sure connect success', (done) => {  
+					pool.getConnection((err, connection) => {
+						let threadId = connection.threadId
+						expect(threadId).to.be.match(/\d+/)
+						done()  // 异步执行结束
+					})
+				})
+			})
+		2、执行cmd：mocha -t 1000 
+4、yeoman：用于项目脚手架快速创建
+	1、准备步骤
+		1、cmd全局安装：cnpm i -g yo bower generator-webapp
+		2、准备package.json：npm init
+		3、安装项目的开发依赖：cnpm i --save-dev mocha chai  // chai 断言库
+
+
+

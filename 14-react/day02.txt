@@ -1,0 +1,288 @@
+
+称呼
+	在推出ReactNative之前，
+	React ReactJS React.js都是指的是用来进行前端开发的一个框架;
+	推出ReactNative之后，React分为两大块，一个是ReactJS，一个是ReactNative
+回顾
+	ReactJS概述
+	what？
+		核心库只关注视图层
+	why?
+		ReactJS的核心概念：
+			组件
+			refs
+			props
+			state
+			jsx
+		借助于VDOM（virtual DOM）,减少DOM操作的次数
+		借助于单向数据流，减少业务的复杂度，降低代码的维护成本
+
+一、如何搭建ReactJS的开发环境	
+
+方案1： 借助于命令行
+	
+	//安装工具 create-react-app
+	npm install -g create-react-app
+	//创建一个my-app的基于ReactJS的项目
+	create-react-app my-app
+	//进入my-app目录
+	cd my-app/
+	//启动开发服务器
+	npm start
+
+方案2： 直接在普通的项目中 引入对应的文件
+	引入了3个文件：
+	react.js 核心文件
+	react-dom.js 处理与DOM操作
+	browser.min.js 支持jsx语法
+
+二、JSX 语法
+
+JavaScriptXML，并不是一种新的语法，只不过是支持在js中编写html标记而已。
+
+ReactJS不是强制要求使用JSX语法，但是推荐使用（因为用js写太麻烦了）。
+虽然说可以直接在js中编写html标签，但是html标签并不是像在真正的html文件中支持所有的属性。
+
+<label for=“”></label>
+--》
+<label htmlFor=“”></label>
+
+2.1 babel
+是一个js的编译器，可以支持将typescript\es6\jsx，转换为当前浏览器所支持的普通的js
+
+babel官网：       babeljs.io
+在线查看编译效果：babeljs.io/repl/
+
+2.2 第一个方法
+
+//向指定的容器渲染元素
+ReactDOM.render(
+准备要渲染的元素，
+要渲染到的容器
+);
+
+比如：
+
+
+2.3 jsx
+jsx 语法 
+①支持在js中编写html标签
+②reactjs在渲染元素时，是不允许直接返回多个要渲染的元素，要统一的放在一个容器中
+③在jsx是支持js运算的
+可以通过花括号的语法执行js运算
+<any>{运算表达式}</any>
+
+练习：创建一个demo03.html (10:35 - 10:45)
+在该文件中 要求在h1的标签中 执行逻辑运算，在p标签中执行三目运算；将h1和p 通过react渲染到id为containter的div中。
+
+三、React中组件的创建和使用
+组件：是一个用来渲染视图的类，视图是可被反复使用的 带有特定功能。
+
+创建：
+var MyComponent = React.createClass({
+	render:function(){
+	 return 要渲染的元素
+	}
+})
+通过返回值 指定组件类的名称
+
+使用：
+直接作为标签去使用
+<MyComponent></MyComponent>
+
+<MyComponent/>
+
+
+创建组件的注意事项：
+①名称
+保证大驼峰，首字母都是大写的
+（原因：reactJS根据首字母的大小写 来判断是否是组件，如果是大写，就用reactjs来解析，如果是小写，交给html）
+②return
+在return要渲染的元素时，不允许直接换行
+③返回多个元素
+reactjs在渲染元素时，是不允许直接返回多个要渲染的元素，要统一的放在一个容器中
+
+
+四、复合组件
+复合组件在React中 并不是新的概念，其实就是一个组件；只不过组件中 包含其他的组件
+
+
+如何创建一个模板？
+
+file -> new ->edit file template
+->右上角的+ -> 指定name和extension，粘贴模板内容，保存即可。
+
+
+组件化有什么好处？
+	①代码封装完之后，方便复用，提高了代码的复用率
+	②组件一般都是作为标签去使用，
+	提高了代码的可读性、可维护性
+	③提高了编码速度
+
+
+
+总结：
+①React中的基本写法
+ReactDOM.render()
+babel
+②jsx 
+jsx 给React提供了哪些好处？
+	让react的组件封装的更好，ui、data全都搞定
+jsx 遇到{，就会调用js去解析；遇到<，如果首字母是大写，会通过react按照组件去解析，首字母是小写的情况，正常的html去解析
+
+③组件
+组件的本质：就是视图
+React的核心思想：封装组件 复用组件
+
+React是用来ui的，靠组件渲染视图，但是并不像bootstrap，ionic有很多现成样式让咱使用？
+
+https://github.com/brillout/awesome-react-components
+
+
+五、props
+
+properties 属性
+
+Vue中：
+<SonComponent myName="zhangsan"></SonComponent>
+Vue.component({
+	props:['myName']
+})
+
+angular:
+<SonComponent myName="zhangsan"></SonComponent>
+
+import {Input} from '@angular/core'
+@Input() myName:string="";
+	
+
+<a href="">
+<img src="">
+
+在React的组件 也是支持属性。
+
+1、基本流程：
+
+<SonComponent myName="zhangsan"></SonComponent>
+
+子组件就可以接收myName属性对应的值：
+  this.props.myName
+
+练习：
+创建3个组件，分别是
+MyInput
+ 指定两个属性 myLabelName myPlaceholder
+MyButton
+ btnName
+MyForm
+ 是由两个MyInput和两个MyButton构成的
+
+
+2、props中children属性
+props对象中的属性和在调用组件时 所指定的属性 是一一对应的，但是有一个比较特殊，就是this.props.children
+组件中子标签
+	如果只有一个 this.props.children就是一个对象
+	如果有多个 就是数组
+	如果没有 就是空
+
+3、属性传来的值是否可被修改？
+
+	不可修改的，只是可读的。
+	（this.props.** = ** 是不允许的）
+4、子-》父通信
+ events up
+
+ Vue:
+
+ <sonComponent @customEvent=""></sonComponent>
+
+ Vue.component('sonComponent',{
+	methods:{
+		sendEvent(){
+			this.$emit(
+				'customEvent',
+				123
+				)
+		}
+	}
+ })
+
+ angular:
+
+ <sonComponent (customEvent)=""></sonComponent>
+
+import { Output, EventEmitter} from '@angular/core'
+
+@Output() customEvent = new EventEmitter();
+
+this.customEvent.emit(123);
+
+
+React中子与父通信的详细步骤：
+	①在父组件定义一个有参数的方法
+		handleLogin:function(userName){
+		}
+	②在父组间中 调用子组件时，将上一步定义的方法通过属性传递给子组件
+		<SonComponent myClick={this.handleLogin}/>
+	③子组件直接通过props属性调用父组件传递的方法，并且在调用方法的同时，在方法中写上要传递的值
+		this.props.myClick('zhangsan');
+
+
+
+六、refs
+
+VDOM：Virtual DOM 虚拟DOM
+真的元素有可能会有几百个属性，每一次操作DOM的成本都是非常高的；
+虚拟DOM就是一种数据结构，就是由组件构成的，只有当它真正的插入文档以后，才会变成真实的DOM。
+
+如果要操作DOM，之前如果没有虚拟DOM，对于DOM的操作是直接就发生在真实的DOM中；有了虚拟DOM之后，当需要修改数据，首先将需要变化的部分，反映在虚拟DOM，找到真正需要更新的部分，最后再反映在真实DOM
+这个对比算法，React称之为DOM diff算法
+（都是交给React框架处理，React会采用最优的算法，在最合适的时间来更新DOM）
+
+需要在组件的处理函数中，假设需要调用真实的DOM节点，可以通过ref找到真实的DOM节点。
+
+refs的基本用法：
+①指定ref属性
+<any ref="myInput"></any>
+
+②通过ref名称去寻找元素
+this.refs.myInput
+
+
+综合练习：
+有3个组件（16:55 - 17:25）
+	MyInputComponent: 渲染一个输入框
+	MyButtonComponent: 渲染一个按钮
+	MyMainComponent： 由上述两个组件构成
+实现的效果：
+	点击MyButtonComponent中的按钮，获取到
+MyInputComponent中所输入的内容
+	
+步骤1：将MyInputComponent中用户所输入的内容 存在MyMainComponent中
+	子与父通信
+	①父组件中定义一个带有参数的方法
+	②将方法传递给子组件
+	③在子组件中 调用父组件传递的方法并传值
+步骤2：在点击MyButtonComponent的按钮时，取保存在MyMainComponent中的值
+	①在父组件中定义一个方法，用来返回保存的用户输入的内容
+	②把这个方法 传递给 子组件
+	③子组件中调用方法
+每日一练：
+	完成指定综合练习的所有的要求。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

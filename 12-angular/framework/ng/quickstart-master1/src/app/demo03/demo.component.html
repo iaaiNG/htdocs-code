@@ -1,0 +1,8 @@
+<h1>常用指令demo</h1>
+<!-- <img [src]="imgUrl"> -->
+<hr>
+<input type="text" [(ngModel)]="myMsg"> <span>{{myMsg}}</span>
+<hr>
+<input type="text" [ngModel]="myVal"> <span>{{myVal}}</span>
+<hr>
+<input type="text" [(ngModel)]="myMsg" (ngModelChange)="check($event)">

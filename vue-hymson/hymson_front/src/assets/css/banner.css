@@ -1,0 +1,129 @@
+#box{
+    width:1200px;
+    height:400px;
+    overflow:hidden;
+    /*margin: 0 auto;*/
+    position: relative;
+}
+#box img{
+height: 400px;
+width: 100%;
+}
+#box>div{
+    width:130px;
+    height:400px;
+    position:absolute;
+    top:0;
+    /*background-image:url("img/index/1.jpg");*/
+    background-position:center center;
+    background-size: 1200px 400px;
+}
+#box>div:nth-child(2){
+    left:0px;
+    background-position:0px 0px;
+    /*background-image:url("images/banner/1.jpg");*/
+}
+#box>div:nth-child(3){
+    left:130px;
+    background-position:-130px 0px;
+}
+#box>div:nth-child(4){
+    left:260px;
+    background-position:-260px 0px;
+}
+#box>div:nth-child(5){
+    left:390px;
+    background-position:-390px 0px;
+}
+#box>div:nth-child(6){
+    left:520px;
+    background-position:-520px 0px;
+}
+#box>div:nth-child(7){
+    left:650px;
+    background-position:-650px 0px;
+}
+#box>div:nth-child(8){
+    left:780px;
+    background-position:-780px 0px;
+}
+#box>div:nth-child(9){
+    left:910px;
+    background-position:-910px 0px;
+}
+#box>div:nth-child(10){
+    left:1040px;
+    background-position:-1040px 0px;
+}
+#box>div:nth-child(11){
+    left:1170px;
+    background-position:-1170px 0px;
+}
+#box>div:nth-child(12){
+    left:1300px;
+    background-position:-1300px 0px;
+}
+#box>div:nth-child(13){
+    left:1430px;
+    background-position:-1430px 0px;
+}
+#box>div:nth-child(14){
+    left:1560px;
+    background-position:-1560px 0px;
+}
+#box>div:nth-child(15){
+    left:1690px;
+    background-position:-1690px 0px;
+}
+#box>div:nth-child(16){
+    left:1820px;
+    background-position:-1820px 0px;
+}
+#box>div:nth-child(17){
+    left:1950px;
+    background-position:-1950px 0px;
+}
+
+.shake{
+    animation:shake .5s ease-in-out;
+}
+@keyframes shake{
+    0%{top:0px}
+    20%{top:100px}
+    50%{top:-70px}
+    65%{top:40px}
+    80%{top:-20px}
+    90%{top:10px}
+    100%{top:0px}
+}
+.index{
+    z-index:1;
+    position: relative;
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.bannerTxt {
+    color: white;
+    text-align: center;
+    width: 400px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    margin-left: -200px;
+}
+.bannerTxt p{
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.bannerTxt a{
+    display: inline-block;
+    margin-left: 10px;
+    width: 10px;
+    height: 10px;
+    background: white;
+}
+.indicator .cur {
+    background: #FE980F;
+}

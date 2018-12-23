@@ -1,0 +1,181 @@
+ref
+<any ref="" />
+
+<input ref="myInput"/>
+this.refs.myInput
+
+<MyInputComponent ref="UserInput"/>
+
+	input ref="myInput"
+
+this.refs.UserInput ???
+
+state
+lifecycle
+表单
+
+一、State 状态
+在React中，任何会变化的数据，都要保存在状态中。
+
+状态的3个基本操作：
+①初始化
+	getInitialState:function(){
+		return {
+		 count:0,
+		 age:10,
+		 sex:1
+		}
+	}
+②写状态
+	this.setState({count:1},func)
+③读状态
+	this.state.count
+
+重点：React是可以将状态中的值 绑定到视图，
+当状态中的值 发生变化的时候，React框架会检测到这个变化，然后再合适的时间，经过DOM diff算法，采用最优的效率来更新真实的DOM
+（React支持将状态中值 动态绑定 到视图）
+
+练习：
+通过状态来重构昨天的综合练习。
+
+把save方法中得到的数据 通过状态来进行保存，然后将状态中的值 直接通过属性传递给MyButtonComponent
+①初始化
+	getInitialState:function(){
+		return {
+		 count:0
+		}
+	}
+②写状态 this.setState({count:1})
+③读状态 this.state.count
+
+二、lifecycle 生命周期
+
+在React中,组件的生命周期分为3个阶段
+	mount/update/unmonut
+
+componentWillMount
+componentDidMount
+
+componentWillUpdate
+componentDidUpdate
+
+componentWillUnmount
+
+注意事项：
+①生命周期的处理函数的名称不能写错了，这是由React框架本身提供的方法，会被自动的执行
+②refs
+要想通过refs操作真实的DOM，必须等到ComponentDidMount之后
+③setState方法是一个异步操作
+	this.setState(
+		{count:1},
+		function(){
+		//当状态设置成功之后的处理函数
+		}
+		);
+	
+④update相关的处理函数有参数的
+   componentWillUpdate:
+        function (nextProps,nextState) {
+          console.log('nextState',nextState);
+    },
+    componentDidUpdate:
+        function (prevProps,prevState) {
+          console.log('prevState',prevState);
+    }
+⑤生命周期的处理在使用时，不允许在和update相关的处理函数中 去修改状态或者属性（因为会陷入死循环，直到耗尽栈的资源）
+
+（<label htmlFor=""/> 
+ <any className=""/>
+）
+综合练习：
+	创建一个组件，该组件要求渲染一个h1的标签
+
+	要求：
+	在组件插入到真实的DOM之后，启动定时器，让h1的标签透明度 从0~1,接着从0~1,反复变化。
+	
+	①将变化的数据存在状态中
+	②注意事项
+	(no)style="opacity:this.state.***"
+	(yes)style={{opacity:this.state.**}}
+
+三、方法
+React组件的方法主要分为两大类
+①React自有的方法
+	render/componentWill、Did**/getInitialState
+②自定义的方法
+	hanldeClick/handleChange
+
+	React所建议的编程规范：建议事件的处理函数通过handle+eventName
+	React建议将React自带的方法放在组件的前边（render比较例外，放在最后），中间才是自定义的方法
+
+四、表单
+受控表单元素
+	当表单元素中 给input/textarea指定了value；给checkbox/radio指定了checked，
+	给select中的option指定了selected属性
+
+	该表单元素的状态变化都会有React来控制
+
+非受控表单元素
+	defaultValue/...
+
+受控表单元素的解决方案：
+	①初始化一个状态
+		getInitialState:function(){
+			return {myValue:'hello'}
+		}
+	②将状态的值 绑定给 表单元素的属性value/checkd/..
+		<input value={this.state.myValue}/>
+
+	③通过onChange事件，修改状态
+	<input value={this.state.myValue}
+		onChange={this.handleChange}
+	/>
+
+	handleChange:function(event){
+		this.setState({myValue:event.target.value})
+	}
+	表单受控元素并不是 强制要求的，它的好处是方便我们统一进行数据的管理，比如做一些验证。。
+
+React中的核心概念：
+	jsx
+	component
+	props
+	refs
+	state
+
+三连棋：（15:55 - 16:40）
+	基本步骤
+	①在Board组件 定义一个方法
+	这个方法是有参数的（参数是第几个square）
+	修改数组
+	修改xIsNext
+	②将该方法传递给Square组件
+	③在square组件的按钮 单击时 调用该方法同时将自己的序号告诉Board组件的方法
+	④
+	square知道自己是第几个，
+	board组件知道自己的数组，
+
+	将board组件中的状态的squares数组传递给Square组件，将square数组中对应位置的元素 绑定给Square组件的按钮
+
+	（17:10 - 17:30）
+	⑤判断输赢
+	在board组件中每次update之后，调用判断输赢的方法 ，如果有输赢通过弹窗提示
+
+ToDoList
+http://todomvc.com/
+
+
+每日一练：
+	①完成组件的创建和使用
+	②实现add
+		①到ToDoBox中定义一个状态（类型为数组）
+		②在点击ToDoInput中的add按钮时，怎么修改ToDoBox中的状态
+			在ToDoBox中定义一个方法
+			将方法传递给ToDoInput
+			按钮单击调用该方法修改状态
+		③希望在todolist中能够渲染多个todoitem，就得将ToDoBox中的状态的数组传递给todolist
+		todolist通过属性接收todobox所传递来的数组，遍历数组，返回多个todoitem
+	③实现delete
+
+要求：点击add按钮，能够将用户输入的内容显示在todoitem中，点击多次，创建多个todoitem
+（状态可以实现动态绑定！）

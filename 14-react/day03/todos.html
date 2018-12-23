@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="js/react.js"></script>
+  <script src="js/react-dom.js"></script>
+  <script src="js/browser.min.js"></script>
+</head>
+<body>
+<div id="d1"></div>
+
+<script type="text/babel">
+  let ToDoBox = React.createClass({
+    getInitialState(){
+      return { list:[] }
+    },
+    funcChange(msg){
+      var arr = this.state.list
+      arr.push(msg)
+      this.setState({list:arr})
+    },
+    itemDel(index){
+      var arr = this.state.list
+      arr.splice(index,1)
+      this.setState({list:arr})
+    },
+    render(){
+      return <div>
+        <ToDoInput func={this.funcChange}/>
+        <ToDoList func={this.itemDel} data={this.state.list}/>
+      </div>
+    }
+  })
+  let ToDoInput = React.createClass({
+    handleAdd(){
+      this.props.func(this.refs.myInput.value)
+      this.refs.myInput.value = ""
+    },
+    render(){
+      return <div>
+        <h1>待做事项列表</h1>
+        <input ref="myInput" type="text"/>
+        <button onClick={this.handleAdd}>Add</button>
+      </div>
+    }
+  })
+  let ToDoList = React.createClass({
+    render(){
+      return <ul>{
+        this.props.data.map((value,key)=>{
+           return <ToDoItem func={this.props.func} msg={value} key={key} index={key}/>
+        })
+      }</ul>
+    }
+  })
+  let ToDoItem = React.createClass({
+    handleDel(){
+      this.props.func(this.props.index)
+    },
+    render(){
+      return <li><button onClick={this.handleDel}>delete</button>{this.props.msg}</li>
+    }
+  })
+  ReactDOM.render(
+    <ToDoBox/>,
+    document.getElementById('d1')
+  )
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var arr = [5, 9, 2, 7, 3, 6]
+
+        function calc(arr) {
+            for (var i = 1; i < arr.length; i++) {
+                var n1 = arr[i]
+                var p = i - 1
+                while (p >= 0) {
+                    var n2 = arr[p]
+                    if (n1 < n2) {
+                        arr[p + 1] = n2
+                        arr[p] = n1
+                    }
+                    p--
+                }
+            }
+            console.log(arr)
+        }
+
+        function calcqq(arr) {
+            if(arr.length<=1) return arr
+            var c = parseInt((arr.length-1)/2)
+            var n = arr.splice(c,1)[0]
+            var arrL = []
+            var arrR = []
+            for(var i of arr){
+                if(i<n){
+                    arrL.push(i)
+                }else{
+                    arrR.push(i)
+                }
+            }
+            return calcqq(arrL).concat(n,calcqq(arrR))
+        }
+        arr = calcqq(arr)
+        console.log(arr)
+    </script>
+</body>
+
+</html>

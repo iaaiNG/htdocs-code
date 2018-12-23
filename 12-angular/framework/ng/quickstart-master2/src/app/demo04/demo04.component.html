@@ -1,0 +1,20 @@
+
+<h1>
+    这是我们创建的一个包含各种各样指令的组件
+</h1>
+
+<p>{{"11111"+isMember}}</p>
+<p *ngIf="isMember">仅会员可见</p>
+
+<!--多重判断
+    switch case
+-->
+<div [ngSwitch]="rightAnswer">
+    <p *ngSwitchCase="'a'">正确答案是A</p>
+    <p *ngSwitchCase="'b'">正确答案是B</p>
+    <p *ngSwitchCase="'c'">正确答案是C</p>
+    <p *ngSwitchCase="'d'">正确答案是D</p>
+    <p *ngSwitchDefault>
+        你闹着玩呢 请输入正确的答案
+    </p>
+</div>

@@ -1,0 +1,29 @@
+Day02-微信小程序
+
+1. 什么是小程序
+2. 注册小程序开发者 https://mp.weixin.qq.com
+	2.1 选择小程序
+	2.2 邮箱：未注册订阅号，未注册小程序,未被个人微信号绑定的
+	2.3 进入邮箱，激活小程序开发账号
+	2.4 主体信息登记
+3. 下载小程序编辑器，安装
+4. 创建项目：点“+”号，指定目录 MINA mini-app
+5. 填写 AppID：开发平台 - 设置 - 开发设置
+6. 示例项目的基本结构（* 为必有项）
+	app.js 小程序逻辑 *
+	app.json 小程序公共设置 *
+	app.wxss 小程序公共样式表
+	project.config.json 工具配置
+	pages 页面目录 *
+	index 一个页面
+		- index.js 页面逻辑 *
+		- index.wxml 页面结构 *
+		- index.wxss 页面样式表
+		- index.json 页面配置
+	other pages 其他页面
+7. WebStorm 中关联文件类型
+	File - Settings - Editor - File Types
+		1. Cascading Style Sheet + *.wxss
+		2. HTML + *.wxml
+
+

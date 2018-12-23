@@ -1,0 +1,53 @@
+Node.js
+
+一. 什么是 Node.js
+1. Node.js 官网：https://nodejs.org
+2. JavaScript 的运行时 runtime
+3. 基于 Chrome 的 V8 引擎
+4. 特性之一：event-driven 事件驱动
+5. 特性之二：non-blocking 非阻塞
+6. NPM: Node.js Packages Manager 包管理器
+7. NPM 官网：https://npmjs.com
+8. Node.js 跟传统的后端语言 PHP (.php) Java EE(.jsp)，.NET(.aspx)，Python，Go，Ruby 做同样的事情：服务器端开发
+
+二. Node.js 和 JavaScript 是什么关系？
+9. JavaScript，脚本语言，运行于客户端浏览器，浏览器对 JS 进行解释执行，每个浏览器都有一个组成部分：JavaScript 引擎。IE Firefox Safari Opera Chrome。Google Chrome V8 引擎
+10. Node.js 运行于服务器端，JavaScript 运行于客户端
+11. 语法上 Node.js 与 JavaScript 基本一致
+
+三. 安装 Node.js
+12. 最新版 WebStorm 下载地址：https://download.jetbrains.8686c.com/webstorm/WebStorm-2017.3.exe
+13. LTS（长期支持版，推荐） | Current （当前版本，含有最新特性，不推荐）
+14. 当前下载 Node.js V8.9.3LTS
+15. 下载地址： https://nodejs.org/dist/v8.9.3/node-v8.9.3-x64.msi
+16. 卸载当前的 Node.js：开始-控制面板-程序和功能-找 Node.js-点击右键-卸载
+17. 安装了：
+	17.1 Node.js runtime
+	17.2 NPM
+	17.3 在线文档的快捷方式
+	17.4 把 Node.js 和 NPM 设置为系统环境变量，作用是在命令行里可以直接运行 Node 和 NPM 命令
+18. 安装路径：C:\Program Files\nodejs
+19. 测试：
+	19.1 打开命令行：开始-搜素程序和文件-cmd 19.2 快捷键：Win 键 + R
+20. 命令一：node -v (回车) 输出：V8.9.3
+21. 命令二：npm -v (回车) 输出：5.5.1
+
+四. 运行 Node.js
+22. 命令行里测试
+	22.1 输入：node
+	22.2 输入：var x = 1;
+	22.3 输入：var y = 2;
+	22.4 输入：x + y
+23. Node.js 程序的执行有两种方式：交互模式，脚本模式
+24. 交互模式 (REPL: Read - Evaluate - Print - Loop)，做法是在命令行里执行，先输入 node
+25. 脚本模式：编写 Node.js 的脚本文件，全部是扩展名为 *.js 的文件，再在 Node.js 环境下执行
+26. 配置 WebStorm 的 Node 环境
+	26.1 创建一个 Node.js 的项目
+	26.2 File - Settings - Languages & Frameworks
+	26.3 JavaScript - JavaScript Language Version > EcmaScript 6
+	26.4 Node.js and NPM
+27. File - Settings - 搜索 font
+28. 在项目里创建一个 hello.js 文件，编写代码：
+console.log('Hello, Node.js!');
+19. 在 “Run” 菜单中点击运行，控制台输出：Hello, Node.js!
+20. 运行的快捷键：Shift + F10

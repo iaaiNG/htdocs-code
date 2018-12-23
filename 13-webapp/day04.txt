@@ -1,0 +1,263 @@
+
+每日一练：
+	demo12-lianxi
+	在模板内容中，要求显示一个按钮（一个隐藏的列表），
+	点击按钮时，弹窗一个窗口，要求输入手机号，该窗口有确认和取消按钮；
+	当点击确认，显示一个'正在验证手机号'的加载中的窗口，3s之后，自动关闭，显示一个列表（实现一个avatarList，指定3个列表项）
+
+	button
+	loadingController
+	list
+	alertController
+
+
+一、refresher
+下拉刷新
+	①指定一个对应的组件标签
+	在ion-content的第一个子元素
+	<ion-refresher>
+		<ion-refresher-content
+		 refreshingSpinner="dots"
+                 refreshingText="正在获取数据中"
+		pullingIcon=""
+		pullingText="">
+		</ion-refresher-content>
+	</ion-refresher>
+	②指定下拉刷新要执行的操作
+	<ion-refresher (ionRefresh)="doRefresh()">
+	</ion-refresher>
+	③结束掉刷新动作
+		第一步：在触发ionRefresh事件的处理函数，指定$event作为参数
+		doRefresh($event)
+		第二步：调用complete方法
+		doRefresh(refresher){
+			refresher.complete();
+		}
+
+上拉加载更多
+	①调用
+	在ionContent的最后一个子元素的位置调用
+	  <ion-infinite-scroll>
+	      <ion-infinite-scroll-content
+	      loadingSpinner="dots"
+	      loadingText="正在加载更多"
+	      >
+
+	      </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+	②绑定事件
+	<ion-infinite-scroll
+		(ionInfinite)="loadMore($event)"
+	>
+	</ion-infintie-scroll>
+
+	③结束加载更多的刷新动作
+
+	loadMore(infinite){
+		infinite.complete();
+	}
+
+
+
+二、tabs
+
+tabs在ionic中 主要是用来实现页面底部的导航效果
+
+
+指定一个容器
+	demo14-tabs
+创建两个page
+	demo15-first-tab
+	demo16-second-tab
+指定tabs，可以点击不同的tab，加载不同的页面
+	<ion-tabs>
+		<ion-tab tabTitle="" tabIcon="" [root]="tab1"></ion-tab>
+		<ion-tab></ion-tab>
+		<ion-tab></ion-tab>
+	</ion-tabs>
+
+总结：
+ion-refresher 下拉刷新
+	①第一个子元素位置
+	②(ionRefresh)=“doRefresh($event)”
+	③ doRefresh(refresher){
+	  refresher.complete()
+	}
+ion-inifinite-scroll 上拉加载更多
+	①最后一个子元素位置
+	②(ionInfiniteh)=“loadMore($event)”
+	③ loadMore(infinite){
+	  infinite.complete()
+	}
+ion-tabs 标签页（可以在页面底部充当导航条使用）
+	①创建容器
+	②创建要用到的子页面
+	③将子页面和容器中tab绑定
+	<ion-tabs>
+		<ion-tab [root]="tab1"></ion-tab>
+	</ion-tabs>
+
+
+Forms/Navigation
+
+
+三、Forms 
+
+checkbox/radio/select/textarea/....
+
+Ionic在实现表单的时候，不需要使用form本身这个标签，是通过list来实现的。
+表达的基本结构：
+<ion-list>
+	<ion-item>
+	
+	</ion-item>
+</ion-list>
+常见标签：
+ion-checkbox
+ion-radio
+ion-select
+ion-toggle
+ion-range
+ion-label stacked/floating
+ion-input
+
+四、Navigation
+
+ionic中page之间的跳转，是有个完善的机制，是通过入栈出栈的方式来控制前进和后退。
+
+1、如何来进行跳转
+
+①js方式去跳转：
+	实现步骤：
+	①import {NavController} from 'ionic-angular'
+	②实例化
+	constructor(public navCtrl:NavController){
+	}
+	③跳转
+		第一步
+		import {DestinationPage} from '**'
+		第二步
+		this.navCtrl.push(
+			DestinationPage)
+②属性方式去跳转
+	① import {DestinantionPage} from '**'
+	② 在组件类中定义一个变量并进行赋值
+	   myDestionation:any;
+	   constructor(){
+	    this.myDestination = DestionationPage;
+	   }
+	③ 直接通过属性绑定，将myDestionation绑定给navPush
+	<button [navPush]="myDestionation">
+	</button>
+
+2、参数传递
+	①明确发送 、接收方 
+	②配置接收方的路由地址(可选)
+	③接收参数
+	④发送参数
+
+	从demo18中，获取输入框中的值 并发送给demo19
+	①明确发送 、接收方 
+	②接收参数
+	③发送参数
+
+实现方式：
+	①跳转的同时,发送参数
+	this.navCtrl.push(
+	DestinationPage,
+	{myKey:myValue}
+	)
+	
+	<button 
+	[navPush]="myDestination"
+	[navParams]="{userName:uName}">
+	</button>
+
+	②接收参数
+		第一步：
+		import {NavParams} from 'ionic-angular'
+		constructor(
+		public navParams:NavParams
+		){}
+		第二步：
+		this.navParams.data.myKey;
+		this.navParams.get('myKey')
+
+
+练习：
+demo20-login
+demo21-main
+
+在login有两个输入框，用来输入用户名和密码，要求按照stacked label显示表单；
+
+有一个登录按钮，点击登录按钮时，跳转到main，并将用户名发送过去；
+
+在main接收参数 并显示在h1的标签
+
+考察：
+表单的使用方式
+跳转
+传参
+
+五、lifecycle
+
+ionViewDidLoad
+
+ionViewCanEnter
+ionViewCanLeave
+
+ionViewWillEnter
+ionViewDidEnter
+
+ionViewWillLeave
+ionViewDidLeave
+
+ionViewWillUnLoad
+
+
+
+
+六、ionScroll
+
+滚动区域，允许横向或者纵向滚动
+
+<ion-scroll style="height:200px;white-space:nowrap" 
+scrollX="true">
+	
+	<any style="display:inline-block"></any>
+
+</ion-scroll>
+
+
+
+总结：
+ion-refresher
+ion-infintie-scroll
+ion-tabs
+navigation (跳转、传参)
+form 
+	ion-list
+	ion-item
+	ion-label
+	ion-input
+	ion-toggle
+	ion-checkbox
+	ion-radio
+	ion-select
+	ion-toggle
+	ion-range
+lifecycle
+ionScroll
+
+综合练习：
+demo23-lianxi
+
+准备进入到该页面，启动一个加载中的窗口，3s之后，渲染一个列表，该列表支持下拉刷新和上拉加载更多。
+
+willEnter
+LoadingController
+ionRefresher
+ionInfintieScroll
+
+
+

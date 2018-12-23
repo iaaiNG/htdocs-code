@@ -1,0 +1,77 @@
+http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+http://www.androiddevtools.cn/#tsq=adt&tsp=1
+https://www.androiddevtools.cn/
+
+一、移动端开发的常见的3种趋势
+1、WebApp
+	Web网页 App移动端应用程序
+	使用前端技术来编写的 运行在浏览器中的
+	提供的用户体验接近于原生应用程序
+
+	良好的跨平台性
+2、NativeApp
+	原生应用程序（Android/iOS开发）
+	使用java\kotlin\oc\swift,调用由Google、Apple所推出的SDK（software developement kit 软件开发包）中的各种各样的组件进行开发，而生成的可以直接安装在手机操作系统中的app
+
+	用户体验更棒
+
+3、HybridApp
+	可以使用前端编程技能 结合着原生开发的技巧，开发出可以直接运行在手机操作系统的app，称之为混合编程app
+	可以充分利用前端的跨平台性的优势 结合着 原生组件良好的用户体验的优势
+
+
+二、原生开发基础知识
+
+Android搭建环境？
+①jdk --1.8.0
+java development kit （java的软件开发包）
+
+②adt
+android developer tools (Android 开发者工具)
+
+
+eclipse的使用：
+①视图结构可以重置视图 恢复默认视图
+window->Reset Perspective
+②显示/隐藏工具条
+window -> show/hide toolbar 
+
+
+
+三、第一个Android应用程序
+
+1、创建Android工程的基本步骤
+
+①打开eclipse
+②点击右上角 file
+③new Android Application Project
+④在弹窗中指定name为demo01，
+将package name:com.tarena.demo01
+next
+⑤next
+⑥配置图标
+browse ，选中需要用到的图片作为图标
+⑦next finish
+
+
+2、创建模拟器的基本步骤
+①在toolbar去找Android Virual Device Manager
+②点击new
+③在弹窗中配置参数
+指定AVDName --> testPhone
+指定设备尺寸--》4 480*800
+指定SD卡--》 512
+
+3、如何将一个Android工程编译成一个可以安装在手机中的apk结尾的文件呢？
+
+①选中项目
+②点击右键
+③ run as Android Application Project
+
+总结：
+1、移动端常见的3种开发模式
+2、如何搭建Android的开发环境
+3、如何使用eclipse完成一个Android工程的创建、运行
+
+
+

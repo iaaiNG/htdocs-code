@@ -1,0 +1,113 @@
+一、Angular架构
+1、模块： @NgModule({imports:[],declarations:[],providers:[]})
+2、组件：一个可被反复使用的，带有特定功能的视图
+@Component({
+selector:'login',
+template/templateUrl:'',
+providers:[],
+styleUrls:[]
+})
+3、模板内容
+模板内容就是html，
+只不过支持指令、(),[],[()]、{{}}
+
+4、元数据 metaData
+通过装饰器给类所指定的数据，用来告诉angular如何来处理这个类
+
+5、数据绑定
+双花括号
+()
+[]
+<表单元素>[(ngModel)]="value"</表单元素>
+
+6、指令
+结构型指令:通过在 DOM 中添加、移除和替换元素来修改布局
+*ngFor *ngIf *ngSwtichCase *ngSwitchDefault
+
+属性 (attribute) 型指令
+ngStyle ngClass （） [] [(ngModel)]
+
+7、服务
+就是一个类，把经常用到的方法和数据 进行封装，方在类中，方便复用
+官方建议，尽可能的将组件类中的业务逻辑 通过各种各样的服务去实现，应该让组件类尽可能的简单，只与视图相关。
+
+8、依赖注入
+
+注入要用到的类，而无需关心该类内部的实现方法，无需关心该类到依赖了哪些类；只是注入该类，实例化，去使用。
+解耦
+
+
+二、自定义指令进阶
+自定义服务
+自定义管道
+自定义指令
+
+在自定义指令，怎么传参？
+① <any changebg="#ff00000"></any>
+②在指令内部 去接收
+import {Input} from '***'
+@Input() changebg:string;
+this.changbg
+
+三、组件间通信方式之服务
+组件间通信？
+	1、props down
+	2、events up
+	3、本地变量
+	4、服务
+
+①创建要用到的父组件 子组件
+②在父组件给服务指定providers
+③父组件和子组件就可以引入服务，实例化，进行通信
+
+
+四、路由模块中实现路由守卫
+工作原理：
+	给路由地址指定一个属性 canActivate 
+	(给大门指定老大爷的位置)
+
+	每次去访问该路由地址时，调用上述属性所指定的服务中的一个方法
+	（老大爷让不让你进去）
+
+	方法返回true-->允许访问
+	方法返回false-->拒绝访问
+
+实现步骤：
+	①创建一个服务
+	import {CanActivate} from '@angular/router';
+
+	export class MyGuard implements CanActivate{
+	
+	 canActivate(){
+	  return true/false
+	 }
+	}
+
+	②到模块中 将service指定providers属性
+	③在自定义路由模块中
+	import {MyGuard} from '***'
+	
+	const routes:Routes = [
+	 { 
+		path:'demo30',
+		component:Demo30Component,
+		canActivate:[MyGuard]
+	 }
+	]
+
+
+五、Angular组件生命周期
+Angular的组件的生命周期：
+
+ngOnChanges 输入属性数据变化
+ngOnInit   初始化
+ngDoCheck  输入属性中复杂的数据变化--》灵敏（不建议去使用该方法去操作复杂的业务逻辑）
+	组件所特有的四个处理函数：
+	ngAfterContentInit
+	ngAfterContentChecked
+	ngAfterViewInit
+	ngAfterViewChecked
+ngOnDestroy 组件销毁
+
+onInit/onChanges/onDestroy
+

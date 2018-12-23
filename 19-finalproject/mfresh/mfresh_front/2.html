@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Vue</h3>
+    <div id="app">
+        <div>欢迎回来：{{uname}}</div><span>购物车：{{productCount}}</span>
+        <ul>
+            <li v-for="item in data">
+                <a :href="item.nid">{{item.title}}</a>
+                <span style="float:right">{{item.pubTime|forDate}}</span>
+            </li>
+        </ul>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'asdJKm',
+                uname: 'dingding',
+                productCount: 9,
+                data: [
+                    { "nid": 20, "title": "20智能空气净化器翻盘：净美仕能否领衔?" },
+                    {"nid": 22, "title": "22净美仕新风净化系统　助力校园新风行动", },
+                    { "nid": 23, "title": "23全国新风行动全面启动 助推净美仕战略升级" },
+                    { "nid": 17, "title": "17空气净化器要逆天？ “玫瑰金”“土豪金”齐上阵" },
+                    { "nid": 6, "title": "6净美仕新风净化系统　助力校园新风行动" }
+                ]
+            },
+            filters: {
+                forDate: function (str) {
+                    if (!str) return ''
+                    function addZero(num) {
+                        if (parseInt(num) < 10) {
+                            num = '0' + num;
+                        }
+                        return num;
+                    }
+                    var oDate = new Date(str),
+                        oYear = oDate.getFullYear(),
+                        oMonth = oDate.getMonth() + 1,
+                        oDay = oDate.getDate(),
+                        oTime = oYear + '-' + addZero(oMonth) + '-' + addZero(oDay) + ' ';
+                    return oTime;
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>

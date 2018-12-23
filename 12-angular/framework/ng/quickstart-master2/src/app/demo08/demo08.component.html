@@ -1,0 +1,40 @@
+<h3>常用指令的demo</h3>
+
+<!--属性绑定指令-->
+
+<!--将../../字符串和imgUrl对应的值 拼接之后，绑定中括号中
+的src属性-->
+<img [src]="'../../'+imgUrl" alt="">
+
+<!--将linkUrl变量对应的值 绑定到中括号中的属性-->
+<a [href]="linkUrl">clickMe</a>
+
+<!--双向数据绑定的指令-->
+<!--
+    方向1：将数据 绑定 到视图
+    方向2：将视图中用户操作的结果 绑定到 数据
+
+ngModel指令并不属于ng核心模块的，
+属于表单模块
+
+-->
+
+<!--[ngModel] 将myValue变量
+对应的值 绑定到视图-->
+<input type="text" [ngModel]="myValue"/>
+<h3>{{myValue}}</h3>
+
+<!--双向数据绑定 语法:
+<input [(ngModel)]="">
+-->
+<input type="text" [(ngModel)]="myResult">
+<h3>{{myResult}}</h3>
+
+<!--在使用双向数据绑定时候，
+监听用户的输入做出反馈-->
+
+<!--绑定一个事件处理函数： ngModelChange -->
+<input type="text" 
+[(ngModel)]="myName"
+(ngModelChange)="handleModelChange($event)"
+/>
