@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+    var bus=["大旭","东东","涛哥"];
+            //  0      1      2
+    var [room1,room2,room3]=bus;
+       //  0     1     2
+    console.log(room1,room2,room3);
+
+    var a=3,b=5;
+    [b,a]=[a,b];//不声明第三个变量交换两变量的值
+    console.log(a,b);//5,3
+
+    var date={y:2017,m:9,d:21};
+    var {y:year,m:month,d:date}=date;
+    console.log(year,month,date);
+    
+    function fun({y:year,m:month,d:date}){
+      console.log(year,month,date);
+    }
+    var date={y:2017,m:9,d:21};
+    fun(date);
+  </script>
+ </body>
+</html>

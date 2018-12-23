@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            text-align:center;
+        }
+        svg{
+            background: #bbb;
+        }
+    </style>
+</head>
+<body>
+<h1>SVG-RECT</h1>
+<svg id="s2" width="500" height="400">
+    <rect id="r2" width="30" height="300" fill="#faa" x="235" y="50" stroke="#800" fill-opacity="0.3" stroke-opacity="0.3"></rect>
+</svg>
+<script src="../jquery-3.2.0.js"></script>
+<script>
+    $("#r2").hover(
+        function(){
+            var $tar = $(this)
+            $tar.attr("fill-opacity",1)
+            $tar.attr("stroke-opacity",1)
+        },
+        function(){
+            var $tar = $(this)
+            $tar.attr("fill-opacity",0.3)
+            $tar.attr("stroke-opacity",0.3)
+        }
+        )
+</script>
+</body>
+</html>

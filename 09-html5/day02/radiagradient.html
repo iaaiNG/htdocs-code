@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{text-align: center}
+        canvas{background: #ddd}
+    </style>
+</head>
+<body>
+    <canvas width="500" height="400" id="c2"></canvas>
+    <script>
+        var c2 = document.getElementById("c2")
+        var ctx = c2.getContext("2d")
+        var g = ctx.createLinearGradient(0,0,0,400)
+        g.addColorStop(0,"blue")
+        g.addColorStop(0.5,"red")
+        g.addColorStop(1,"green")
+        ctx.lineWidth = 10
+        ctx.strokeStyle = g
+        ctx.strokeRect(100,20,200,360)
+    </script>
+</body>
+</html>

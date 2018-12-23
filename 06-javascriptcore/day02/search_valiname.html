@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ok{
+            background:green;
+            color:white;
+            font-size:12px;
+        }
+        .err{
+            background:red;
+            color:white;
+            font-size:12px;
+        }
+        .def{
+            color:#000;
+            font-size:12px;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td align="right">密码：</td>
+        <td>
+            <input type="password" id="upwd">
+            <span id="msgUpwd"></span>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">身份证号：</td>
+        <td>
+            <input type="text" id="pid">
+            <span id="msgPid"></span>
+        </td>
+    </tr>
+    <tr>
+        <td align="right">生日：</td>
+        <td>
+            <input type="text" id="birth">
+            <span id="msgBirth"></span>
+        </td>
+    </tr>
+</table>
+    <script>
+        function vail(elemId,msgSpan,re,errMsg){
+            elemId.onfocus=function(){
+                msgSpan.className = "def"
+                msgSpan.innerHTML = errMsg
+            }
+            elemId.onblur = elemId.onkeyup = function(){
+                if(re.test(elemId.value)){
+                    msgSpan.innerHTML = "验证通过";
+                    msgSpan.className = "ok";
+                }else{
+                    msgSpan.innerHTML = errMsg;
+                    msgSpan.className = "err";
+                }
+            }
+        }
+        vail(upwd,msgUpwd,/^\d{6}$/,"密码必须为6位数字组合")
+        vail(pid,msgPid,/(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$)|(^[1-9]\d{5}\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{2}$)/,"必须符合身份证格式")
+        vail(birth,msgBirth,
+            /(^(19|20)\d{2}-(1[0-2]|0?[1-9])-(0?[1-9]|[1-2][0-9]|3[0-1])$)|(^(19|20)\d{2}\/(1[0-2]|0?[1-9])\/(0?[1-9]|[1-2][0-9]|3[0-1])$)/,
+            "必须符合日期格式")
+    </script>
+</body>
+</html>

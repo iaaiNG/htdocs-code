@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var t=0
+    function con(){
+        t+=0.3
+    }
+    function que(){
+        t+=0.8
+        var err=true
+        if(err){
+            (function(){
+                var t="JKM"
+                console.log(t)
+            })()
+        }
+    }
+    con()
+    que()
+    console.log(t)
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+      img{
+        vertical-align:-40%;
+      }
+      #top{
+        width:960px;
+        height:50px;
+        margin:50px auto 0;
+      }
+      #logo,#search{
+        float:left;
+      }
+      #search{
+        width:400px;
+        height:34px;
+        margin:0 0 0 60px;
+        border:1px solid #11A1EB;
+      }
+      #search>input{
+        outline:none;
+        border:none;
+        width:260px;
+        height:34px;
+        padding:0 0 0 10px;
+      }
+      #search *{
+        float:right;
+      }
+      #search>span{
+        font-size:14px;
+        height:34px;
+        line-height:34px;
+        color:#C2C2C2;
+      }
+      #search>a>img{
+        height:36px;
+        margin:-1px -1px 0 0;
+      }
+      #search>img{
+        margin:14px 6px;
+      }
+      #dao{
+        margin-top:10px;
+        color:#7F7F7F;
+        float:right;
+        font-size:12px;
+      }
+      #dao a{
+        text-decoration:none;
+        margin:0 5px;
+      }
+      a{
+        text-decoration:none;
+      }
+      #nav{
+        clear:both;
+        float:left;
+        list-style:none;
+        padding:0;
+        margin-top:40px;
+      }
+      #nav li{
+        float:left;
+        font-size:18px;
+        margin-right:40px;
+      }
+      #nav a{
+        color:#CBCBCB;
+      }
+    </style>
+  </head>
+  <body>
+  <div  id="top">
+    <header>
+        <a href="#" id="logo">
+          <img src="img/header/logo.png" alt="logo">
+        </a>
+      
+      <div id='search'>
+        <a href="#"><img src="img/header/search.png"></a>
+        <img src="img/header/header_normal.png">
+        <span>分类搜索</span>
+        <input type="text" class="text" placeholder="请输入您要搜索的内容">
+      </div>
+
+      <div id="dao">
+        <a href="#">
+          <img src="img/header/care.png">
+        </a>
+        <span>|</span>
+        <a href="#">
+          <img src="img/header/order.png">
+        </a>
+        <span>|</span>
+        <a href="#">
+          <img src="img/header/shop_car.png">
+        </a>
+        <span>|</span>
+        <a href="#">注册</a>
+        <span>|</span>
+        <a href="#">登录</a>
+      </div>
+    </header>
+    <ul id="nav">
+      <li><a href="#">首页</a></li>
+      <li><a href="#">学习用品</a></li>
+      <li><a href="#">私人定制</a></li>
+    </ul>
+  </div>
+  </body>
+</html>

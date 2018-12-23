@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="common.js"></script>
+	<script>
+		function check_uname(){
+			//1、创建 / 获取 xhr
+			var xhr = createXhr();
+			//2、创建请求 (附带参数)
+				//2.1 获取 uname 的 value
+				var uname=$("uname").value;
+				//2.2 拼url保存在变量 url 中
+				var url = "07-ajax-params.php?uname="+uname;
+			xhr.open("get",url,true);
+			//3、设置回调函数 - onreadystatechange
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					var resText = xhr.responseText;
+					$("msg-show").innerHTML=resText;
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+	</script>
+ </head>
+ <body>
+  用户名：<input type="text" id="uname" onblur="check_uname()">
+	<div id="msg-show"></div>
+ </body>
+</html>

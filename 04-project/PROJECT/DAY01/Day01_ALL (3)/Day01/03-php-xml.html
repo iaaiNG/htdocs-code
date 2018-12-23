@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="00-common.js"></script>
+	<script>
+		function loadXml(){
+			//1、获取 xhr
+			var xhr = createXhr();
+			//2、创建连接
+			xhr.open("get","03-php-xml.php",true);
+			//3、设置回调
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					//1、接收响应的数据
+					var xmlDoc = xhr.responseXML;
+					//2、获取 name,age,gender
+					var name = xmlDoc.getElementsByTagName("name")[0].innerHTML;
+
+					var age = xmlDoc.getElementsByTagName("age")[0].innerHTML;
+
+					var gender = xmlDoc.getElementsByTagName("gender")[0].innerHTML;
+					console.log("姓名:"+name);
+					console.log("性别:"+gender);
+					console.log("年龄:"+age);
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+	</script>
+ </head>
+ <body>
+  <button onclick="loadXml()">显示XML数据</button>
+ </body>
+</html>

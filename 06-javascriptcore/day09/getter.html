@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    class Emp{
+        constructor(id,name,age){
+            this.id=id
+            this.name=name
+            this.age=age
+        }
+        get age(){return this._age}
+        set age(val){
+            if(val>=18&&val<=65){
+                this._age=val
+            }else{
+                throw new RangeError("happy");
+            }
+        }
+    }
+    var eric = new Emp(1001,"Eric",25)
+    console.log(eric.age)
+</script>
+</body>
+</html>

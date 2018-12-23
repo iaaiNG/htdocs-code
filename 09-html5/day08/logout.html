@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    您已退出，3秒后将自动跳转回首页
+</body>
+<script>
+    sessionStorage.removeItem("uname")
+    var t=3
+    var timer = setInterval(function(){
+        t -= 1
+        document.body.innerHTML = `您已退出,${t}秒后将自动跳转回首页...`
+        if(t<1){
+            clearInterval(timer)
+            location = "index.html"
+        }
+    },1000)
+</script>
+</html>

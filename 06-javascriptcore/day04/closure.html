@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function outer(){
+        var i=1;
+        function other(){
+            console.log(i++)
+        }
+        other()
+        other()
+        other()
+        // return other
+    }
+    outer()()
+    // var i = outer()
+    // console.log(typeof(outer()))
+</script>
+</body>
+</html>

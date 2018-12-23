@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='common.js'></script>
+    <script>
+      function getInfo(){
+        var xhr=createXhr();
+        xhr.open("get","exercise_10.json",true);
+        xhr.onreadystatechange = function (){
+          if(xhr.readyState==4&&xhr.status==200){
+            var obj = JSON.parse(xhr.responseText)
+            for(var i in obj){
+              per = obj[i]
+              console.log(
+                '用户名:'+per.uname,
+                '密码:'+per.upwd,
+                '性别:'+per.gender);
+            }
+          }
+        }
+        xhr.send(null);
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick='getInfo()'>显示数据</button>
+  </body>
+</html>

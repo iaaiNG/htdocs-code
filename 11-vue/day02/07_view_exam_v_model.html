@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h4>|{{myVal2}}|</h4>
+
+    number:<input type="text" v-model.number="myVal2"/>
+    <br/>
+
+  </div>
+  <script src="js/vue.min.js"></script>
+  <script>
+    //1:model
+    var exampleData = {
+       myVal1:0,
+       myVal2:"",
+    }
+    //2:viewmodel
+    var app = new Vue({
+      el:"#app",
+      data:exampleData
+    });
+  </script>
+</body>
+</html>

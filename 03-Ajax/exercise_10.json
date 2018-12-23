@@ -1,0 +1,17 @@
+[
+  {
+    "uname":"Mary",
+    "upwd":"123",
+    "gender":"女"
+  },
+  {
+    "uname":"Tom",
+    "upwd":"456",
+    "gender":"男"
+  },
+  {
+    "uname":"Joe",
+    "upwd":"789",
+    "gender":"男"
+  }
+]

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8">
+	<style>
+		*{margin:0; padding:0;}
+		#target{
+			border-radius:10px;
+			background: #e4393c;
+		}
+		.fade{/*动画起始状态*/
+			height:0; width:0; opacity:0;
+			padding:0; overflow:hidden;
+			border:0;
+			position:absolute; top:50%;left:50%;
+			transition:all .5s linear;
+		}
+		.in{/*动画结束状态*/
+			height:150px; width:600px; opacity:1;
+			padding: 20px;
+			text-align:justify;
+			margin:-100px 0 0 -300px;
+			border: 1px solid #a87a2c;
+		}
+	</style>
+ </head>
+ <body>
+	<h1>jQuery动画函数——显示隐藏动画</h1>
+	<button id="btn1">显示/隐藏div</button>
+	<div id="target" class=" fade">
+		<p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore debitis animi sint iste sequi sunt ad excepturi error labore molestiae est expedita eos nisi placeat provident dolorem quos facilis! Sapiente!</span><span>Accusamus neque id reprehenderit! Voluptatem in deleniti laboriosam commodi facere magnam impedit minima corrupti distinctio culpa amet optio natus esse. Inventore incidunt ab id perspiciatis atque minus magnam tempore harum.</span></p>
+	</div>
+	<script src="js/jquery-1.11.3.js"></script>
+	<script>
+		var $tar =$("#target")
+		$("#btn1").click(function(){
+      //让#target瞬间显示隐藏: 
+			$tar.toggleClass("in")
+      //让#target过度显示隐藏:
+
+      //使用上滑下滑代替显示/隐藏效果
+      //使用淡入淡出代替显示/隐藏效果
+		});
+	</script>
+ </body>
+</html>

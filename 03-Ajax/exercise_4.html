@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='common.js'></script>
+    <script>
+      function changeProvince(){
+        var val = $('selProvince').value;
+        var elem = $('text');
+        elem.innerHTML = val
+        
+      }
+    </script>
+  </head>
+  <body>
+    <select onchange='changeProvince()' id='selProvince'>
+      <option value='黑龙江'>黑龙江</option>
+      <option value='吉林'>吉林</option>
+      <option value='辽宁'>辽宁</option>
+    </select>
+    <p id='text'></p>
+  </body>
+</html>

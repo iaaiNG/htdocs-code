@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>判断用户名称是否存在</title>
+	<script src="00-common.js"></script>
+	<script>
+		function checkUname(){
+			//1、获取 xhr
+			var xhr = createXhr();
+			//2、创建请求
+			var value = $("uname").value;
+			var url = "00-checkuname.php?uname="+value;
+			xhr.open("get",url,true);
+			//3、设置回调函数
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					$("uname-show").innerHTML=xhr.responseText;
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+	</script>
+ </head>
+ <body>
+  用户名：<input type="text" id="uname" onblur="checkUname()">
+	<span id="uname-show">*</span>
+ </body>
+</html>

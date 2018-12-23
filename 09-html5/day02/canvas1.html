@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{text-align: center}
+        canvas{background: #ddd}
+    </style>
+</head>
+<body>
+    <canvas width="500" height="400" id="c2"></canvas>
+    <script>
+        var c2 = document.getElementById("c2")
+        var ctx = c2.getContext("2d")
+        ctx.strokeWidth = 1
+        ctx.strokeStyle = "blue"
+        ctx.strokeRect(100,100,100,80)
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="00-common.js"></script>
+	<script>
+		/**
+		 * loadUser() 负责向05-list-page.php异步发送请求并接收响应数据，显示在页面上
+		 * currentPage ：当前想看的页数
+		 */
+		function loadUser(currentPage){
+			//1、获取 xhr
+			var xhr = createXhr();
+			//2、创建请求
+			//获取每页显示的行数
+			var pageSize = $("pageSize").value;
+			var url="05-list-page.php?currentPage="+currentPage+"&pageSize="+pageSize;
+			xhr.open("get",url,true);
+			//3、设置回调
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					var resText=xhr.responseText;
+					//1、将 resText 转换为 JS数组，保存在 list 变量中
+					var list = JSON.parse(resText);
+					//2、循环list数组，下标从0开始，到length-1结束,取出每一条数据，拼成<tr>和<td>,放在 <tbody>中
+					var html = "";
+					for(var i=0;i<list.length-1;i++){
+						var user=list[i];
+						//累加 tr 和 td们 到 html 的后面
+						html+="<tr>";
+							html+="<td>"+user.uname+"</td>";
+							html+="<td>"+user.email+"</td>";
+							html+="<td>"+user.user_name+"</td>";
+							html+="<td>"+user.gender+"</td>";
+						html+="</tr>";
+					}
+					$("show-body").innerHTML=html;
+					//3、取出 list 中的最后一条数据(分页数据)，转换成JS对象，拼a标记，放在 <tfoot>中
+					var pageObj=JSON.parse(list[list.length-1]);
+					var pageHTML = "<tr>";
+						pageHTML+="<td><a href='javascript:loadUser(1)'>首页</a></td>";
+
+						pageHTML+="<td><a href='javascript:loadUser("+pageObj.prePage+")'>上一页</a></td>";
+
+						pageHTML+="<td><a href='javascript:loadUser("+pageObj.nextPage+")'>下一页</a></td>";
+
+						pageHTML+="<td><a href='javascript:loadUser("+pageObj.totalPage+")'>尾页</a></td>";
+
+					pageHTML+="</tr>";
+					//将pageHTML放在show-page中
+					$("show-page").innerHTML=pageHTML;
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+	</script>
+ </head>
+ <body onload="loadUser(1)">
+	<p>
+		行数：<input type="text" value="10" id="pageSize">
+	</p>
+  <table width="500" border="1">
+		<!-- 标题 -->
+		<thead>
+			<tr>
+				<th>登录名称</th>
+				<th>电子邮件</th>
+				<th>用户姓名</th>
+				<th>用户性别</th>
+			</tr>
+		</thead>
+		<!-- 主体内容 -->
+		<tbody id="show-body"></tbody>
+		<!-- 分页信息 -->
+		<tfoot id="show-page"></tfoot>
+	</table>
+ </body>
+</html>

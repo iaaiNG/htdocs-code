@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{text-align: center}
+        #container{
+            position: relative;
+            width:856px;
+            left:50%;
+            margin-left:-428px;
+        }
+        #btn,#container>img{
+            display: none;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+        #btn{
+            margin-left:-32px;
+            margin-top:-32px;
+        }
+        #container>img{
+            display: none;
+            width:500px;
+            height:350px;
+            margin-left:-250px;
+            margin-top:-175px;
+        }
+    </style>
+</head>
+<body>
+    <h1>视频播放</h1>
+    <hr>
+    <div id="container">
+        <video src="birds.mp4"  id="v2"></video>
+        <img src="adv.JPG">
+        <a href="#" id="btn">
+            <img src="pause.png">
+        </a>
+    </div>
+    <script src="../jquery-3.2.1.js"></script>
+    <script>
+        var $v2 = $("#v2")
+        var $btn = $("#btn")
+        $("#container").hover(
+            ()=>$btn.show(),
+            ()=>$btn.hide()
+        )
+        $btn.click(e=>{
+            e.preventDefault()
+            console.log($v2.attr("paused"))
+            if($v2[0].paused){
+                $v2[0].play()
+                $("#btn>img")[0].src="play.png"
+
+            }
+            else{
+                $v2[0].pause()
+                $("#btn>img")[0].src="pause.png"
+                $("#container>img").show()
+            }
+        })
+        $v2[0].onplay = function () {
+            $("#container>img").hide()
+        }
+        $v2[0].onpause = function () {
+            $("#container>img").show()
+        }
+    </script>
+</body>
+</html>

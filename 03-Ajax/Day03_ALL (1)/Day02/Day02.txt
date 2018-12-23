@@ -1,0 +1,148 @@
+1、DOM
+	1、事件
+		onchange
+
+		练习：
+			1、创建一个二维数组
+				var city = [
+					["哈尔滨",""],
+					["长春",""],
+					["沈阳",""]
+				];
+			2、当 selProvince 发生改变时，将对应的 城市信息 显示在selCity中
+				如果选项是 ===请选择=== ，则将 请先选择省份，显示在 selCity 中
+2、AJAX
+	1、名词解释
+		1、同步
+			在一段时间内，只能做一个事情
+			同步访问：在访问服务器时，客户端只能等待服务器的响应，不能做其它事情。用户体验非常的差
+			代表场合：
+				1、输入网址访问页面
+				2、a标记的默认跳转
+				3、submit按钮的表单提交
+		2、异步
+			在一段时间内，可以同时干多个事情
+			异步访问：在向服务器发送请求时，不耽误用户在网页上做其它的操作
+			代表场合：
+				1、用户名的重复性验证
+				2、聊天室
+				3、股票走势图
+				4、搜索建议(百度，京东，淘宝 的搜索框)
+	2、什么是AJAX
+		Asynchronous Javascript And Xml
+		异步的       JS         和  Xml
+
+		本质：使用 JS 提供的 XMLHttpRequest 对象 异步的向服务器发送请求，并接受响应数据（格式是 xml(已过时)）
+		AJAX中，服务器响应回来的是部分的数据而不是完整的页面，并且可以以无刷新的效果来更改页面中的局部内容
+
+
+	3、获取 AJAX核心对象 - XMLHttpRequest
+		标准创建:var xhr=new XMLHttpRequest();
+		IE8以下 : 
+			var xhr=new ActiveXObject("Microsoft.XMLHttp");
+		
+		允许通过 window.XMLHttpRequest 判断浏览器是否支持 XMLHttpRequest()。如果 window.XMLHttpRequest的值是null的话，说明需要通过 ActiveXObject()创建，否则 需要通过 XMLHttpRequest() 来创建
+
+		var xhr; 
+		//判断浏览器是否支持 XMLHttpRequest
+		if(window.XMLHttpRequest){
+			xhr = new XMLHttpRequest();
+		}else{
+			//浏览器不支持 XMLHttpRequest
+			xhr = new ActiveXObject("Microsoft.XMLHttp");
+		}
+		练习：
+			1、创建 xhr 对象，并且将创建好的对象打印在控制台上观察结果
+			2、将 创建 xhr 的步骤封装成一个函数
+				1、在 common.js创建一个函数
+					function createXhr(){}
+				2、函数体内
+					判断浏览器是否支持 XMLHttpRequest，根据结果创建 xhr 并且将 xhr对象 返回
+				3、页面中创建一个按钮，点击按钮时，获取 xhr 对象，并打印在控制台上
+	4、XHR 的常用属性 和 方法(难点)
+		1、open() - 方法
+			作用：创建请求
+			语法：open(method,url,isAsyn)
+				1、method
+					string 类型
+					请求方式 ：get,post,... ...
+				2、url
+					string 类型
+					请求地址
+				3、isAsyn
+					boolean 类型
+					指定采用同步(false)还是异步(true)的方式发送请求
+			练习：
+				1、创建一个网页 getresponse.html ,在网页中创建一个按钮，点击按钮时，实现以下功能：
+					1、创建 / 获取 XHR 对象
+					2、创建一个请求，采用异步的方式，get的提交方法，向 response.php 发送一个请求
+		2、readyState - 属性
+			作用：表示 xhr 对象的 请求状态
+			值：由 0 - 4 表示 5个状态
+				0 : 请求尚未初始化
+				1 : 已经打开到WEB服务器的连接，正在向服务器发送请求
+				2 : 请求完成
+				3 : 正在接收服务器端的响应
+				4 : 接收响应数据成功
+				注意：当 readyState的值为4的时候，表示所有的响应都已经接收完毕。
+		3、status - 属性
+			作用：服务器的响应状态码
+			值：
+				只记住一个即可 200
+				当 status 的值是 200的时候，表示服务器已经正确的给出所有的响应
+		4、onreadystatechange - 事件
+			作用：当 xhr 的readyState 属性值发生改变的时候，要自动激发的操作。
+			语法：
+				xhr.onreadystatechange = function(){
+					//每当xhr.readyState的值，发生变化时，要执行的操作。
+
+					//判断 xhr.readyState 为4的时候 并且 xhr.status 为 200的时候，才能获取正常的响应数据
+					if(xhr.readyState == 4 && xhr.status == 200){
+						//可以接收响应回来的数据 
+						//responseText 属性，表示服务器响应回来的文本
+						var resText=xhr.responseText;
+					}
+
+				}
+		5、send() - 方法
+			作用：发送\提交请求
+			语法：send(body);
+				body : 是请求主体
+				没有请求主体的提交方式，body位置处，要写 null
+				有请求主体的提交方式，body位置处，编写的就是请求主体的数据
+	5、发送异步请求的步骤
+		1、创建 / 获取 XHR 对象
+		2、创建请求 ：xhr.open()
+		3、设置 xhr 的 onreadystatechange 事件
+			判断readyState 以及 status 的值，并接收响应
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					xhr.responseText;
+				}
+			}
+		4、发送请求:xhr.send();
+
+	练习：
+		创建一个页面06-ajax-exercise.html，创建一个按钮，点击按钮时，向 06-ajax-exercise.php 异步的发送一个请求，并将 响应回来的数据(欢迎光临) 显示在页面的一个div中
+
+	6、使用GET提交方式，发送请求数据
+		在请求地址后，拼接请求参数(查询字符串)
+		...
+		xhr.open("get","xx.php?name=value&name1=value1",true);
+		...
+
+		ex:
+		xhr.open("get","check.php?uname=zs&upwd=123",true);
+		在 check.php 中，如何获取 uname 和 upwd 值?
+		$uname=$_REQUEST["uname"];
+		$upwd=$_REQUEST["upwd"];
+
+
+
+
+作业：
+	1、创建 hm1.html 页面，页面上提供一个文本框，用于接收用户输入的姓名，当失去焦点时，异步提交给php，验证用户名称是否存在，并显示在页面中
+		
+	2、创建 hm2.html 页面，页面上提供文本框 和 密码框 分别表示用户名 和 密码，再提供一个按钮，点击按钮时，验证用户名和密码是否正确
+
+	以上操作，均使用 xuezi 数据库 以及 xz_user表

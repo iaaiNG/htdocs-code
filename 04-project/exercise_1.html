@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='common.js'></script>
+    <script>
+      var xhr = createXhr();
+      xhr.open('get','student.xml',true);
+      xhr.onreadystatechange=function(){
+        if(xhr.readyState==4&&xhr.status==200){
+          var resText = xhr.responseXML
+          var students = resText.getElementsByTagName("student");
+          for(var i=0;i<students.length;i++){
+            var stu = students[i]
+            var name = stu.getElementsByTagName("name")[0].innerHTML
+            console.log('姓名：'+name)
+            var gender = stu.getElementsByTagName("gender")[0].innerHTML
+            console.log('性别：'+gender)
+            var age = stu.getElementsByTagName("age")[0].innerHTML
+            console.log('年龄：'+age+'\n ')
+          }
+        }
+      }
+      xhr.send(null);
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

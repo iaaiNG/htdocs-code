@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    .myRed{color:red}
+    .myYellow{color:yellow}
+    .mySize{font-size:39px}
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!--3:view-->
+    <h3 v-bind:style="{backgroundColor:bgBG}">我是标题，当点击下面按钮时会改变色</h3>
+    <button @click="modifyColor">修改背景色</button>
+    <hr/>
+    <h3 :style="{backgroundColor:bgBG,color:myColor}">修改颜色</h3>
+    <!--isRed=true将myRed添加至class-->
+    <!--isRed=false将myRed删除-->
+    <p v-bind:class="{myRed:isRed}">文字色是红色的吗?</p>
+    <p v-bind:class="{myRed:isRed,myYellow:isCustome}">文字色是红色的吗?</p>
+    <p v-bind:class="myColor">文字色是红色的吗?</p>
+
+
+    <button v-bind:disabled="isDisable">disabled</button>
+<!--简写-->
+<button :disabled="isDisable">disabled</button>
+
+  </div>
+  <script src="js/vue.min.js"></script>
+  <script>
+    //1:model
+    var exampleData = {
+        bgBG:"#ff0000",     //背景颜色
+        myColor:"#00ff00",  //文字颜色
+        imgUrl:"p3.png",    //图片地址
+        isRed:false,         //变量
+        isCustome:true,
+        hasMore:true,
+        isDisable:false,
+    }
+    //2:viewmodel
+    var app = new Vue({
+      el:"#app",
+      data:exampleData,
+      methods:{
+        modifyColor:function(){
+           //获取随机颜色，赋值bgBG变量
+           this.bgBG = this.getRandomColor();
+           this.myColor = this.getRandomColor();
+        },
+        getRandomColor:function(){
+          var r = Math.floor(Math.random()*256);
+          var g = Math.floor(Math.random()*256);
+          var b = Math.floor(Math.random()*256);
+          return  `rgb(${r},${g},${b})`;
+        }
+      }
+    });
+  </script>
+</body>
+</html>

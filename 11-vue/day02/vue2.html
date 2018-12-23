@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <table id="tb1" width="80%" border="1">
+            <thead>
+                <tr>
+                    <th>下标</th>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(user,i) in users">
+                    <td>{{i}}</td>
+                    <td>{{user.uid}}</td>
+                    <td>{{user.uname}}</td>
+                    <td>{{user.age}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <button @click="add">添加元素</button>
+    </div>
+    <script src="js/vue.min.js"></script>
+    <script>
+        var data = {
+            users:[
+                {uid:1,uname:"tom1",age:27},
+                {uid:2,uname:"tom2",age:28},
+                {uid:3,uname:"tom3",age:29}
+            ]
+        }
+        new Vue({
+            el:"#app",
+            data:data,
+            methods:{
+                add(){
+                    // console.log("JKM")
+                    this.users.push({uid:4,uname:"tom4",age:30})
+                }
+            }
+        })
+    </script>
+</body>
+</html>

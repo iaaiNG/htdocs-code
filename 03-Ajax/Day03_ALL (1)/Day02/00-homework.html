@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="common.js"></script>
+	<script>
+		/**
+		 * 动态构建数据并且显示在 tbody 中
+		 */
+		function fillContent(){
+			//1、拼要显示在tbody中的字符串
+			var html ="";
+			html += "<tr>";
+				html += "<td>1</td>";
+				html += "<td>《西游记》</td>";
+				html += "<td>吴承恩</td>";
+				html += "<td>";
+					html += "<button>修改</button>";
+					html += "<button>删除</button>";
+				html += "</td>";
+			html += "</tr>";
+
+			html += "<tr>";
+				html += "<td>2</td>";
+				html += "<td>《水浒传》</td>";
+				html += "<td>施耐庵</td>";
+				html += "<td>";
+					html += "<button>修改</button>";
+					html += "<button>删除</button>";
+				html += "</td>";
+			html += "</tr>";
+			//2、获取 tbody
+			var tbody = $("tbody");
+			//3、将拼好的字符串设置给tbody的innerHTML
+			tbody.innerHTML = html;
+		}
+	</script>
+ </head>
+ <body>
+  <button onclick="fillContent()">显示数据</button>
+	<table border="1" width="400">
+		<thead>
+			<tr>
+				<th>编号</th>
+				<th>书名</th>
+				<th>作者</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+		<tbody id="tbody"></tbody>
+	</table>
+ </body>
+</html>

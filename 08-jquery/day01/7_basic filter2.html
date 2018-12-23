@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>...</title>
+  <style>
+    #btn-group{
+      margin:0;
+      padding:0;
+      width:120px;
+      list-style: none;
+      display:flex;
+      flex-direction:row;
+      justify-content:space-between
+    }
+    #btn-group>li{
+        height:30px;
+        width:30px;
+        line-height:30px;
+        text-align:center;
+        border:2px solid #000;
+    }
+    #btn-group>li:nth-child(2){
+      font-size:25px;
+    }
+    #btn-group>li:nth-child(3){
+      font-size:10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>实现按钮组效果</h1>
+  <ul id="btn-group">
+    <li>←</li>
+    <li>▷</li>
+    <li>| |</li>
+    <li>→</li>
+  </ul>
+  <div style="clear:both"></div>
+
+  <h1>实现表格隔行变色效果</h1>
+  <script src="js/jquery-1.11.3.js"></script>
+  <script>
+    $("#btn-group>li:first-child").css("borderRadius","8px 0 0 8px");
+    $("#btn-group>li:last-child").css("borderRadius","0 8px 8px 0");
+    $("#btn-group>li:not(:first-child)").css("border-left", 0)
+  </script>
+</body>
+</html>

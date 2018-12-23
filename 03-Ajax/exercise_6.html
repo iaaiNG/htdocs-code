@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='common.js'></script>
+    <script>
+      function getInfo(){
+        var xhr;
+        if(window.XMLHttpRequest){
+          xhr = new XMLHttpRequest();
+        }else{
+          xhr = new ActiveXObject("Microsoft.MXLHttp")
+        }
+        xhr.open("get","exercise_6.php",true);
+        console.log('你好')
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState==4&&xhr.status==200){
+            var resText = xhr.responseText
+            $('d1').innerHTML = resText
+          }
+        }
+        xhr.send(null);
+      }
+    </script>
+  </head>
+  <body>
+    <p id='d1'></p>
+    <button onclick="getInfo()">提交</button>
+  </body>
+</html>

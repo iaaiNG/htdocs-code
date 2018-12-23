@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="common.js"></script>
+	<script>
+		function btn_click(){
+			//1、创建 / 获取 xhr
+			var xhr = createXhr();
+			//2、创建请求
+			xhr.open("get","06-ajax-exercise.php",true);
+			//3、设置回调函数 onreadystatechange
+			xhr.onreadystatechange=function(){
+				//判断readyState 以及 status 的状态
+				if(xhr.readyState==4&&xhr.status==200){
+					//获取响应数据
+					var resText = xhr.responseText;
+					//对响应数据的处理
+					$("msg-show").innerHTML=resText;
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+	</script>
+ </head>
+ <body>
+  <div id="msg-show"></div>
+	<button onclick="btn_click()">显示数据</button>
+ </body>
+</html>

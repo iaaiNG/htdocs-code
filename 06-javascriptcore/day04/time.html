@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1 id="cs"></h1>
+<script src="../ajax.js"></script>
+<script>
+    ajax("get","time.php").then(
+        function(output){
+            var end=output.end;
+            var now=output.now;
+            var s = parseInt(end-now);
+            var d = parseInt(s/(24*3600));
+            var h = parseInt(s%(24*3600)/3600);
+            var m = parseInt(s%(3600)/60);
+            var i = s%60;
+            cs.innerHTML = "距离国庆放假还有："+d+"天"+h+"小时"+m+"分"+i+"秒"
+        }
+    )
+
+</script>
+</body>
+</html>

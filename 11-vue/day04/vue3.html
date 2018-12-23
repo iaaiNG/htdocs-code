@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+        <my></my>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        Vue.component("my",{
+            template:`
+                <div>
+                <ul>
+                    <li v-for="i in user" v-if=isN>{{i}}</li>
+                </ul>
+                <child @dataE = getd></child>
+                </div>`,
+            data(){return {user:[1,2,3,4],isN:true}},
+            methods:{
+                getd(msg){this.isN=msg}
+            }
+        })
+
+        Vue.component("child", {
+            methods:{
+                setd(){this.$emit("dataE",false)}
+            },
+            template:`
+                <div>
+                    <button @click="setd">clickMe</button>
+                </div>`,
+        })
+
+        new Vue({el:"#app",})
+    </script>
+</body>
+</html>

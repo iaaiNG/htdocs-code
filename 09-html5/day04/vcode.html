@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        canvas{
+            border:1px solid red;
+        }
+    </style>
+</head>
+<body>
+<h1>canvas画布</h1>
+<canvas id="c2" width="120" height="50"></canvas>
+<script>
+    function fn(min,max){
+        return Math.floor(Math.random()*(max-min)+min)
+    }
+    function fc(min,max){
+        var r = fn(min,max)
+        var g = fn(min,max)
+        var b = fn(min,max)
+        return `rgb(${r},${g},${b})`
+    }
+    var ctx = c2.getContext("2d"),
+        p="ABCDEFGHIJKLMNOPQRSTUVWSYZabcdefghijklmnopqrstuvwsyz0123456789",
+        w = 120
+        h = 50
+        code = ""
+    ctx.fillStyle = fc(150,200)
+    ctx.fillRect(0,0,120,50)
+    for(var i=1;i<5;i++){
+        var c = p[fn(0,p.length)]
+        code += c
+        ctx.save()
+        ctx.translate(20*i,35)
+        ctx.fillStyle = fc(50,100)
+        //ctx.textBaseline = "top"
+        ctx.font = "30px sans-serif"
+        ctx.rotate(fn(-45,45)*Math.PI/180)
+        ctx.fillText(c,0,0)
+        ctx.restore()
+    }
+    console.log(code)
+    for(var i=0;i<5;i++){
+        ctx.beginPath()
+        ctx.strokeStyle = fc(100,150)
+        ctx.moveTo(fn(0,w),fn(0,h))
+        ctx.lineTo(fn(0,w),fn(0,h))
+        ctx.lineWidth = fn(1,4)
+        ctx.stroke()
+    }
+    for(var i=0;i<100;i++){
+        ctx.beginPath()
+        ctx.fillStyle = fc(100,150)
+        ctx.arc(fn(0,w),fn(0,h),1,0,2*Math.PI)
+        ctx.fill()
+    }
+</script>
+</body>
+</html>

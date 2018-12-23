@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+        <my></my>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        Vue.component("my",{
+            template:`<h1 v-bind:style="{opacity:oValue}">JKM</h1>`,
+            data(){return {oValue:0}},
+            mounted(){
+                var vim = this
+                var timer = setInterval(()=>{
+                    vim.oValue > 0.9 ? clearInterval(timer) : vim.oValue += 0.1
+                    console.log(vim.oValue)
+                },500)
+            }
+        })
+        new Vue({
+            el:"#app",
+        })
+    </script>
+</body>
+</html>

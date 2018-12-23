@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='common.js'></script>
+    <script>
+      function msgLoad(){
+        var xhr = createXhr();
+        xhr.open('get','homework.php',true);
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState==4&&xhr.status==200){          
+            var text = JSON.parse(xhr.responseText)
+            var html = "";
+            for(var i in text){
+              var per = text[i];
+              html += '<tr>'
+                html += '<td>'+per.uid+"##"+per.uname+'</td>'
+                html += '<td>'+per.email+'</td>'
+                html += '<td>'+per.user_name+'</td>'
+                html += '<td><button>删除</button>&nbsp;&nbsp;&nbsp;&nbsp;<button>修改</button></td>'
+              html += '</tr>' 
+            }
+            $('msg').innerHTML = html;
+          }
+        }
+        xhr.send(null);
+      }
+    </script>
+  </head>
+  <body onload='msgLoad()'>
+    <table cellspacing=0 border=1px width=550>
+      <thead>
+       <tr>
+        <th>用户名</th>
+        <th>邮件</th>
+        <th>姓名</th>
+        <th>操作</th>
+       </tr>
+      </thead>
+      <tbody id='msg'  align=center></tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>
+  <meta charset="utf-8">
+	<link rel="stylesheet" href="css/jquery-ui.css">
+ </head>
+ <body>
+  <h1>jQueryUI：Widgets —— Autocomplete</h1>
+	<input id="txtSeach" name="search" placeholder="请输入搜索关键词" style="width:400px">
+	<script src="js/jquery-1.11.3.js"></script>
+	<script src="js/jquery-ui.js"></script>
+	<script>
+$("#txtSeach").autocomplete({
+  source:"4_auto_complete.php",
+  select:function(e,obj){
+    //obj.item获得当前li对应的集合中的对象
+    $(this).val(obj.item.title);
+    setTimeout(function(){
+      location="product_details.html?lid="
+                +obj.item.lid;
+    },3000);
+    return false;//必须
+  }
+}).autocomplete("instance")
+  //每加载一个提示项，就自动执行一次
+  ._renderItem=function($ul,p){
+    //$ul自动获得提示列表的ul的jquery对象
+    //p数据源集合中当前正在加载的对象
+    var $li=$(`<li><div>${p.title} 销量:${p.sold_count}</div></li>`);
+    $ul.append($li);
+    return $li;
+  };
+	</script>
+ </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    body{text-align: center}
+    svg{background: #ddd;}
+  </style>
+</head>
+<body>
+     <h1>svg创建元素</h1>
+    <svg id="s2" width="500" height="400">
+    <!--渐变对象属于一种特效对象 defs define dffects-->
+        <defs>
+            <linearGradient id="g3" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="red"></stop>
+                <stop offset="100%" stop-color="purple"></stop>
+            </linearGradient>
+        </defs>
+        <rect width="400" height="100" x="50" y="150" fill="url(#g3)"></rect>
+    </svg>
+</body>
+</html>

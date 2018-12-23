@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/jquery-ui.css">
+</head>
+<body>
+    <h1>jQueryUI：Widgets —— Autocomplete</h1>
+    关键词搜索：<input id="project">
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script>
+        $("#project").autocomplete({
+            source:"products.php",
+            focus: function( event, ui ) {
+                $( "#project" ).val( ui.item.title );
+                return false;
+            },
+            select: function( event, ui ) {
+                $( "#project" ).val( ui.item.title );
+                return false;
+            }
+        }).autocomplete( "instance" )
+            ._renderItem = function( ul, p ) {
+            var $li = $("<li>")
+            $li.html(p.title).appendTo(ul)
+            return $li
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <h3 id="show">接收响应数据中...</h3>
+  <button id="btn1">请求数据</button>
+  <script src='js/jquery-1.11.3.js'></script>
+  <script>
+    $('#btn1').click(function () {
+      $.ajax({
+        type: 'post',
+        url: 'http://localhost:3005/user/login',
+        data: {uname:'test',upwd:'123456'},
+        success: function (data) {
+          console.log(data)
+          $("#show").html(data.code)
+        }
+      })
+    })
+  </script>
+</body>
+</html>

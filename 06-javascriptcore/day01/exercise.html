@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ok{
+            background:green;
+            color:white;
+        }
+        .error{
+            background:red;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    用户名：<input type="text" id="txtName">
+    <span id="msgName"></span>
+    <script src="../ajax.js"></script>
+    <script>
+        var txtName = document.getElementById("txtName");
+        var msgName = document.getElementById("msgName");
+        txtName.onkeyup=function(){
+            if (txtName.value!= ""){
+                ajax("get", "data/valiName.php?uname=" + txtName.value, "", "text")
+                    .then(function(data){
+                    if (data=="true"){
+                        msgName.innerHTML = "通过";
+                        msgName.className = "ok";
+                    }else{
+                        msgName.innerHTML = "用户名已被占用";
+                        msgName.className = "error";
+                    }
+                })
+            }else msgName.innerHTML="";
+        }
+    </script>
+</body>
+</html>

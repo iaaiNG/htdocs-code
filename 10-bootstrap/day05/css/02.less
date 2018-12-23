@@ -1,0 +1,19 @@
+@jd-red:#e4393c;
+@tb:3px;
+@opc:0.6;
+
+body{
+  margin:1px;
+  font-size:12px;
+}
+
+.box(@bw:10px){
+  padding:10px;
+  margin:10px;
+  color:@jd-red;
+  border:@bw solid darken(@jd-red,20%);
+}
+.wells{
+  .box(@bw:5px);
+  background: #0A246A;
+}

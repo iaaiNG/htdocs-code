@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style>
+        input{width:40px}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <hr>
+        <my></my>
+    </div>
+    <script src="js/vue.js"></script>
+    <script src="js/jquery-1.11.3.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script>
+        Vue.component("my",{
+            template:`
+<div>
+    <input type="text" v-model="num1">
+    <select v-model="val">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type="text" v-model="num2">
+    <span>&nbsp;=&nbsp;{{res}}</span>
+    <hr>
+    <button class="btn" @click="cal">cal</button>
+</div>`,
+            data(){return {res:'', val:'+'}},
+            methods:{
+                cal(){
+                   this.res =  eval(this.num1 + this.val + this.num2)
+                }
+            },
+            beforeMount(){
+                this.num1 = Math.ceil(Math.random()*20)
+                this.num2 = Math.ceil(Math.random()*20)
+            },
+        })
+        new Vue({
+            el:"#app",
+        })
+    </script>
+
+</body>
+</html>

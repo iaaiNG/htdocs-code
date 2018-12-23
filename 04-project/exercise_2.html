@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='common.js'></script>
+    <script>
+      function getInfo(){
+        var xhr = createXhr()
+        xhr.open('get','exercise_2.php',true)
+        xhr.onreadystatechange=function(){
+        if(xhr.readyState==4&&xhr.status==200){
+          var xmlDoc = xhr.responseXML
+          var name = xmlDoc.getElementsByTagName('name')[0].innerHTML
+          var gender = xmlDoc.getElementsByTagName('gender')[0].innerHTML
+          var age = xmlDoc.getElementsByTagName('age')[0].innerHTML
+          console.log("姓名："+name)
+          console.log("性别："+gender)
+          console.log("年龄："+age)
+        }
+        }
+        xhr.send(null);
+      }
+    </script>
+  </head>
+  <body>
+    <button onclick="getInfo()">显示XML内容</button>
+  </body>
+</html>

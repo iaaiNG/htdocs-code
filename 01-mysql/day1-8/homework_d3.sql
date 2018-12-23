@@ -1,0 +1,25 @@
+SET NAMES UTF8;
+DROP DATABASE IF EXISTS mydata;
+CREATE DATABASE mydata CHARSET=UTF8;
+USE mydata;
+CREATE TABLE laptop_family(
+  fid INT PRIMARY KEY AUTO_INCREMENT,
+  fname VARCHAR(32) NOT NULL,
+  laptopCount INT NOT NULL DEFAULT 1
+);
+INSERT INTO laptop_family VALUE(NULL,'戴尔燃7000',100);
+INSERT INTO laptop_family VALUE(NULL,'联想小新',DEFAULT);
+INSERT INTO laptop_family VALUE(NULL,'MacBook',60);
+
+CREATE TABLE laptop(
+  lid INT PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(32) NOT NULL,
+  price DECIMAL(7,2) NOT NULL DEFAULT 99999.99,
+  pic VARCHAR(128) NOT NULL DEFAULT 'img/default.png',
+  isOnsale BOOL NOT NULL DEFAULT FALSE,
+  familyId INT,
+  FOREIGN KEY(familyId) REFERENCES laptop_family(fid)
+);
+INSERT INTO laptop VALUE(NULL,'A',5000,'img/jkm.png',DEFAULT,1);
+INSERT INTO laptop VALUE(NULL,'B',6000,'img/lqw.png',TRUE,2);
+INSERT INTO laptop VALUE(NULL,'C',7000,'img/lov.png',DEFAULT,3);

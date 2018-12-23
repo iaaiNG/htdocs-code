@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+        <my></my>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        Vue.component("my",{
+            template:`
+<div>
+幸运数字：<input type="number" v-model="gg" autofocus>
+<p>{{msg}}</p>
+</div>`,
+            data(){return {gg:"",msg:"请猜数"}},
+            beforeMount(){
+                this.num = Math.ceil(Math.random()*10)
+            },
+            updated(){
+                this.gg > this.num ? this.msg = "大了" :
+                    this.gg < this.num ? this.msg = "小了" : this.msg = "对了"
+            },
+        })
+        new Vue({
+            el:"#app",
+        })
+    </script>
+</body>
+</html>

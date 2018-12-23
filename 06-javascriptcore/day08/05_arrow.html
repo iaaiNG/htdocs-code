@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+    var arr=[12,123,23,2,3,1];
+    arr.sort((a,b)=>a-b);
+    console.log(arr)
+
+    var str="派出所的公安干警负责维护公共安全秩序";
+    str=str.replace(
+      /派出所|公安|干警|公共安全/g,
+      kw=>
+        kw=="派出所"?"PCS":
+                 kw=="公安"?"GA":
+                 kw=="干警"?"GJ":
+                          "GGAQ"
+    );
+    console.log(str)
+
+    var arr=[1,2,3,4,5];
+    arr.forEach((elem,i,arr)=>arr[i]=elem*2);
+    console.log(arr);
+    var arr2=arr.map(elem=>elem+1)
+    console.log(arr2);
+  </script>
+ </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{text-align: center}
+        canvas{background: #ddd}
+    </style>
+</head>
+<body>
+    <canvas width="500" height="400" id="c2"></canvas>
+    <script>
+        var c2 = document.getElementById("c2")
+        var ctx = c2.getContext("2d")
+        var str = "JKM&LQW"
+        ctx.font = "20px 微软雅黑"
+        var len = ctx.measureText(str).width
+        ctx.textBaseline = 'top'
+        ctx.fillStyle = "purple"
+        ctx.fillText(str,0,0)
+        ctx.fillText(str,0,375)
+        ctx.fillText(str,500-len,0)
+        ctx.fillText(str,500-len,375)
+        ctx.fillText(str,(500-len)/2,375/2)
+    </script>
+</body>
+</html>

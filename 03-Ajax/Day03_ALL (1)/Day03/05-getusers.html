@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="00-common.js"></script>
+	<script>
+		function getUsers(){
+			//1、获取xhr
+			var xhr=createXhr();
+			//2、创建请求
+			xhr.open("get","users.json",true);
+			//3、设置回调
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					var users=JSON.parse(xhr.responseText);
+					for(var i=0;i<users.length;i++){
+						console.log("用户名称:"+users[i].uname);
+						console.log("用户密码:"+users[i].upwd);
+						console.log("用户性别:"+users[i].gender);
+					}
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+	</script>
+ </head>
+ <body>
+  <button onclick="getUsers()">显示数据</button>
+ </body>
+</html>

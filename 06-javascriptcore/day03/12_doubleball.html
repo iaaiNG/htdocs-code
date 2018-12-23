@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+    //补: 其实数组也有indexOf，用法和str.indexOf完全一样！
+    function ball(){
+      //定义空数组reds
+        var reds=[]
+      //反复: 只要reds中的球数<6
+        while(reds.length<6){
+            //在1~33之间生成一个随机整数r;
+            var r = parseInt(Math.random()*33+1)
+            //如果reds中不包含r
+            if(reds.indexOf(r)==-1){
+                //才将r压入reds数组中
+                reds.push(r)
+            }
+        }
+        return reds
+    }
+      //(循环结束)
+      //将reds数组按数字升序排列
+    reds = ball()
+    reds.sort(function(a,b){return a-b})
+      //在1~16之间生成一个随机整数blue
+    var blue = parseInt(Math.random()*16+1)
+    document.write(
+        String(reds)+" | "+blue+"<br>"
+      );
+  </script> 
+ </body>
+</html>

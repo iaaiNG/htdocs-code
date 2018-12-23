@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+    <script>
+        var productList = Vue.component("product-list",{
+            template:`
+            <div><ul><li v-for="(p,i) in product"><router-link :to="'/detail/'+i">{{p}}</router-link></li></ul></div>`,
+            data(){return {product:[1,2,3,4]}}
+        })
+        var productDetail = Vue.component("product-detail",{
+            template:`
+            <div >表单下标为{{index}}</div>`,
+            //data(){return {index:0}},
+            created(){
+                this.index = this.$route.params.i
+            }
+        })
+        var myRouters = [
+            {path:"",component:productList},
+            {path:"/list",component:productList},
+            {path:"/detail/:i",component:productDetail},
+            {path:"*",component:productDetail},
+        ]
+        var myRouter = new VueRouter({
+            routes:myRouters
+        })
+        new Vue({
+            el:"#app",
+            router:myRouter
+        })
+    </script>
+</body>
+</html>

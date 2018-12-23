@@ -1,0 +1,102 @@
+1、XML
+	1、什么是XML
+		eXtensible Markup Language
+		可扩展的   标记   语言
+
+		XML的标记没有被预定义，需要自行定义
+		XML的宗旨是做数据传递的，而非数据显示
+	2、XML的语法规范
+		XML可以独立的保存成 ***.xml 文件，也可以以字符串的形式出现(服务器端生成)
+		1、XML的最顶端是XML的声明
+			<?xml version="1.0" encoding="utf-8" ?>
+			练习：
+				创建一个 student.xml 文件，并添加xml声明
+		2、XML的标记的语法
+			1、XML标记都是成对出现，所有的标记必须有显示的结束
+				<person /> 错误
+				<person> 杨幂 错误 
+				<person>杨幂</person> 正确
+			2、XML标记是严格区分大小写，开始和结束必须一直
+				<person></Person> 错误
+				<Person></Person> 正确
+				<PeRsOn></PeRsOn> 正确
+			3、标记允许嵌套，注意嵌套顺序即可(与HTML一致)
+				<person>
+					<name>范冰冰</name>
+					<age>40</age>
+				</person>
+			4、每个标记都允许自定义属性，格式等同于HTML的，但属性值，必须使用引号 括起来
+				<person id="1001" gender="male"></person>
+
+			5、每个XML文档中，有且只有一个根元素
+
+			练习：
+				在 student.xml 基础上完成
+				1、创建一对根元素 studentList
+				2、在 studentList 根元素中 ，使用一对 student 元素 来表示一名学员的信息
+				3、在 student 中，再分别使用三个元素来表示 姓名(name),性别(gender),年龄(age),并将值写在标记中
+				4、创建3个学员的信息
+		3、使用 AJAX 请求 XML 文档
+			1、要遵循AJAX的请求步骤
+				1、创建 / 获取 xhr
+				2、创建请求
+				3、设置回调
+				4、发送请求
+			2、创建请求时，需要将请求地址更改为 xml 文件的地址
+				xhr.open("get","student.xml",true);
+			3、在回调函数中，处理响应数据
+				使用 xhr.responseXML 来获取响应的数据，返回的是 XML文档对象
+				练习：
+					在 student.xml 基础上，使用AJAX向 student.xml发送请求，并将响应结果(responseXML)打印在控制台上
+			4、解析XML文档内容
+				1、核心
+					elem.getElementsByTagName("标签名");
+					elem : 表示的是获取范围
+					返回值：返回一个包含指定元素们的"类数组";
+					...
+					var xmlDoc = xhr.responseXML;
+					var students = xmlDoc.getElementsByTagName("student");
+				2、获取元素中的文本
+					elem.innerHTML 
+
+				练习：
+					上个练习的基础上，将 student.xml 中的内容进行解析，格式如下：
+					姓名：范冰冰
+					年龄：40
+					性别：女
+
+					姓名：杨幂
+					年龄：31
+					性别：女
+
+					姓名：罗玉凤
+					年龄：40
+					性别：女
+			5、在PHP中返回xml格式的字符串
+				1、必须增加响应消息头
+					header("Content-Type:application/xml");
+				2、按照XML的语法结构，拼XML的字符串，再响应给客户端
+					$xml="<?xml version='1.0' encoding='utf-8' ?>";
+					$xml.= "<studentList>";
+					...
+					$xml.= "</studentList>";
+					echo $xml;
+				练习：
+					1、在 03-php-xml.php 响应回以下格式的 xml 字符串
+						<?xml version="1.0" encoding="utf-8">
+						<list>
+							<stu>
+								<name>卡卡西</name>
+								<gender>男</gender>
+								<age>30</age>
+							</stu>
+						</list>
+					2、在 03-php-xml.html中，使用AJAX请求响应数据
+						姓名：卡卡西
+						性别：男
+						年龄：30
+
+
+
+
+

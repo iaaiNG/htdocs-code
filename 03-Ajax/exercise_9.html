@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='common.js'></script>
+    <script>
+      function check(){
+        var uname = $('uname').value;
+        var upwd = $('upwd').value;
+        var xhr = createXhr();
+        xhr.open('get','exercise_9.php?uname='+uname+'&upwd='+upwd,true);
+        xhr.onreadystatechange = function (){
+          if(xhr.readyState==4&&xhr.status==200){
+            var resText = xhr.responseText
+            $('prompt').innerHTML = resText
+          }
+        }
+        xhr.send(null);
+      }
+    </script>
+  </head>
+  <body>
+    <div>
+      <div id='prompt'></div>
+    </div>
+    <div>
+      <input type='text' id='uname'>
+    </div>
+    <div>
+      <input type='password' id='upwd'>
+    </div>
+    <div>
+      <button onclick='check()'>验证</button>
+    </div>
+  </body>
+</html>

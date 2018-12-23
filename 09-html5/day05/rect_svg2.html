@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            text-align:center;
+        }
+        svg{
+            background: #bbb;
+        }
+    </style>
+</head>
+<body>
+<h1>SVG-RECT</h1>
+<svg id="s2" width="500" height="400">
+    <rect id="r2" width="30" height="0" fill="#faa" x="185" y="350" stroke="#800"></rect>
+    <rect id="r3" width="30" height="0" fill="#faa" x="285" y="350" stroke="#800"></rect>
+</svg>
+<script src="../jquery-3.2.0.js"></script>
+<script>
+    var h = 0
+    var $r2 = $("#r2"), $r3 = $("#r3")
+    var timer = setInterval(()=>{
+        h += 1
+        var y2 = $r2.attr("y"), y3 = $r3.attr("y")
+        if(h<=150){
+            $r2.attr({"height":h, "y":y2-1})
+            $r3.attr({"height":h, "y":y3-1})
+        }else if(h<=300) $r2.attr({"height":h, "y":y2-1})
+        else clearInterval(timer)
+    },10)
+</script>
+</body>
+</html>

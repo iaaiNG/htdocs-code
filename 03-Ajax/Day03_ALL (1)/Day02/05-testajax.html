@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="common.js"></script>
+	<script>
+		/**
+		 * 单击按钮时向服务器发送异步请求并接收响应的数据，显示在 msg-show 里面
+		 */
+		function getInfo(){
+			//1、创建 / 获取 xhr
+			var xhr = createXhr();
+			//2、创建请求
+			xhr.open("get","05-testajax.php",true);
+			//3、设置 onreadystatechange(回调函数)
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					//接收响应数据
+					var resText = xhr.responseText;
+					//对响应数据的处理
+					$("msg-show").innerHTML=resText;
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+	</script>
+ </head>
+ <body>
+  <div id="msg-show"></div>
+	<button onclick="getInfo()">发送异步请求</button>
+ </body>
+</html>

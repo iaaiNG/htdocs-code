@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="00-common.js"></script>
+	<script>
+		function loadProvince(){
+			//1、获取xhr
+			var xhr = createXhr();
+			//2、创建请求
+			xhr.open("get","08-province-json.php",false);
+			//3、设置回调
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					//得到是 JSON 格式的字符串
+					var resText=xhr.responseText;
+					//将 resText 转换为 JS 数组
+					var province=JSON.parse(resText);
+					// 循环遍历province，拼 <option>
+					var opts = "";
+					for(var i=0;i<province.length;i++){
+						opts += "<option value='"+i+"'>";
+						opts += province[i];
+						opts += "</option>";
+					}
+					console.log(opts);
+					$("selProvince").innerHTML = opts;
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+		
+		/**加载城市信息*/
+		function loadCity(){
+			//1、获取xhr
+			var xhr = createXhr();
+			//2、创建请求
+			var pid = $("selProvince").value;
+			var url="08-city-json.php?pid="+pid;
+			xhr.open("get",url,true);
+			//3、设置回调
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					//将响应回来的数据转换成 JS 数组
+					var city = JSON.parse(xhr.responseText);
+					//将 city 进行解析，拼 <option>
+					var opts="";
+					for(var i=0;i<city.length;i++){
+						opts += "<option value='"+i+"'>";
+						opts += city[i];
+						opts += "</option>";
+					}
+					$("selCity").innerHTML=opts;
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+
+		function pageLoad(){
+			loadProvince();
+			loadCity();
+		}
+	</script>
+ </head>
+ <body onload="pageLoad()">
+  <select id="selProvince" onchange="loadCity()"></select>
+	<select id="selCity"></select>
+ </body>
+</html>

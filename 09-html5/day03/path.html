@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{text-align: center}
+        canvas{background: #ddd}
+    </style>
+</head>
+<body>
+<canvas width="500" height="400" id="c2"></canvas>
+<script>
+    var c2 = document.getElementById("c2")
+    var ctx = c2.getContext("2d")
+    ctx.lineWidth = 5
+
+    ctx.beginPath()
+    ctx.moveTo(50,50)
+    ctx.lineTo(50,350)
+    ctx.moveTo(35,75)
+    ctx.lineTo(50,50)
+    ctx.lineTo(65,75)
+    ctx.strokeStyle = "red"
+    ctx.stroke();
+
+    ctx.beginPath()
+    ctx.moveTo(50,350)
+    ctx.lineTo(450,350)
+    ctx.moveTo(425,335)
+    ctx.lineTo(450,350)
+    ctx.lineTo(425,365)
+    ctx.strokeStyle = "blue"
+    ctx.stroke();
+</script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<?php
+	$conn = mysqli_connect("localhost","root","","tedu",3306);
+	$sql = "SELECT * FROM dept;";
+	$result = mysqli_query($conn,$sql);
+	if($result == false){
+		echo "执行失败";
+	}else{
+		echo "执行成功";
+	};
+?>

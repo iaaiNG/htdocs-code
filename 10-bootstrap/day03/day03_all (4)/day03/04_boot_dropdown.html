@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.min.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+  <style>
+  </style>
+</head>
+<body>
+<div class="container">
+       <h3>组件--下拉菜单</h3>
+       <h3>最简单下拉菜单--自定义属性-配置js实现</h3>
+       <div class="dropdown">
+         <!--16:37&#45;&#45;16:42 写js实现切换菜单-->
+         <a href="#" data-qiehuan="xialia">产品大全</a>
+         <ul class="dropdown-menu">
+           <li><a href="#">冰箱1</a></li>
+           <li><a href="#">冰箱2</a></li>
+           <li><a href="#">冰箱3</a></li>
+           <li><a href="#">冰箱4</a></li>
+           <li><a href="#">冰箱5</a></li>
+           <li><a href="#">冰箱6</a></li>
+           <li><a href="#">冰箱7</a></li>
+         </ul>
+       </div>
+  <h3>最简单下拉菜单--使用BOOT属性</h3>
+  <div class="dropdown">
+<a href="#" data-toggle="dropdown"
+    clss="btn btn-default">产品大全
+     <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="#">11</a></li>
+      <li><a href="#">22</a></li>
+      <li><a href="#">33</a></li>
+    </ul>
+  </div>
+
+  <h3>稍复杂下拉菜单--使用BOOT属性</h3>
+  <div class="dropdown">
+    <a href="#" data-toggle="dropdown"
+       clss="btn btn-default">产品大全
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li class="dropdown-header"><a href="#">电器类</a></li>
+      <li><a href="#">冰箱</a></li>
+      <li><a href="#">电视</a></li>
+      <li class="dropdown-header"><a href="#">婴童类</a></li>
+      <li><a href="#">奶粉</a></li>
+      <li><a href="#">尿不湿</a></li>
+    </ul>
+  </div>
+
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/bootstrap.js"></script>
+<!--检测工具 bootstrap 样式结构-->
+<script src="js/bootlint.js"></script>
+<script>
+  bootlint.showLintReportForCurrentDocument([]);
+</script>
+<script>
+    $("[data-qiehuan='xialia']").click(function(e){
+      e.preventDefault();
+      $(this).siblings('.dropdown-menu').toggle();
+    });
+</script>
+</body>
+</html>

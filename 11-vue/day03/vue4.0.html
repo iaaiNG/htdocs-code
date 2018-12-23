@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <input-form></input-form>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        Vue.component("label-name",{template:`<label>用户名</label>`})
+        Vue.component("label-pwd",{template:`<label>密码</label>`})
+        Vue.component("button-login",{template:`<button>登录</button>`})
+        Vue.component("button-register",{template:`<button>注册</button>`})
+        Vue.component("input-name",{template:`<input type="text">`})
+        Vue.component("input-pwd",{template:`<input type="password">`})
+        Vue.component("input-form",{template:`<div>
+<label-name></label-name>
+<input-name></input-name>
+<br>
+<label-pwd></label-pwd>
+<input-pwd></input-pwd>
+<br>
+<button-login></button-login>
+<button-register></button-register>
+</div>`})
+        new Vue({
+            el:"#app",
+        })
+    </script>
+</body>
+</html>

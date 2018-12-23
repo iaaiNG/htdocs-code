@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.min.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<div class="container">
+  <h1>全局CSS样式--表格</h1>
+  <!--应该把选项应用父元素<div ><table></div>-->
+  <!---->
+<!--.table-responsive` is supposed to be used on the table's parent wrapper `<div>`, not on the table itself-->
+  <div class="table-responsive">
+  <table class="table table-bordered table-striped table-hover">
+    <thead>
+      <tr>
+        <td>用户编号</td>
+        <td>用户名称</td>
+        <td>用户年龄</td>
+        <td>操作</td>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>101</td>
+      <td>大旭</td>
+      <td>24</td>
+      <td>
+<a href="#" class="btn btn-success">del</a>
+<a href="#" class="btn btn-warning">update</a>
+<a href="#" class="btn btn-success">detail</a>
+      </td>
+    </tr>
+    <tr>
+      <td>102</td>
+      <td>小旭</td>
+      <td>24</td>
+      <td>
+        <a href="#" class="btn btn-success">del</a>
+        <a href="#" class="btn btn-warning">update</a>
+        <a href="#" class="btn btn-success">detail</a>
+      </td>
+    </tr>
+    <tr>
+      <td>103</td>
+      <td>小小旭</td>
+      <td>24</td>
+      <td>
+        <a href="#" class="btn btn-success">del</a>
+        <a href="#" class="btn btn-warning">update</a>
+        <a href="#" class="btn btn-success">detail</a>
+      </td>
+    </tr>
+    <tr>
+      <td>104</td>
+      <td>小旭旭</td>
+      <td>24</td>
+      <td>
+        <a href="#" class="btn btn-success">del</a>
+        <a href="#" class="btn btn-warning">update</a>
+        <a href="#" class="btn btn-success">detail</a>
+      </td>
+    </tr>
+    <tr>
+      <td>105</td>
+      <td>微旭旭</td>
+      <td>24</td>
+      <td>
+        <a href="#" class="btn btn-success">del</a>
+        <a href="#" class="btn btn-warning">update</a>
+        <a href="#" class="btn btn-danger">detail</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<script src="js/jquery-1.11.3.js"></script>
+<script src="js/bootstrap.js"></script>
+<!--检测工具 bootstrap 样式结构-->
+<script src="js/bootlint.js"></script>
+<script>
+  bootlint.showLintReportForCurrentDocument([]);
+</script>
+</body>
+</html>

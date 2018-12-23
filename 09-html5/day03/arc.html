@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{text-align: center}
+        canvas{background: #ddd}
+    </style>
+</head>
+<body>
+<canvas width="500" height="400" id="c2"></canvas>
+<script>
+    var c2 = document.getElementById("c2")
+    var ctx = c2.getContext("2d")
+    function closeM(){
+        ctx.lineWidth = 2
+        ctx.beginPath()
+        ctx.arc(250,200,150,0,360*Math.PI/180)
+        ctx.lineTo(260,200)
+        ctx.fillStyle = "yellow"
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath()
+        ctx.arc(250+20,200-60-20,30,0,360*Math.PI/180)
+        ctx.fillStyle = "white"
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath()
+        ctx.arc(250+30,200-60-30,5,0,360*Math.PI/180)
+        ctx.fillStyle = "blue"
+        ctx.fill();
+        ctx.stroke();
+
+        return true
+    }
+    function openM(){
+        ctx.lineWidth = 2
+        ctx.beginPath()
+        ctx.arc(250,200,150,40*Math.PI/180,325*Math.PI/180)
+        ctx.lineTo(260,200)
+        ctx.closePath()
+        ctx.fillStyle = "yellow"
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath()
+        ctx.arc(250+20,200-60-20,30,0,360*Math.PI/180)
+        ctx.fillStyle = "white"
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.beginPath()
+        ctx.arc(250+30,200-60-30,5,0,360*Math.PI/180)
+        ctx.fillStyle = "blue"
+        ctx.fill();
+        ctx.stroke();
+
+        return false
+    }
+    //closeM()
+    var b = closeM()
+    var timer = setInterval(function(){
+        ctx.clearRect(0,0,500,400)
+        if(b) b = openM()
+        else b = closeM()
+    },400)
+</script>
+</body>
+</html>

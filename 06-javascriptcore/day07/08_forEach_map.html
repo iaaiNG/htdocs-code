@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+    //if(?没有forEach)
+      //在?添加forEach=function(?){
+        //?
+      //}
+
+    //if(?没有map)
+      //在?添加map=function(?){
+        //?
+      //}
+
+    var arr=[1,2,3,4,5];
+    //将原数组中每个数*2
+    arr.forEach(function(elem,i,arr){
+      arr[i]=elem*2;
+    });
+    //将原数组中每个值*2后放入新数组
+    var evens=arr.map(function(elem){
+      return elem*2;
+    });
+    document.write(arr+"<br>");
+    document.write(evens+"<br>");
+  </script>
+ </body>
+</html>

@@ -1,0 +1,10 @@
+//获得s1的父元素
+console.log(s1.parentNode);
+//获得body的直接子元素
+console.log(document.body.children);
+//获得s1的下一个兄弟元素
+console.log(s1.nextElementSibling);
+//获得body下的h1
+console.log(document.body.children[1]);
+//获得h1的前一个元素
+console.log(document.body.children[1].previousElementSibling);

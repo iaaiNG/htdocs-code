@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function isPrime(n){
+        if(isNaN(n)){
+            console.error("数据错误")
+        }else{
+            if(n<3)return true
+            if(n%2==0)return false
+        }else{
+            for(var i=3;i<=Math.sqrt(n);i+=2){
+                if(n%i==0)
+                    return false
+            }
+            return true
+        }
+        }
+    console.log(isPrime(aa))
+</script>
+</body>
+</html>

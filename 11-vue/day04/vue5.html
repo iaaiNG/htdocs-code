@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <parent></parent>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        Vue.component("parent",{
+            data(){return {uname:["tom","jerry"]}},
+            template:`
+<div>
+    <ul>
+    <li v-for="i in uname">{{i}}</li>
+</ul>
+<child userN="tom"></child>
+<child userN="jerry"></child>
+</div>`,
+        })
+
+        Vue.component("child",{
+            props:["userN"],
+            data(){return {user:""}},
+            template:`
+<div>
+    {{user}}
+    <input type="text" v-model="user">
+    <button @click="add">click</button>
+</div>`,
+            methods:{
+                add(){
+                    this.$parent.uname.push(this.userN+":"+this.user)
+                }
+            }
+        })
+        new Vue({el:"#app",})
+    </script>
+</body>
+</html>

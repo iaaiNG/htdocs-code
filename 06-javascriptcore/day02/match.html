@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="../ajax.js"></script>
+<script>
+    ajax("get", "sina.html", "", "text").then(
+        function(html){
+            var as = html.match(/<a[^>]*href="http[^"]+"/ig);
+            for(var i in as){
+                var index = as[i].indexOf("href");
+                as[i] = as[i].slice(index+6,-1);
+            }
+        }
+    )
+</script>
+</body>
+</html>

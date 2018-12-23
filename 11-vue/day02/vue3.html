@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .page{list-style: none}
+        .page>li{
+            float:left;
+            padding: 5px;
+            margin-right:10px;
+            border:1px solid #ddd;
+            background:#eee;
+        }
+        .active{color:red}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <hr>
+        <ul class="page">
+            <li v-on:click="prev">button</li>
+            <li v-on:click="tiao"  v-for="i in pageCount" :class="{active:activeNumber==i}">{{i}}</li>
+            <li v-on:click="next">下一页</li>
+        </ul>
+    </div>
+    <script src="js/vue.min.js"></script>
+    <script>
+        var data = {
+            pageCount:10,
+            activeNumber:3,
+            active:false
+        }
+        new Vue({
+            el:"#app",
+            data:data,
+            methods:{
+                prev(){
+                    this.activeNumber>1 && this.activeNumber--
+                },
+                next(){
+                    this.activeNumber<this.pageCount && this.activeNumber++
+                },
+                tiao(e){
+                    this.activeNumber = e.target.innerHTML
+                }
+            }
+        })
+    </script>
+</body>
+</html>

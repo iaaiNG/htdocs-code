@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <h4>{{`${msg}`}}</h4>
+        <hr>
+        <ul>
+
+            <li v-for="i in list">{{i}} </li>
+        </ul>
+        <hr>
+        <ul>
+            <li v-for="(val,key) in list">{{`${val}|${key}`}}</li>
+        </ul>
+    </div>
+    <script src="js/vue.min.js"></script>
+    <script>
+        var data = {
+            msg:"Hello vue!",
+            list:[11,22,33,44],
+        };
+
+        new Vue({
+            el:"#app",
+            data:data
+        });
+    </script>
+</body>
+</html>

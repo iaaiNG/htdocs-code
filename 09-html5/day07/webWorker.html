@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    数值：<input type="number" id="p1">
+    <button id="btn">开始计算</button>
+    <script>
+        btn.onclick = function(e){
+            var w = new Worker("2.js")
+            w.postMessage(p1.value)
+            w.onmessage = function(e){
+                d1.innerHTML = e.data
+            }
+        }
+    </script>
+    <div id="d1"></div>
+</body>
+</html>

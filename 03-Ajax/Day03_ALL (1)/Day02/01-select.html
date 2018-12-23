@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="common.js"></script>
+	<script>
+		/** 
+		 * 当 selProvince 选项发生改变时要做的操作
+		 */
+		function changeProvince(){
+			//获取 selProvince 中选中的 value 值
+			var val = $("selProvince").value;
+			alert("您选中的值:"+val);
+		}
+		
+		/**
+		 * 根据所选择的省份信息加载所对应的城市信息
+		 */
+		function loadCity(){
+			//1、声明一个二维数组
+			var city = [
+				["哈尔滨","齐齐哈尔","牡丹江"],
+				["长春","吉林","四平"],
+				["沈阳","大连","鞍山"]
+			];
+			//2、获取 selProvince 的值
+			var val = $("selProvince").value;
+			//3、判断 val 的值是否为 -1 (===请选择===)，如果不是-1，则继续加载城市信息
+			if(val == -1){
+				var html = "<option>请先选择省份</option>";
+				$("selCity").innerHTML = html;
+			}else{
+				//通过 val 到 city 中取出对应的 子数组
+				var arrayCity = city[val];
+				//循环遍历 arrayCity 数组，拼 "option" 的字符串 ： 
+				var htmlCity = "";
+				for(var i=0;i<arrayCity.length;i++){
+					htmlCity += "<option>";
+					htmlCity += arrayCity[i];
+					htmlCity += "</option>";
+				}
+				//将拼好的字符串，显示在 selCity 中
+				$("selCity").innerHTML = htmlCity;
+			}
+		}
+	</script>
+ </head>
+ <body>
+  <select id="selProvince" onchange="loadCity()">
+		<option value="-1">===请选择===</option>
+		<option value="0">黑龙江</option>
+		<option value="1">吉林</option>
+		<option value="2">辽宁</option>
+	</select>
+	<select id="selCity"></select>
+ </body>
+</html>

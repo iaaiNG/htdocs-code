@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        canvas{
+            background: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <h1>canvas画布</h1>
+    <canvas id="c2" width="500" height="400"></canvas>
+    <script>
+        var ctx = c2.getContext("2d")
+        var p3 = new Image()
+        p3.src = "img/p3.png"
+        var p4 = new Image()
+        p4.src = "img/p4.png"
+
+        window.onload = function(){
+            var deg1 = 1
+            var deg2 = 1.5
+            var timer1 = setInterval(function(){
+                ctx.save()
+                ctx.translate(100,150)
+                ctx.clearRect(-100,-150,500,400)
+                ctx.rotate(deg1*Math.PI/180)
+                ctx.drawImage(p3,-100,-50)
+                ctx.restore()
+                deg1 += 1
+
+                ctx.save()
+                ctx.translate(400,150)
+                ctx.rotate(deg2*Math.PI/180)
+                ctx.drawImage(p4,-100,-50)
+                ctx.restore()
+                deg2 += 1.5
+            },1)
+        }
+
+    </script>
+</body>
+</html>

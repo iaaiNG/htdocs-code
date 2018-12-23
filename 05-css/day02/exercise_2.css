@@ -1,0 +1,14 @@
+#container{
+  width:900px;
+  min-height:150px;
+  border:1px solid #D0E4C2;
+  box-sizing:border-box;
+}
+#page>a{
+  border:1px solid #ccc;
+  border-radius:5px;
+  padding:3px 10px;
+}
+#page>a:hover{
+  border:0;
+}

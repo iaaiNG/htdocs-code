@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script src="07_ajax.js"></script>
+  <script>
+    function r1(){
+      return new Promise(resolve=>{
+        console.log("1道起跑...");
+        ajax("get","08_r1.php","","text")
+        .then(data=>{
+          console.log(data);
+          resolve();
+        });
+      })
+    }
+    function r2(){
+      return new Promise(resolve=>{
+        console.log("2道起跑...");
+        ajax("get","08_r2.php","","text")
+        .then(data=>{
+          console.log(data);
+          resolve();
+        });
+      })
+    }
+    function r3(){
+      return new Promise(resolve=>{
+        console.log("3道起跑...");
+        ajax("get","08_r3.php","","text")
+        .then(data=>{
+          console.log(data);
+          resolve();
+        });
+      })
+    }
+    function end(){console.log("比赛结束");}
+    Promise.all([
+      r1(),r2(),r3()
+    ]).then(end);
+  </script>
+ </body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var str="她说：我擦，你家真大！";
+    var i = str.search(/[我卧]([艹草槽]|cao)/);
+    if (i!=-1)
+        console.error("发现敏感词，关进小黑屋！")
+    else
+        console.log("大旭说："+str);
+</script>
+</body>
+</html>

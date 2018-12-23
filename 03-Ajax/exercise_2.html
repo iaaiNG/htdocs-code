@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <script src='common.js'></script>
+  <script>
+    function getMsg(){
+      var elem1 = $('d1');
+      var elem2 = $('d2');
+      var text = "<h1>"+elem1.value+"</h1>"
+      elem2.innerHTML = text
+      console.log(text,elem1.value)
+    }
+  </script>
+  <body>
+    <div id='d2'></div>
+    <input type='text' id='d1'>
+    <button onclick='getMsg()'>开始</button>
+  </body>
+</html>

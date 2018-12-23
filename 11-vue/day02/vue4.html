@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .page{list-style: none}
+
+        .active{color:red}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-on:keydown.13="inputm">
+        <ul class="page">
+            <li v-for="(user,i) in users">{{user}}&nbsp;<button v-on:click="del(i)">X</button></li>
+        </ul>
+    </div>
+    <script src="js/vue.min.js"></script>
+    <script>
+        var data = {
+            users:['tom', 'jerry']
+        }
+        new Vue({
+            el:"#app",
+            data:data,
+            methods:{
+                inputm(e){
+                    this.users.push(e.target.value)
+                    e.target.value=""
+                },
+                del(i){
+                    this.users.splice(i,1)
+                },
+            }
+        })
+    </script>
+</body>
+</html>

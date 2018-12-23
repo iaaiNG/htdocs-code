@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+      #d1>span{
+        color:blue;
+        background:orange;
+      }
+      #d1>p>span{
+        background:pink;
+      }
+      a:link{
+        text-decoration:none;
+      }
+      a:hover{
+        text-decoration:underline;
+      }
+      a:active{
+        color:orange;
+      }
+      .text{
+        color:gray;
+        font-style:italic;
+        }
+      .text:active{font-style:normal;}
+      .text:focus{color:green;}
+    </style>
+  </head>
+  <body>  
+    <a href='http://www.baidu.com'>百度1</a>
+    <input class='text' type='text' value="李大钊">
+    <div id='d1'>
+      <span>这是d1中的span</span>
+      <p>
+        <span>这是d1中的p中的span</span>
+      </p>
+    </div>
+  </body>
+</html>

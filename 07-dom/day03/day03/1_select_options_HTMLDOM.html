@@ -1,0 +1,60 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>二级联动列表</title>
+<meta charset="utf-8" />
+	<style>
+		.hide{
+			display:none
+		}
+	</style>
+</head>
+<body>
+	<label>
+		<select name="family">
+			<option>—请选择—</option>
+		</select>
+	</label>
+	<label>
+		<select name="laptop" class="hide">
+			<option>—请选择—</option>
+		</select>
+	</label>
+	<script src="js/ajax.js"></script>
+	<script>
+		var selFamily = document.querySelector("[name=family]")
+        var selLaptop = document.querySelector("[name=laptop]")
+        ajax("get","getFamily.php","")
+            .then(data=>{
+                var frag = document.createDocumentFragment()
+                for(var each of data){
+                    var opt =document.createElement("option")
+					opt.innerHTML=each.fname
+					opt.value=each.fid
+					frag.appendChild(opt)
+				}
+				selFamily.appendChild(frag)
+            })
+        selFamily.onchange = function(){
+			var fid = this.value
+			if(fid!="—请选择—"){
+                selLaptop.className=""
+                selLaptop.innerHTML = "<option>—请选择—</option>"
+                ajax("get","getTitle.php?fid="+fid,"")
+                    .then(data=>{
+                        var frag = document.createDocumentFragment()
+                        for(var i of data){
+                            var opt =document.createElement("option")
+                            opt.innerHTML=i.title
+                            frag.appendChild(opt)
+                        }
+                        selLaptop.appendChild(frag)
+                    })
+			}else{
+                selLaptop.className="hide"
+			}
+		}
+
+	</script>
+</body>
+</html>

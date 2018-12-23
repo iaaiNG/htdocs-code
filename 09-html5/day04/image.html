@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{text-align: center}
+        canvas{background-image: url("img/bg.jpg")}
+    </style>
+</head>
+<body>
+    <canvas id="c2" width="400" height="500"></canvas>
+    <script>
+        var progress = 0
+        var p1 = new Image()
+        p1.src = "img/play.png"
+        p1.onload = ()=>{
+            progress += 25
+            if(progress==75) startDraw()
+        }
+        var p2 = new Image()
+        p2.src = "img/pause.png"
+        p2.onload = ()=>{
+            progress += 25
+            if(progress==75) startDraw()
+        }
+        var p3 = new Image()
+        p3.src = "img/disc.png"
+        p3.onload = ()=>{
+            progress += 25
+            if(progress==75) startDraw()
+        }
+        function startDraw(){
+            var ctx = c2.getContext("2d")
+            ctx.translate(200,250)
+            ctx.arc(0,0,110,0,2*Math.PI)
+            ctx.fill()
+            ctx.scale(1.5,1.5)
+            ctx.drawImage(p3,-p3.width/2,-p3.height/2)
+            ctx.scale(0.2,0.2)
+            ctx.drawImage(p1,-p1.width/2,500)
+        }
+    </script>
+</body>
+</html>

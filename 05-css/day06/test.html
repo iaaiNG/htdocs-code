@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        @keyframes scroll{
+            0%{
+                transform:translateX(0) rotate(0);
+            }
+            100%{
+                background:yellow;
+                transform:translateX(500px) rotate(7200deg);
+            }
+        }
+        div{
+            width:100px;
+            height:100px;
+            background:red;
+            font-size:30px;
+            text-align:center;
+            line-height:100px;
+            border-radius:25%;
+            border:2px solid #000;
+            animation-name:scroll;
+            animation-duration:3s;
+            animation-timing-function:ease-in-out;
+            animation-iteration-count:infinite;
+            animation-direction:alternate;
+        }
+    </style>
+</head>
+<body>
+    <div>江康明</div>
+</body>
+</html>

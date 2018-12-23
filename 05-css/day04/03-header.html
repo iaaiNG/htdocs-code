@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<style>
+		.main{
+			width:960px;
+			margin:0 auto;
+		}
+
+		#logo{
+			float:left;
+		}
+
+		img{
+			vertical-align:top;
+		}
+		#input-box{
+			/*宽度，边框*/
+			border:1px solid #0AA1ED;
+			width:299px;
+			/*左浮动，左外边距*/
+			float:left;
+			margin-left:40px;
+		}
+		#search{
+			/*取消边框，取消轮廓，高度*/
+			border:none;
+			outline:none;
+			height:32px;
+		}
+		a{
+			text-decoration:none;
+			color:#808080;
+		}
+		a:hover{
+			color:#0AA1ED;
+		}
+		#list{
+			margin-top:8px;
+			float:right;
+		}
+	</style>
+ </head>
+ <body>
+  <div class="main">
+		<!-- 1、上：LOGO，搜索框，登录注册等 -->
+		<header id="header-top">
+			<!-- 1、左：LOGO -->
+			<a href="#" id="logo">
+				<img src="img/header/logo.png">
+			</a>
+			<!-- 2、左：搜索框 -->
+			<div id="input-box">
+				<!-- 1、文本框 -->
+				<input type="text" id="search" placeholder="请输入您要搜索的内容">
+				<!-- 2、分类搜索  -->
+				<span>分类搜索</span>
+				<!-- 3、三角符号 -->
+				<img src="img/header/header_normal.png">
+				<!-- 4、查找图片 -->
+				<img src="img/header/search.png">
+			</div>
+			<!-- 3、右：登录 注册等 -->
+			<div id="list">
+				<a href="#">
+					<img src="img/header/care.png">
+				</a>
+				<span>|</span>
+				<a href="#">
+					<img src="img/header/order.png">
+				</a>
+				<span>|</span>
+				<a href="#">
+					<img src="img/header/shop_car.png">
+				</a>
+				<span>|</span>
+				<a href="#">注册</a>
+				<span>|</span>
+				<a href="#">登录</a>
+			</div>
+		</header>
+		<!-- 2、下：主导航 -->
+		
+	</div>
+ </body>
+</html>

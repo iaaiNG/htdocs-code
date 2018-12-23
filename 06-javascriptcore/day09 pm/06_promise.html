@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script src="../ajax.js"></script>
+  <script>
+function conn(){            // then    catch
+  return new Promise((resolve,reject)=>{
+    ajax("get","05-1-conn.php","","text")
+    .then(text=>{
+      var r=Math.random()>0.2;
+      if(r){
+        console.log(text);
+        resolve();
+      }else
+        reject("连接出错!");
+    });
+  });
+}
+function query(){
+  return new Promise((resolve,reject)=>{
+    ajax("get","05-2-query.php","","text")
+    .then(text=>{
+      var r=Math.random()>0.2;
+      if(r){
+        console.log(text);
+        resolve();
+      }else
+        reject("查询出错!");
+    });
+  });
+}
+function response(){
+  return new Promise((resolve,reject)=>{
+    ajax("get","05-3-response.php","","text")
+    .then(text=>{
+      var r=Math.random()>0.2;
+      if(r){
+        console.log(text);
+        resolve();
+      }else
+        reject("返回响应出错!");
+    });
+  })
+}
+function end(){ console.log("操作完成!"); }
+conn()/*抛出承诺*/  
+.then(query)/*将query放入承诺中等待执行*/
+/*query执行后，又抛出新的承诺*/
+.then(response)/*将response放入承诺中等待执行*/
+/*response执行后，又抛出新的承诺*/
+.then(end)/*将end放入承诺中等待执行*/
+/*之前任何一个then出错，后续then不再执行，而是自动到结尾调用catch*/
+.catch(err=>console.log(err));
+/*抛出承诺,然后将后续函数放入承诺中等待执行*/
+  </script>
+ </body>
+</html>

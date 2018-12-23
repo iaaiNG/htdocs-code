@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='common.js'></script>
+    <script>
+      function loadUsers(currentPage){
+        var xhr= createXhr();
+        var pageSize = $('size').value
+        url = '05-list-page.php?currentPage='+currentPage+'&pageSize='+pageSize
+        xhr.open('get',url,false);
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState==4&&xhr.status==200){ 
+            var text = JSON.parse(xhr.responseText)
+            var html = "";
+            for(var i=0;i<text.length-1;i++){
+              var per = text[i]
+              html += "<tr>"
+                 html += "<td>"+per.uname+"</td>"
+                 html += "<td>"+per.email+"</td>"
+                 html += "<td>"+per.user_name+"</td>"
+                 html += "<td>"+per.gender+"</td>"
+              html += "</tr>"
+            }
+            $('tbody').innerHTML = html
+            var page = text[text.length-1]
+            var pageMsg = JSON.parse(page)
+            
+            
+            var arr = [],last=pageMsg.lastPage
+            for(var i=1;i<=last;i++){
+              arr.push(i)
+            }
+            var html2 = "<select onchange='loadUser("+val+")' id='d1'>"
+            for(var i in arr){
+                html2 += "<option value="+arr[i]+">"+arr[i]+"</option>"
+            }
+            html2 += "</select>"
+            
+            var pageHTML =""
+            pageHTML += "<tr>"
+              pageHTML += "<td><a href='javascript:loadUser(1)'>首页</a></td>"
+              pageHTML += "<td><a href='javascript:loadUser("+pageMsg.prePage+")'>上一页</a>"+html2+"</td>"
+              pageHTML += "<td><a href='javascript:loadUser("+pageMsg.nextPage+")'>下一页</a></td>"
+              pageHTML += "<td><a href='javascript:loadUser("+pageMsg.lastPage+")'>尾页</a></td>"
+            pageHTML += "</tr>"
+            $('tfoot').innerHTML = pageHTML
+            var val = $('d1').value
+            console.log(val)
+          }
+        }
+        xhr.send(null);
+      }
+    
+      function loadUser(currentPage){
+        var xhr= createXhr();
+        var pageSize = $('size').value
+        url = '05-list-page.php?currentPage='+currentPage+'&pageSize='+pageSize
+        xhr.open('get',url,true);
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState==4&&xhr.status==200){ 
+            var text = JSON.parse(xhr.responseText)
+            var html = "";
+            for(var i=0;i<text.length-1;i++){
+              var per = text[i]
+              html += "<tr>"
+                 html += "<td>"+per.uname+"</td>"
+                 html += "<td>"+per.email+"</td>"
+                 html += "<td>"+per.user_name+"</td>"
+                 html += "<td>"+per.gender+"</td>"
+              html += "</tr>"
+            }
+            $('tbody').innerHTML = html
+            var page = text[text.length-1]
+            var pageMsg = JSON.parse(page)
+            
+            
+            var arr = [],last=pageMsg.lastPage
+            for(var i=1;i<=last;i++){
+              arr.push(i)
+            }
+            var html2 = "<select onchange='loadUsers("+val+")' id='d1'>"
+            for(var i in arr){
+                html2 += "<option value="+arr[i]+">"+arr[i]+"</option>"
+            }
+            html2 += "</select>"
+            
+            var pageHTML =""
+            pageHTML += "<tr>"
+              pageHTML += "<td><a href='javascript:loadUser(1)'>首页</a></td>"
+              pageHTML += "<td><a href='javascript:loadUser("+pageMsg.prePage+")'>上一页</a>"+html2+"</td>"
+              pageHTML += "<td><a href='javascript:loadUser("+pageMsg.nextPage+")'>下一页</a></td>"
+              pageHTML += "<td><a href='javascript:loadUser("+pageMsg.lastPage+")'>尾页</a></td>"
+            pageHTML += "</tr>"
+            $('tfoot').innerHTML = pageHTML
+            var val = $('d1').value
+            //console.log(val)
+          }
+        }
+        xhr.send(null);
+      }
+    </script>
+  </head>
+  <body onload='loadUser(1)'>
+    <p>行数：
+      <select id='size'>
+        <option value=10>10</option>
+        <option value=20>20</option>
+        <option value=30>30</option>
+      </select>
+    </p>
+    <table border=5 width=500>
+      <thead>
+        <tr>
+          <th>登录名称</th>
+          <th>电子邮件</th>
+          <th>用户姓名</th>
+          <th>用户性别</th>
+       </tr>
+      </thead>
+      <tbody id='tbody' align=center></tbody>
+      <tfoot align=center id='tfoot'></tfoot>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #main{
+            width:1000px;
+            margin:0 auto;
+            position:relative;
+        }
+        #list{
+            margin:0;
+            padding:0;
+            list-style:none;
+            position:absolute;
+            bottom:20px;
+            left:465px;
+        }
+        #list li{
+            float:left;
+            width:12px;
+            height:12px;
+            background:#FEFEFE;
+            border-radius:50%;
+            margin-right:10px;
+        }
+        #list li:hover{
+            background:#11A1EB;
+        }
+        .left,.right{
+            width:40px;
+            height:80px;
+            position:absolute;
+            border-radius:5px;
+        }
+        .left{
+            bottom:165px;
+            left:10px;
+            background:#000 url(img/index/arrow-left.png) no-repeat center;
+            opacity:0.3;
+        }
+        .right{
+            bottom:165px;
+            right:10px;
+            background:#000 url(img/index/arrow-right.png) no-repeat center;
+            opacity:0.3;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="main">
+        <img src="img/index/banner3.png" alt="banner3.png">
+        <ul id="list">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+</body>
+</html>

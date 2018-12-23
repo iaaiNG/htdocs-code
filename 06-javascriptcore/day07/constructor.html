@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    "use strict"
+    function Emp(id,ename,age,salary){
+        this.id=id;
+        this.ename=ename;
+        this.salary=salary
+        var _age=0
+        Object.defineProperties(this,{
+            id:{writable:false,configurable:false},
+            ename:{configurable:false},
+            salary:{enumerable:false,configurable:false},
+            age:{
+                get(){
+                    //console.log("get在执行")
+                    return _age
+                },
+                set(val){
+                    //console.log("set在执行")
+                    if(_age!=val&&18<=val&&val<=65){
+                        _age=val;
+                    }else{
+                        throw new RangeError("年龄必须介于18~65之间")
+                    }
+                },
+                enumerable:true,
+            }
+        })
+        this.age=age;
+        Object.seal(this)
+    }
+    var eric = new Emp(1001,"Eric",18,12000)
+    //eric.id=1002
+    //eric._age=-2
+    for (var i in eric){
+        console.log(i+":"+eric[i])
+    }
+</script>
+</body>
+</html>

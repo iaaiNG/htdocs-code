@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>创建XMLHttpRequest对象</title>
+ </head>
+ <body>
+ <!-- 
+  <script>
+		//1、声明一个 xhr 对象，用于保存不同浏览器中创建出来的AJAX核心对象
+		var xhr;
+
+		//2、判断浏览器是否支持 XMLHttpRequest，支持的话，则new XMLHttpRequest() 否则，new ActiveXObject("Microsoft.XMLHttp");
+		if(window.XMLHttpRequest){
+			xhr = new XMLHttpRequest();
+		}else{
+			xhr = new ActiveXObject("Microsoft.XMLHttp");
+		}
+
+		console.log(xhr);
+	</script>
+	-->
+	<script src="common.js"></script>
+
+	<button onclick="console.log(createXhr());">创建XHR对象</button>
+ </body>
+</html>

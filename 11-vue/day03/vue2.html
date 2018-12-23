@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <h3 v-change-background-color="value">{{msg}}</h3>
+    </div>
+    <script src="js/vue.min.js"></script>
+    <script>
+        var data = {
+            msg:"Hello world!",
+            value:"red",
+        }
+        new Vue({
+            el:"#app",
+            data:data,
+            directives:{changeBackgroundColor:{
+                bind(el,bindings){
+                    el.style.backgroundColor = bindings.value
+                },
+            }}
+        })
+    </script>
+</body>
+</html>

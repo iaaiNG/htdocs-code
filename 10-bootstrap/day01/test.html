@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>测试试卷：</h3>
+    <div id="testContent"></div>
+    <hr>
+    <a href="result.html" id="result">提交答案</a>
+    <script src="../jquery-1.11.3.js"></script>
+    <script>
+        var html = ""
+        for(var i=0;i<localStorage.length;i++){
+            html += `${localStorage.key(i)}：<input type="text"><br><br>`
+        }
+        testContent.innerHTML = html
+        var n = localStorage.length
+        sessionStorage.num = n
+        result.onclick = function(){
+            var ans = document.querySelectorAll("#testContent input")
+            for(var i=0;i<ans.length;i++){
+                if(localStorage[localStorage.key(i)]!=ans[i].value){
+                    n-=1
+                }
+            }
+            sessionStorage.ok = n
+        }
+    </script>
+</body>
+</html>

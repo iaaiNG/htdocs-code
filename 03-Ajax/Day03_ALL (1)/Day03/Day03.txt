@@ -1,0 +1,95 @@
+1、使用 POST 方式发送请求
+	1、提交的请求数据
+		提交的请求数据需要按照指定的格式拼好，放在 send() 中传递
+		xhr.send("name1=value1 & name2=value2");
+	2、设置一个请求消息头
+		POST 提交方式，必须将 Content-Type 的请求消息头更改为 application/x-www-form-urlencoded
+
+		在发送请求之前：
+		xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+2、JSON
+	1、什么是JSON
+		JavaScript Object Notation
+		JS 对象表示法,即以JS对象的方式来表现出来的字符串
+	2、JS对象
+		var fbb = [];
+
+		fbb["yuwen"] = 121;
+		fbb["shuxue"] = 73;
+		fbb["yingyu"] = 116;
+
+		var fbb = {
+			yuwen:121,
+			shuxue:73,
+			yingyu:116
+		}
+
+		console.log(fbb.yunwen);
+
+		练习：(5分钟)
+			1、创建一个对象 ， yangmi
+			2、包含三个属性
+				height , 值为 165
+				weight , 值为 50
+				gender , 职位 女
+			3、在控制台上分别将以上三个属性打印输出
+	3、JSON
+		1、JSON对象
+			语法：
+				1、用一对 {} 来表示一个对象
+				2、对象的属性名称，必须用 "" 引起来，值如果也是字符串，也必须用 "" 引起来
+				3、属性 与 值，用 : 连接
+				4、多对属性 与 值之间，用 , 分开
+			ex:
+				var ym = '{"height":175,"weight":50}';
+		2、JSON数组
+			1、普通数组表现 ：'["杨幂","范冰冰","凤姐"]'
+			2、对象的数组 :
+				'[
+					{
+						"height":170,
+						"weight":55,
+						"gender":"女"
+					},
+					{
+						"height":180,
+						"weight":60,
+						"gender":"女"
+					}
+				]'
+		3、JSON文件
+			创建一个文件，以 ***.json 作为后缀
+			该文件中的数据必须是符合JSON格式的字符串
+		4、将JSON字符串 转成 JS对象/数组
+			var p = '{"name":"sf.z","age":25}';
+			1、使用 eval()
+				var obj = eval("("+p+")");
+			2、使用JSON.parse() 来解析JSON字符串得到JS对象
+				var obj = JSON.parse(p);
+			练习：(10分钟)
+				1、创建一个 users.json 的文件，里面包含一个数组，数组中有3个对象，每个对象包含 uname，upwd，gender 属性，分别赋值
+				2、创建一个 getusers.html，使用异步的方式向users.json 发送一个请求，并按以下格式打印输出数据
+					用户名称：xxxx
+					用户密码：xxxx
+					用户性别：男
+					
+					用户名称：xxxx
+					用户密码：xxxx
+					用户性别：男
+
+					用户名称：xxxx
+					用户密码：xxxx
+					用户性别：男
+		5、在Php中，可以直接将数组(一维，二维，关联) 转换成JSON格式的字符串	
+			php中通过 : json_encode() 将数组转换为JSON字符串
+			语法：$str = json_encode($array);
+		
+			注意：如果服务器端响应回来的数据时JSON格式的，需要增加响应消息头
+				header("Content-Type:application/json");
+
+		练习：(10分钟)
+			1、改版省市级联的操作
+			2、将省份信息直接以JSON格式的字符串进行响应
+			3、在浏览器中得到JSON格式的字符串后，转行成JS对象/数组，进行解析，拼<option>,再将数据显示在 <select>
+			4、以相同的方式改版 城市信息
+

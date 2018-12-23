@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性布局</title>
+    <style>
+        a{
+            text-decoration:none;
+        }
+        #main{
+            display:flex;
+            width:960px;
+            margin:0 auto;
+            flex-wrap:wrap;
+            justify-content:space-between;
+        }
+        #main div{
+            background:#E7E7E7;
+            margin-top:10px;
+        }
+        #main div:first-child{
+            width:610px;
+            height:370px;
+            position:relative;
+        }
+        #main div:first-child *{
+            position:absolute;
+        }
+        #main div:first-child a{
+            width:130px;
+            height:40px;
+            color:#fff;
+            text-align:center;
+            line-height:40px;
+            border-radius:3px;
+            font-weight: 700;
+            background-image:linear-gradient(0deg,#11A1EB,#29B1F4);
+            bottom: 90px;
+            left: 100px;
+        }
+        #main div:first-child img{
+            bottom: 20px;
+            right: 20px;
+        }
+        #main div:first-child .name{
+            font-family:simhei;
+            font-size:32px;
+            color:#323232;
+            left: 100px;
+            top:30px;
+        }
+        #main div:first-child .detials{
+            width:250px;
+            font-size:12px;
+            left: 100px;
+            top:125px;
+            color:#656565;
+        }
+        #main div:first-child .price{
+            font-size: 24px;
+            color: #0AA1ED;
+            left: 100px;
+            top:185px;
+         }
+        #main div:nth-child(2){
+            width:340px;
+            height:370px;
+        }
+        #main div:nth-child(3){
+            width:360px;
+            height:230px;
+        }
+        #main div.small{
+            width:190px;
+            height:230px;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        <div>
+            <p class="name">Apple MacBook<br>Air系列</p>
+            <p class="detials">酷睿双核i5处理器|256GB SSD|8GB内存|英特尔HD显卡620含共享显卡内存</p>
+            <p class="price">￥6988.00</p>
+            <a href="#">查看详情</a>
+            <img src="img/index/study_computer_img1.png">
+        </div>
+        <div></div>
+        <div></div>
+        <div class="small"></div>
+        <div class="small"></div>
+        <div class="small"></div>
+    </div>
+</body>
+</html>

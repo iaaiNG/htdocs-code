@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script>
+		//1、编写一个函数 获取 xhr对象
+		function createXhr(){
+			var xhr;
+			if(window.XMLHttpRequest){
+				xhr = new XMLHttpRequest();
+			}else{
+				xhr = new ActiveXObject("Microsoft.XMLHttp");
+			}
+			return xhr;
+		}
+		//2、编写 button 的 onclick 事件
+		function getResponse(){
+			//1、获取 xhr
+			var xhr = createXhr();
+			//2、创建请求:使用get方式，异步的向response.php 发送一个请求
+			xhr.open("get","response.php",true);
+	
+		}
+	</script>
+ </head>
+ <body>
+  <button onclick="getResponse()">发送异步请求</button>
+ </body>
+</html>

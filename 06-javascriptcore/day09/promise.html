@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="ajax01.js"></script>
+<script>
+    function conn(){
+        return new Promise(function(resolve){
+        ajax("get","connect.php","","text")
+            .then(function(data){
+                console.log(data)
+                resolve()
+            })
+        })
+    }
+    function query(){
+        return new Promise(function(resolve){
+            ajax("get","query.php","","text")
+                .then(function(data){
+                    console.log(data)
+                    resolve()
+                })
+        })
+    }
+    function res(){
+        return new Promise(function(resolve){
+            ajax("get","response.php","","text")
+                .then(function(data){
+                    console.log(data)
+                    resolve()
+                })
+        })
+    }
+    conn().then(query).then(res).catch(err=>console.log(err))
+</script>
+</body>
+</html>

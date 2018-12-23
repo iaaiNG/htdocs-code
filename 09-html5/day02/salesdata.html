@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{text-align: center}
+        canvas{background: #ddd}
+    </style>
+</head>
+<body>
+    <h1>统计表格</h1>
+    <canvas width="500" height="400" id="c2"></canvas>
+    <script src="../jquery-1.11.3.js"></script>
+    <script>
+        var c2 = document.getElementById("c2")
+        var ctx = c2.getContext("2d")
+        var x = 55.56, pd=25, y
+        ctx.lineWidth = "#ddd"
+        ctx.strokeRect(pd,pd,500-pd*2,400-pd*2)
+        ctx.fillStyle = "purple"
+        $.ajax({
+            url:"salesdata.php",
+            type:"get",
+            success(data){
+                for(var p of data){
+                    y = 400-pd-p.value
+                    ctx.font = "15px consoals"
+                    ctx.fillRect(x,y,50,p.value)
+                    ctx.fillText(p.label,x,390)
+                    ctx.fillText(p.value,x+12,y-5)
+                    x += 55.56*2
+                }
+            },
+        })
+    </script>
+</body>
+</html>

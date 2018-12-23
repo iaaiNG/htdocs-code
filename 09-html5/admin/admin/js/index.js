@@ -1,0 +1,19 @@
+$(
+    $("[name=usubmit]").click(e=>{
+        e.preventDefault()
+        $.ajax({
+            url:"data/01_login.php",
+            type:"post",
+            data:$("form").serialize(),
+            error(){alert("出现网络故障，请检查~")}
+        }).then(data=>{
+            console.log(data)
+            if(data.code){
+                alert(data.msg)
+                location="main.html"
+            }
+            else
+                alert(data.msg)
+        })
+    })
+)

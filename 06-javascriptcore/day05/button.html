@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="btnZan">👍(+0)</button>
+<button id="btnCai">踩(+0)</button>
+<script>
+    function zan(btn,word){
+        var n=0;
+        return function(){
+            btn.innerHTML = word+"(+"+(++n)+")"
+        }
+    }
+    btnZan.onclick = zan(btnZan,"👍")
+    btnCai.onclick = zan(btnCai ,"踩")
+</script>
+</body>
+</html>

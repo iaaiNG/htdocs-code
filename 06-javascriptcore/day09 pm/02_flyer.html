@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+    class Flyer{
+      constructor(fname,speed){
+        this.fname=fname;
+        this.speed=speed;
+      }
+      fly(){//Flyer.prototype.fly
+        console.log(
+          this.fname+"以时速"+this.speed+"飞行");
+      }
+      toString(){
+        console.log("调用爷爷的toString");
+return `fname:${this.fname},speed:${this.speed}`;
+      }
+    }
+
+    class Plane extends Flyer{
+      constructor(fname,speed,score){
+        super(fname,speed);
+        this.score=score;
+      }
+      getScore(){
+        console.log(
+          "击落"+this.fname+"得"+this.score+"分");
+      }
+      toString(){
+        console.log("调用爸爸的toString");
+    return super.toString()+`,score:${this.score}`;
+      }
+    }
+    var f16=new Plane("F16",1000,10);
+    f16.fly();
+    f16.getScore();
+    //作业: 模仿Plane和f16,编写Bee和bee
+    console.log(f16.toString());
+  </script>
+ </body>
+</html>

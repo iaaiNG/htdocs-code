@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='common.js'></script>
+    <script>
+      function response(){
+        var name = $('name').value;
+        var xhr;
+        if(window.XMLHttpRequest){
+          xhr = new XMLHttpRequest();
+        }else{
+          xhr = new ActiveXObject("Microsoft XMLHttp");
+        }
+        xhr.open("get",'exercise_7.php?name='+name,true);
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState==4&&xhr.status==200){
+            var resText = xhr.responseText;
+            $('welcome').innerHTML = "欢迎"+resText;
+          }
+        }
+        xhr.send(null);
+      }
+    </script>
+  </head>
+  <body>
+    用户名<input type='text' id='name' onblur='response()'>
+    <div id='welcome'></div>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button>CLICK</button>
+<button>CLICK</button>
+<button>CLICK</button>
+<button>CLICK</button>
+<button>CLICK</button>
+<script>
+    var btns = document.getElementsByTagName("button")
+    for (var i=0;i<btns.length;i++){
+        (function(i){
+            btns[i].onclick = function(){
+                alert("我是第"+(i+1)+"个")
+            }
+        })(i)
+    }
+</script>
+</body>
+</html>

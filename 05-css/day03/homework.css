@@ -1,0 +1,85 @@
+body,h1,h2,h3,p,ul,ol,dl,dd{
+  margin:0;
+}
+#top{
+  width:1000px;
+  height:52px;
+}
+body{
+  height:700px;
+  background:url(img/bg.png) no-repeat;
+  background-position:center;
+  background-size:1370px 560px;
+}
+.top{
+  width:960px;
+  height:46px;
+  margin:20px 0px 5px 250px;
+}
+.top>span{
+  font-size:20px;
+}
+.top>img{
+  margin-right:15px;
+  margin-bottom:-8px;
+}
+#txt{
+  width:273px;
+  height:285px;
+  background:rgba(0,0,0,0.3);
+  margin:150px 10px 10px 1000px;
+  padding:15px 10px 10px;
+}
+#txt p{
+  font-size:20px;
+  color:white;
+}
+.uname,.upwd{
+  width:250px;
+  height:35px;
+  padding-left:20px;
+  margin-top:10px;
+}
+.yhm{
+  position: relative;
+  top: -34px;
+  right: -224px;
+}
+.mm{
+  position: relative;
+  top: -34px;
+  right: -224px;
+}
+
+.zhuce{
+  font-size:10px;
+  margin-left:90px;
+}
+.prompt{
+  font-size:10px;
+  color:red;
+}
+.zidong{
+  margin:-10px 0px 0px 0px;
+  font-size:10px;
+  color:white;
+}
+.gorget{
+  font-size:20px;
+  padding:10px 20px 10px 20px;
+}
+.zidong>input{
+  padding-bottom:2px;
+}
+.denglu{
+  width:273px;
+  height:40px;
+  background:linear-gradient(to bottom,#27B0F6 0,#01A1ED 100%);
+  border-radius:3px;
+  margin:10px 0 10px 0;
+}
+.denglu>p{
+  color:white;
+  font-size:10px;
+  margin:7px 0px 0px 117px;
+}

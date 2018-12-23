@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    #slider{
+      width:200px; height:150px;
+      position:relative;
+      border:1px solid #555;
+    }
+    #slider>img{
+      position:absolute; top:0; left:0;
+      opacity:0;
+      transition:all 1s linear;
+    }
+    #slider>img.show{  opacity:1; z-index: 10; }
+  </style>
+</head>
+<body>
+<div id="slider">
+  <img src="images/1.jpg" alt="1" class="show"/>
+  <img src="images/2.jpg" alt="2"/>
+  <img src="images/3.jpg" alt="3"/>
+  <img src="images/4.jpg" alt="4"/>
+</div>
+<script>
+    var imgs = document.querySelectorAll("#slider>img")
+  function next(){
+      var img = document.querySelector("#slider>.show")
+      img.className=""
+      if(img!=imgs[3]){
+          img.nextElementSibling.className = "show"
+      }else
+          imgs[0].className = "show"
+  }
+  var timer = setInterval(next,2000)
+  var div = document.getElementById("slider")
+  div.onmouseover = function(){
+      clearInterval(timer)
+      timer=null
+  }
+  div.onmouseout = function(){
+      timer = setInterval(next,2000)
+  }
+  for(let each of imgs){
+        each.onclick = function(){
+            alert(this.alt)
+        }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{text-align: center}
+        canvas{background: #ddd}
+    </style>
+</head>
+<body>
+<canvas width="500" height="400" id="c2"></canvas>
+<script>
+    var c2 = document.getElementById("c2")
+    var ctx = c2.getContext("2d")
+    ctx.beginPath()
+    ctx.lineWidth = 40
+    ctx.arc(250,200,150,0,360*Math.PI/180)
+    ctx.strokeStyle = "#aaa"
+    ctx.stroke()
+
+    var start = -90, end = -90
+    var timer = setInterval(function(){
+        ctx.beginPath()
+        ctx.strokeStyle = "green"
+        ctx.arc(250,200,150,start*Math.PI/180,end*Math.PI/180)
+        end += 0.5
+        ctx.stroke()
+        if(end>260) clearInterval(timer)
+    },1)
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="00-common.js"></script>
+	<script>
+		function loadProvince(){
+			//1、获取 xhr
+			var xhr = createXhr();
+			//2、创建请求(将访问方式改为同步，确保能够在加载完省份信息后再加载城市信息)
+			xhr.open("get","02-province.php",false);
+			//3、设置回调
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState==4 && xhr.status==200){
+					var resText = xhr.responseText;
+					$("selProvince").innerHTML = resText;
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+		
+		/**
+		 * 当 selProvince选项发生更改时，要执行的操作，即加载对应的城市信息
+		 */
+		function loadCity(){
+			//1、获取xhr
+			var xhr=createXhr();
+			//2、创建请求
+			var pid = $("selProvince").value;
+			var url = "02-city.php?pid="+pid;
+			xhr.open("get",url,true);
+			//3、设置回调
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					var resText = xhr.responseText;
+					$("selCity").innerHTML = resText;
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+		/**
+		 * 网页加载时要执行的函数
+		 * 将此函数指定给 body 的 onload 事件
+		 */
+		function pageLoad(){
+			console.log("网页加载时...");
+			loadProvince();
+			loadCity();
+		}
+	</script>
+ </head>
+ <body onload="pageLoad()">
+  <select id="selProvince" onchange="loadCity()"></select>
+	<select id="selCity"></select>
+ </body>
+</html>

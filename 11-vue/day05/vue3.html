@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <router-view></router-view>
+    </div>
+    <script src="js/vue.js"></script>
+    <script src="js/vue-router.js"></script>
+    <script>
+        var collect = Vue.component("collect",{
+            template:`<div>
+<h1>收藏页面</h1>
+<router-link to="/detial">详情</router-link>
+</div>`,
+        })
+        var detial = Vue.component("detial",{
+            template:`<div>
+<h1>详情页面</h1>
+<button @click="order">订单</button>
+</div>`,
+        methods:{
+            order(){
+                console.log(this.$router)
+                this.$router.push("/order")
+            }
+        }
+        })
+        var order = Vue.component("order",{
+            template:`<div>
+<h1>订单页面</h1>
+<a href="http://localhost/11-vue/day05/vue3.html#/collect">订单</a>
+</div>`,
+        })
+        var myRs = [
+            {path:"", component:collect},
+            {path:"/collect", component:collect},
+            {path:"/detial", component:detial},
+            {path:"/order", component:order},
+        ]
+        var myR = new VueRouter({routes:myRs})
+        new Vue({
+            el:"#app",
+            router:myR
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='common.js'></script>
+    <script>
+      function loadProvince(){
+        var xhr = createXhr();
+        xhr.open('post','exercise_1_11.php',false);
+        xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xhr.onreadystatechange=function(){
+          if(xhr.readyState==4&&xhr.status==200){
+            var resText = xhr.responseText
+            var pro = JSON.parse(resText);
+            var html = "";
+            for(var i in pro){
+            html += "<option value="+i+">"+pro[i]+"</option>";
+            }
+            $('province').innerHTML = html;
+          }
+        }
+        xhr.send("province=1");
+      }
+      
+      function loadcity(){
+        var xhr = createXhr();
+        xhr.open('get','exercise_1_11.php',true);
+        xhr.onreadystatechange=function(){
+          if(xhr.readyState==4&&xhr.status==200){
+            var resText = xhr.responseText
+            var city = JSON.parse(resText);
+            var html = "";
+            var cities = city[$('province').value]
+            for(var i in cities){
+            var each = cities[i]
+            html += "<option value="+i+">"+cities[i]+"</option>";
+            }
+            $('city').innerHTML = html;
+          }
+        }
+        xhr.send(null);
+      }
+      
+      function pageLoad(){
+        loadProvince()
+        loadcity()
+      }
+    </script>
+  </head>
+  <body onload='pageLoad()'>
+    <select id='province' onchange='loadcity()'></select>
+    <select id='city'></select>
+  </body>
+</html>

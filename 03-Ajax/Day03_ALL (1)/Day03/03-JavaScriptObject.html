@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>JS中的对象表现</title>
+	<script>
+		function showObject(){
+			//1、创建一个对象，名称为 fbb，包含三个属性，yuwen，值为121；shuxue，值为73；英语，116
+			var fbb = {
+				yuwen:121,
+				shuxue:73,
+				yingyu:116
+			};
+			//2、打印 fbb的yunwen，fbb的shuxue，fbb的yingyu
+			console.log("语文:"+fbb.yuwen);
+			console.log("数学:"+fbb.shuxue);
+			console.log("英语:"+fbb.yingyu);
+		}
+
+		function showYm(){
+			//1、创建 ym 对象，包含三个属性
+			var ym = {
+				height:165,
+				weight:50,
+				gender:"女"
+			};
+			//2、将ym 的 三个属性打印输出
+			console.log(ym.height,ym.weight,ym.gender);
+		}
+		
+		/**
+		 * 对象的数组
+		 */
+		function showObjectArray(){
+			//1、范冰冰对象
+			var fbb = {
+				height:121,
+				weight:73,
+				gender:"女"
+			};
+			//2、杨幂对象
+			var ym = {
+				height:165,
+				weight:50,
+				gender:"女"
+			};
+			//3、声明一个数组，保存 fbb 和 ym
+			var star = [fbb,ym];
+			for(var i=0;i<star.length;i++){
+				var s = star[i];
+				console.log(s.height,s.weight,s.gender);
+			}
+		}
+
+		function showObjectArray1(){
+			//1、范冰冰对象
+			var fbb = {
+				height:121,
+				weight:73,
+				gender:"女"
+			};
+			//2、杨幂对象
+			var ym = {
+				height:165,
+				weight:50,
+				gender:"女"
+			};
+			//3、声明一个数组，保存 fbb 和 ym
+			var star = [
+				{
+					height:121,
+					weight:73,
+					gender:"女"
+				},
+				{
+					height:165,
+					weight:50,
+					gender:"女"
+				},
+				{
+					height:178,
+					weight:55,
+					gender:"女"
+				}
+			];
+			for(var i=0;i<star.length;i++){
+				var s = star[i];
+				console.log(s.height,s.weight,s.gender);
+			}
+		}
+	</script>
+ </head>
+ <body>
+  <button onclick="showYm()">显示对象</button>
+	<button onclick="showObjectArray1()">显示对象的数组</button>
+ </body>
+</html>

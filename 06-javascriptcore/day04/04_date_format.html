@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+ <script>
+     function format(date){
+         var days = ["日","一","二","三","四","五","六"];
+         var day = days[date.getDay()];
+         var i = (date.toLocaleDateString()).split("/");
+         var j = date.toLocaleTimeString().slice(0,date.toLocaleTimeString().lastIndexOf(":"))
+         return i[0]+"年"+i[1]+"月"+i[2]+"日  星期"+day+" "+j;
+     }
+     console.log(format(new Date()));
+     //2017年09月14日 星期四 下午02:19
+ </script>
+ </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+<h3>自定义指令</h3>
+<div id="app">
+   {{msg}}
+   <h3 v-change-background-color="myBgColor">hello</h3>
+  <hr/>
+  <hr/>
+</div>
+<script src="js/vue.min.js"></script>
+<script>
+   var exampleData = {
+     msg:"hello vue",
+     count:0,
+     myBgColor:"red",
+   };
+   new Vue({
+      el:"#app",
+      data:exampleData,
+      directives:{
+          changeBackgroundColor:{
+            bind:function(el,bindings){
+                el.style.backgroundColor = bindings.value;
+            }
+          }
+      }
+    });
+</script>
+</body>
+</html>

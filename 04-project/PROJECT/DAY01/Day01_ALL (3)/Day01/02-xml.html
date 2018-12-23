@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+	<script src="00-common.js"></script>
+	<script>
+		function loadXml(){
+			//1、获取 xhr
+			var xhr = createXhr();
+			//2、创建请求
+			xhr.open("get","01-student.xml",true);
+			//3、设置回调
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					//接收响应回来的XML数据
+					var xmlDoc = xhr.responseXML;
+
+					//在 xmlDoc 中获取所有的 student 元素
+					var students = xmlDoc.getElementsByTagName("student");
+					//循环遍历 students 类数组，取出每一个 student 元素
+					for(var i=0;i<students.length;i++){
+						var stu = students[i];
+						//获取姓名元素
+						var name = stu.getElementsByTagName("name")[0].innerHTML;
+						console.log("姓名："+name);
+
+						//获取年龄
+						var age = stu.getElementsByTagName("age")[0].innerHTML;
+						console.log("年龄："+age);
+
+						//获取性别
+						var gender = stu.getElementsByTagName("gender")[0].innerHTML;
+						console.log("性别："+gender);
+
+						console.log("\n");
+					}
+
+
+
+
+
+
+
+
+					/*var studentList = xmlDoc.getElementsByTagName("studentList");
+
+					console.log(studentList[0]);*/
+				}
+			}
+			//4、发送请求
+			xhr.send(null);
+		}
+	</script>	
+ </head>
+ <body>
+  <button onclick="loadXml()">加载XML数据</button>
+ </body>
+</html>

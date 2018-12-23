@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>//鄙视: 仿写bind的实现原理!
+     Function.prototype.band = function(obj,...){
+         var fun =this
+         var arg1=...
+         return function(){
+             return fun.apply(obj,arg2)
+         }
+     }
+      function calc(base,bonus1,bonus2){
+       document.write(this.ename+"的总工资:"+(
+         base+bonus1+bonus2
+       )+"<br>");
+     }
+     var lilei={ename:"Li Lei"};
+     var hmm={ename:"Han Meimei"};
+     var lilei_calc=calc.band(lilei,10000,3000);
+     lilei_calc(2000);
+     lilei_calc.call(hmm,4000,7000,6000);
+     //calc.call(lilei,10000,3000,2000)
+  </script>
+ </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="isShow=!isShow">clickMe</button>
+        <my v-if="isShow"></my>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        Vue.component("my",{
+            template:`
+<div>
+    <button @click="hand">JKM</button>
+    <h4>hello {{count}}</h4>
+</div>`,
+            data(){return {count:0}},
+            methods:{
+                hand(){this.count++}
+            },
+            beforeCreate:function(){console.log("1:创建前")},
+            created:function(){console.log("2:创建后")},
+            beforeMount:function(){console.log("3:挂载前")},
+            mounted:function(){console.log("4:创建后")},
+            beforeUpdate:function(){console.log("5:更新前")},
+            updated:function(){console.log("6:创建后")},
+            beforeDestroy:function(){console.log("7:消毁前")},
+            destroyed:function(){console.log("8:消毁后")}
+        })
+        new Vue({
+            el:"#app",
+            data:{isShow:false}
+        })
+    </script>
+</body>
+</html>

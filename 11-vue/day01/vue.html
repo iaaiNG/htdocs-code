@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="app">
+        <h4>{{msg}}</h4>
+        <h5 v-if="yes">yes</h5>
+        <h5 v-if="no">no</h5>
+        <h5 v-if="count>28">age:{{count}}</h5>
+    </div>
+    <script src="js/vue.min.js"></script>
+    <script>
+        var data = {
+            msg:"Hello vue!",
+            msg2:"<h6>jkm</h6>",
+            count:28,
+            yes:true,
+            no:false,
+        };
+        new Vue({
+            el:"#app",
+            data:data
+        });
+    </script>
+</body>
+</html>

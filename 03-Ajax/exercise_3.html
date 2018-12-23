@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+  </head>
+  <script src='common.js'></script>
+  <script>
+    function change(){
+      var elem1 = $('d1').value;
+      var elem2 = $('d2');
+      if(elem1==""){
+        //elem2.innerHTML = "用户名不能为空";
+        elem2.innerHTML = "请输入6-10为字符";
+      }else{
+        elem2.innerHTML = "用户名已被占用";
+      }
+    }
+  </script>
+  <body>
+  <input type='text' id='d1' onfocus="change()"><span id='d2'></span>
+  </body>
+</html>

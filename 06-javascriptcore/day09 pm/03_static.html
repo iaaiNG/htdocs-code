@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+ </head>
+ <body>
+  <script>
+    class Config{
+      static getConn(){//构造函数上
+        console.log("连接数据库:192.168.0.100 成功!");
+      }
+    }
+    //var conf=new Config();
+    //conf.getConn();
+    Config.getConn();
+  </script>
+ </body>
+</html>

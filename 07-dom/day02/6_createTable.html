@@ -1,0 +1,64 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>动态创建表格</title>
+<meta charset="utf-8" />
+<style>
+	table{width:600px; border-collapse:collapse;
+		text-align:center;
+	}
+	td,th{border:1px solid #ccc}
+</style>
+
+</head>
+<body>
+	<div id="data">
+  </div>
+  <script src="ajax.js"></script>
+  <script>
+	  ajax("get","6_getUsers.php","")
+      .then(data=>{
+      /*
+        [
+          {
+            uid:"3", 
+            uname:"xuxu", 
+            email:"xu@tedu.cn", 
+            phone:"12312312346"
+          },
+          {uid, uname, email, phone},
+          {uid, uname, email, phone},
+          ...
+        ]
+      */
+      //创建table,追加到id为data的div中
+      var table=document.createElement("table");
+      
+      //创建thead,将thead追加到table中
+      var thead=document.createElement("thead");
+      table.appendChild(thead);
+      //创建tr,将tr追加到thead中
+      var tr=document.createElement("tr");
+      thead.appendChild(tr);
+      //遍历data中第一个对象的每个属性
+      for(var key in data[0]){
+        //创建th,将th追加到tr
+        var th=document.createElement("th");
+        tr.appendChild(th);
+        //设置th的内容为当前属性名
+        th.innerHTML=key;
+      }
+      //作业: 
+      //创建tbody，追加到table中
+      //遍历data数组中每个元素
+        //每遍历一个元素对象,就创建一个tr，追加到tbody中
+        //遍历data中当前元素对象的每个属性
+          //每遍历一个属性，就创建一个td，追加到tr中
+          //设置td的内容为data中当前元素对象的当前属性的值
+
+      document.querySelector("#data")
+              .appendChild(table);
+    })
+  </script>
+</body>
+</html>

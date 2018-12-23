@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src='common.js'></script>
+    <script>
+      function check(){
+        var uname = $('uname').value;
+        var xhr;
+        if(window.XMLHttpRequest){
+          xhr = new XMLHttpRequest();
+        }else{
+          xhr = new ActiveXObject("Microsoft.XMLHttp");
+        }
+        xhr.open('get','exercise_8.php?uname='+uname,true);
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState==4&&xhr.status==200){
+            var resText = xhr.responseText
+            $('prompt').innerHTML = resText
+          }
+        }
+        xhr.send(null);
+      }
+    </script>
+  </head>
+  <body>
+    用户名：<input type='text' id='uname' onblur='check()'><span id='prompt'></span>
+  </body>
+</html>

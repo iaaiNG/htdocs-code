@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var url = "http://tedu.cn/imgs/logo.png";
+    var i = url.lastIndexOf("/");
+    var filename = url.slice(i+1);
+    var ext = filename.slice(filename.length-4);
+    console.log(filename,ext);
+</script>
+</body>
+</html>

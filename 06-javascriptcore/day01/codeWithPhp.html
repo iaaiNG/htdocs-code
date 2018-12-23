@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ok{background:green;}
+        .err{background:red;}
+        img{cursor:pointer;}
+    </style>
+</head>
+<body>
+    验证码：<input type="text" id="txtCode">
+    <img src="data/01_code.php" onclick="javascript:fun()"  id="codeImg" title="看不清？点击换一张"><br>
+    <span id="msgCode">请输入验证码</span>
+    <span id="test"></span>
+    <script src="ajax.js"></script>
+    <script>
+        txtCode.onkeyup = function() {
+            if (txtCode.value != "") {
+                ajax(
+                    "get",
+                    "data/chk_code.php?code=" + txtCode.value,
+                    "",
+                    "text"
+                ).then(function (data) {
+                    if (data == "true") {
+                        msgCode.innerHTML = "正确";
+                        msgCode.className = "ok";
+                    } else {
+                        msgCode.innerHTML = "错误";
+                        msgCode.className = "err";
+                    }
+                })
+            } else
+                msgCode.innerHTML = "";
+        }
+        //为imgCode绑定单击事件
+        function fun(){
+            codeImg.src = "data/01_code.php";
+        }
+        //修改当前imgCode的src属性为指定的php路径
+    </script>
+</body>
+</html>

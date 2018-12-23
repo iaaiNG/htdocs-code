@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <h3>测试结果</h3>
+    <ul>
+        <li id="wcount"></li>
+        <li id="oky"></li>
+        <li id="lv"></li>
+    </ul>
+    继续录入单词 | <a href="save.html">再次测试</a>
+    <script>
+        var count = sessionStorage.num
+        var ok = sessionStorage.ok
+        wcount.innerHTML = "总单词数：" + count
+        oky.innerHTML = "正确数量" + ok
+        lv.innerHTML = "准确率" + parseFloat((ok/count).toFixed(2))*100 + "%"
+    </script>
+</body>
+</html>

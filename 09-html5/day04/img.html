@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        canvas{
+            background: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <h1>canvas画布</h1>
+    <canvas id="c2" width="500" height="400"></canvas>
+    <script>
+        var ctx = c2.getContext("2d")
+        var p1 = new Image()
+        p1.src = "1.JPG"
+        var p2 = new Image()
+        p2.src = "2.JPG"
+        var p3 = new Image()
+        p3.src = "3.JPG"
+        var p4 = new Image()
+        p4.src = "4.JPG"
+        p1.onload = function(){
+            console.log(1)
+            ctx.drawImage(p1,0,0)
+        }
+        p2.onload = function(){
+            console.log(2)
+            ctx.drawImage(p2,500-p2.width,0)
+        }
+        p3.onload = function(){
+            console.log(3)
+            ctx.drawImage(p3,0,400-p3.height)
+        }
+        p4.onload = function(){
+            console.log(4)
+            ctx.drawImage(p4,500-p4.width,400-p4.height)
+        }
+
+    </script>
+</body>
+</html>

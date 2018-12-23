@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /*td{text-align: center}*/
+        table{
+            width:215px;
+            height:150px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr align="center">
+            <th>单词录入</th>
+        </tr>
+        <tr>
+            <td>英文：<input type="text" id="us" placeholder="请输入英文"></td>
+        </tr>
+        <tr>
+            <td>中文：<input type="text" id="cn" placeholder="请输入中文"></td>
+        </tr>
+        <tr>
+            <td align="right"><button id="save">保存</button></td>
+        </tr>
+        <tr align="right">
+            <td><a href="test.html">开始测试</a></td>
+        </tr>
+    </table>
+    <script src="../jquery-1.11.3.js"></script>
+    <script>
+        $("#save").on("click",function(){
+            var cnw = cn.value
+            localStorage[cnw] = us.value
+            us.value = ""
+            cn.value = ""
+        })
+    </script>
+</body>
+</html>
